@@ -1,15 +1,13 @@
 # SEI7 Team Project 2
 
-# Project Name: Auction / Tender Website
+## Project Name: Auction / Tender Website
 
-# SEI7 - Project 2 (December 2023)
+### Developers & Collaborators Team
 
-# Developers & Collaborators Team
-
-# Mazen Al-Maskati 
-# Noor Mahdi Abdali 
-# Weaam Ajoor
-# Rajiah Hassan
+### Mazen Al-Maskati 
+### Noor Mahdi Abdali 
+### Weaam Ajoor
+### Rajiah Hassan
 
 ## ERD
 
