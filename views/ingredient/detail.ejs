@@ -1,0 +1,35 @@
+<main>
+
+    <div class="album py-5 bg-body-tertiary">
+    <div class="container">
+        
+        <h1><%= title %> <span class="text-white"><%= ingredient.ingredientName %></span></h1>
+    
+    <div class="row g-5">
+        <div class="col-md-7 col-lg-8">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <span>Created: <%= dayjs(ingredient.createdAt).format('DD/MM/YYYY') %> | Updated: <%= dayjs(ingredient.updatedAt).fromNow(true) %> ago</span>
+            </div>
+            <p><%= ingredient.description %></p>
+            <hr>
+            <p><%- ingredient.ingredient %></p>
+        </div>
+        <div class="col-md-5 col-lg-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <span>Measurement / Scale</span>
+
+                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                    <button type="button" class="btn btn-sm btn-primary"><%= ingredient.amount %></button>
+                    <button type="button" class="btn btn-sm bg-success"><%= ingredient.scale %></button>
+                  </div>
+
+                <!--<span class="badge bg-success rounded-pill"> </span>-->
+            </div>
+            <p><% let thePhoto = "empty-ingredient.jpg"; if(ingredient.thumbnail){ thePhoto = ingredient.thumbnail } %><img src="../images/<%= thePhoto %>" width="100%"></p>
+        </div>
+    </div>
+    
+    </div>
+    </div>
+    
+    </main>

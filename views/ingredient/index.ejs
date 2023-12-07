@@ -1,0 +1,67 @@
+<main>
+
+    <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+    
+            <h1><%= title %></h1>
+    
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">No.</th>
+            <th scope="col">Ingredient Name</th>
+            <th scope="col">Amount / Size</th>
+            <th scope="col">Thumbnail</th>
+            <th scope="col">Created</th>
+            <th scope="col">Updated</th>
+            <th scope="col">Action(s)</th>
+        </tr>
+    </thead>
+
+    <% let x=1; ingredient.forEach(ingredient => { %>
+         <tr>
+            <td><%= x %>. </td>
+            <td><a href="/ingredient/detail?id=<%= ingredient._id %>"><%= ingredient.ingredientName %></a></td>
+            <td><%= ingredient.amount %></td>
+            <td><%= ingredient.thumbnail %></td>
+            <td><%= dayjs(ingredient.createdAt).format('DD/MM/YYYY') %></td>
+            <td>Updated <%= dayjs(ingredient.updatedAt).fromNow(true) %> ago</td>
+            <td>
+            <a class="btn btn-sm btn-warning" href="/ingredient/edit?id=<%= ingredient._id %>"><i class="bi-pencil-fill"></i></a> <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#D<%= x %>">
+                <i class="bi-trash3-fill"></i></button>
+  
+  <div class="modal fade" id="D<%= x %>" tabindex="-1" aria-labelledby="exampleModalLabel<%= x %>" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-3 text-danger" id="exampleModalLabel<%= x %>">Are you sure you want to delete?</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            Ingredient <%= ingredient.ingredientName %> 
+        </div>
+        <div class="modal-footer">
+        <form method="POST" action="/ingredient/delete?id=<%= ingredient._id %>">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>                
+
+            </td>
+
+         </tr>
+    <% x++; }); %>
+
+</table>
+
+</div>
+
+</div>
+</div>
+
+</main>

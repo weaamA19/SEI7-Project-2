@@ -1,0 +1,65 @@
+<main>
+
+    <div class="album py-5 bg-body-tertiary">
+    <div class="container">
+        
+        <h1><%= title %></h1>
+        
+        <form method="POST" action="/ingredient/update" autocomplete="off">
+        <div class="row g-3"> <!-- row-cols-1 row-cols-sm-2 row-cols-md-3 -->  
+    
+            <div class="col-lg-4 col-md-12 col-sm-12">
+    
+                <div class="mb-3 pb-1">
+                    <label for="ingredientName" class="form-label">Ingredient Name</label>
+                    <input type="text" class="form-control" id="ingredientName" name="ingredientName" value="<%= ingredient.ingredientName %>">
+                </div>
+    
+                <div class="mb-3 pb-1">
+                    <label for="amount" class="form-label">Measurement / Amount #</label>
+                    <input type="number" class="form-control" id="amount" name="amount" value="<%= ingredient.amount %>">
+                </div>
+
+                <div class="mb-3 pb-1">
+                    <label for="scale" class="form-label">Measurement / Scale</label>
+                    <!-- <input type="text" class="form-control" id="scale" name="scale"> -->
+
+                    <select class="form-select form-select" aria-label="Small select example" id="scale" name="scale">
+                        <option value="<%= ingredient.scale %>" selected><%= ingredient.scale %></option>
+                        <% scales.forEach(scale => { %>
+                            <option value="<%= scale %>"><%= scale %></option>
+                        <% }); %>
+                    </select>
+
+            
+                </div>
+    
+                <div class="mb-3">
+                    <label for="thumbnailFile" class="form-label">Photo</label>
+                    <input class="form-control" type="file" name="thumbnailFile" id="thumbnailFile">
+                    <input type="text" name="thumbnail" id="thumbnail" value="<%= ingredient.thumbnail %>">(to be hidden)
+                </div>
+    
+            </div>
+    
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="form-floating pb-3">
+                    <textarea class="form-control" style="height: 300px;" placeholder="" id="description" name="description"><%= ingredient.description %></textarea>
+                    <label for="content">Description</label>
+                </div>
+            </div>
+    
+            <div class="row">
+                <div class="d-grid gap-2 col-4 col-sm-8 mx-auto">
+                <button class="btn btn-bd-primary" type="submit">Update Ingredient</button>
+                </div>
+            </div>
+                
+            
+        </div>
+        </form>
+    
+    </div>
+    </div>
+    
+    </main>
