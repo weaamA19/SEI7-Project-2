@@ -1,0 +1,25 @@
+<h1>Auctions</h1>
+
+<table class="table table-striped">
+  <tr>
+    <th>Name</th>
+    <th>Email Address</th>
+    <th>Phone Number</th>
+    <th>Delete</th>
+    <th>Edit</th>
+  </tr>
+
+<% auctions.forEach(function (auction) {  %>
+  <tr>
+    <td><a href="/auction/detail?id=<%= auction._id %>"><%= auction.aucction_name %></a></td>
+    <td><%= auction.auction_date %></td>
+    <td><%= auction.item_category %></td>
+    <td><%= auction.item_name %></td>
+    <td><%= auction.sarting_price %></td>
+    <td><%= auction.item_img %></td> 
+    <td><a href="/auction/delete?id=<%= auction._id %>">Delete</a></td>
+    <td><a href="/auction/edit?id=<%= auction._id %>">Edit</a></td>
+  </tr>
+<% }) %>
+
+</table>

@@ -1,4 +1,4 @@
-const Bid = require('../models/Bids');
+const Bid = require('../models/Bids.js');
 
 //Define all Bid APIs or Functions
 
