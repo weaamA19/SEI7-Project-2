@@ -7,6 +7,12 @@
 
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid justify-content-start">
+            <a class="btn btn-sm btn-outline-success me-2" href="/bid/add">Add New Bid</a>
+        </div>
+    </nav>
+    
 <table class="table">
 <thead>
     <tr>
@@ -23,7 +29,7 @@
 <% let x=1; bids.forEach(bid => { %>
         <tr>
         <td><%= x %>. </td>
-        <td><a href="!">Auction Item</a></td>
+        <td><a href="/bid/detail/?id=<%= bid._id %>">Auction Item</a></td>
         <td><%= bid.amount %></td>
         <td><%= bid.note %></td>
         <td><%= dayjs(bid.createdAt).format('DD/MM/YYYY') %></td>
@@ -35,32 +41,27 @@
 <div class="modal fade" id="D<%= x %>" tabindex="-1" aria-labelledby="exampleModalLabel<%= x %>" aria-hidden="true">
 <div class="modal-dialog">
     <div class="modal-content">
-    <div class="modal-header">
-        <h1 class="modal-title fs-3 text-danger" id="exampleModalLabel<%= x %>">Are you sure you want to delete your Bid?</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-    </div>
-    <div class="modal-body">
-        Auction: [Auction / Item Name] 
-        Amount: <%= bid.amount %></td>
-    </div>
-    <div class="modal-footer">
-    <form method="POST" action="/bid/delete?id=<%= bid._id %>">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-danger">Delete</button>
-    </form>
-    </div>
+        <div class="modal-header">
+            <h1 class="modal-title fs-3 text-danger" id="exampleModalLabel<%= x %>">Are you sure you want to delete your Bid?</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            Auction: [Auction / Item Name] 
+            Amount: <%= bid.amount %>
+        </div>
+        <div class="modal-footer">
+        <form method="POST" action="/bid/delete?id=<%= bid._id %>">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+        </div>
     </div>
 </div>
 </div>                
-
         </td>
-
         </tr>
 <% x++; }); %>
-
 </table>
-
-</div>
 
 </div>
 </div>
