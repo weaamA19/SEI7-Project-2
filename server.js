@@ -34,14 +34,14 @@ const db = require('./config/db');
 //Require & import routes
 const indexRouter = require('./routes/index');
 //const userRouter = require('./routes/user');
-//const auctionRouter = require('./routes/auction');
+const auctionRouter = require('./routes/auction');
 //const itemRouter = require('./routes/item');
 const bidRouter = require('./routes/bid'); //Mazen
 
 //Mount routes
 app.use('/', indexRouter);
 //app.use('/user', userRouter);
-//app.use('/auction', auctionRouter);
+app.use('/auction', auctionRouter);
 //app.use('/item', itemRouter);
 app.use('/bid', bidRouter); //Mazen
 
