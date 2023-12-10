@@ -36,14 +36,14 @@ const indexRouter = require('./routes/index');
 //const userRouter = require('./routes/user');
 //const auctionRouter = require('./routes/auction');
 //const itemRouter = require('./routes/item');
-//const bidRouter = require('./routes/bid');
+const bidRouter = require('./routes/bid'); //Mazen
 
 //Mount routes
 app.use('/', indexRouter);
 //app.use('/user', userRouter);
 //app.use('/auction', auctionRouter);
 //app.use('/item', itemRouter);
-//app.use('/bid', bidRouter);
+app.use('/bid', bidRouter); //Mazen
 
 
 //Use public folder
@@ -51,7 +51,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 //Console
 app.listen(port, () => {
-    console.log(`Auction App is running on port ${port}`);
+    console.log(`Auction App is running on port \u001b[1;35m${port}\u001b[0m`);
 });
 
 
