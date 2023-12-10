@@ -23,7 +23,6 @@ const port = process.env.PORT;
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-
 //Mount express ejs layouts so Nodejs looks for views folder for layout.ejs
 app.use(expressLayouts);
 

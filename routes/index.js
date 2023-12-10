@@ -8,10 +8,10 @@ const express = require('express');
 const router = express.Router();
 
 //Require our index controller
-//const indexCntrl = require('../controllers/index');
+const indexCntrl = require('../controllers/index');
 
 //Routes
-//router.get('/', indexCntrl.index);
+router.get('/', indexCntrl.index);
 
 //routes using passport for Google OAuth below
 
