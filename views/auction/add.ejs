@@ -1,0 +1,54 @@
+<main>
+
+  <div class="album py-5 bg-body-tertiary">
+  <div class="container">
+
+<h1><%= title %></h1>
+
+<form method="POST" action="/auction/add">
+
+  <div>
+    <label>Item Category</label>
+    <input name="category" type="text" class="form-control">
+  </div>
+
+  <div>
+    <label>Auction / Item Name</label>
+    <input name="name" type="text" class="form-control">
+  </div>
+
+  <div>
+    <label>Starting Price</label>
+    <input name="min_price" type="number" class="form-control">
+  </div>
+
+  <div>
+    <label>Description</label>
+    <textarea name="description" class="form-control"></textarea>
+  </div>
+
+  <!-- <div>
+    <label>Start Date</label>
+    <input name="start_date" type="date" class="form-control">
+  </div> -->
+
+  <div>
+    <label>End Date</label>
+    <input name="end_date" type="date" class="form-control">
+  </div>
+
+  <div>
+    <label>Photo</label>
+    <input name="item_img" type="file" class="form-control">
+  </div>
+
+  <br>
+  <input name="status" type="hidden" value="true" class="form-control">
+  <button type="submit" class="btn btn-primary">Create Auction</button>
+
+</form>
+
+</div>
+</div>
+
+</main>
