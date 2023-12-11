@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", function(){
     var mindate = date + 1;
     var maxdate = date + 14;
 
-
 document.querySelector("#end_date").value = today;
 document.querySelector("#end_date").setAttribute("min", mindate);
 document.querySelector("#end_date").setAttribute("max", maxdate);
