@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit User Details</title>
+    <link rel="stylesheet" href="../stylesheets/editPageStyle.css">
+</head>
+<body>
+    <h1>Edit Users Details</h1>
+    <form method="POST" action="/user/update">
+        <div>
+            <label>Name</label>
+            <input type="text" name="name" value="<%= users.name %>">
+        </div>
+
+        <div>
+            <label>Google Id</label>
+            <textarea name="googleId" readonly><%= users.googleId %></textarea> 
+        </div>
+    
+        <div>
+            <label>Email</label>
+            <input type="text" name="email" value="<%= users.email %>" readonly>
+        </div>
+        
+        <div>
+            <label>Users Image</label>
+            <input type="text" name="avatar" value="<%= users.avatar %>">
+        </div>
+        
+        <div>
+            <label>Users Type</label>
+            <input type="number" name="userType" value="<%= users.userType%>" min="1" max="3">
+        </div>
+        
+        <input type="hidden" name="id" value="<%= users._id %>">
+        <button type="submit">Edit User Details</button>
+    </form>
+</body>
+</html>
+
