@@ -23,7 +23,7 @@
                 <td><%= user.name %></td>
                 <td><%= user.googleId %></td>
                 <td><%= user.email %></td>
-                <td><%= user.avatar %></td>
+                <td><img src="<%= user.avatar %>" referrerpolicy="no-referrer" height="35px"></img></td>
                 <td><%= user.userType %></td>
                 <td> Created <%= dayjs(user.createdAt).format('DD/MM/YYYY') %></td>
                 <td> Updated <%= dayjs(user.updatedAt).fromNow(true) %> ago</td>
