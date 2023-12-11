@@ -6,7 +6,7 @@ dayjs.extend(relativeTime);
 
 // Create Operation
 exports.auction_create_get = (req, res) => {
-  res.render("auction/add");
+  res.render("auction/add", {"title": "Create New Auction"});
 }
 
 exports.auction_create_post = (req, res) => {
@@ -25,9 +25,9 @@ exports.auction_create_post = (req, res) => {
 }
 
 exports.auction_index_get = (req, res) => {
-  Auction.find()
+  Auction.find().sort({ end_date: 'desc'})
   .then((auctions) => {
-    res.render("auction/index", {auctions, dayjs});
+    res.render("auction/index", {auctions, dayjs, "title": "List All Auctions"});
   })
   .catch((err) => {
     console.log(err);
