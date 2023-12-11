@@ -4,15 +4,15 @@ const mongoose = require('mongoose');
 
 //Design the Schema
 const bidsSchema = mongoose.Schema({
-    amount: String,
-    auction: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Auction'
-    }],
-    bidder: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Bidder' //user who is placing the big - must be similar to the defined const in the other model
-    }],
+    amount: Number,
+    // auction: [{
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'Auction'
+    // }],
+    // bidder: [{
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'Bidder' //user who is placing the big - must be similar to the defined const in the other model
+    // }],
     note: String,
     status: Boolean,
 
