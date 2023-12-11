@@ -52,3 +52,25 @@ exports.bid_delete_post = (req,res) => {
         res.send("Cannot Delete Bid. Please try again later.");
     })
 }
+
+exports.bid_edit_get = (req, res) => {
+    Bids.findById(req.query.id)
+    .then((bid) => {
+      res.render("bid/edit", {bid, "title": "Edit your bid"});
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
+  
+  exports.bid_update_post = (req, res) => {
+    console.log(req.body.id);
+    Bids.findByIdAndUpdate(req.body.id, req.body)
+    .then(() => {
+      res.redirect("/bid/index");
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
+  
