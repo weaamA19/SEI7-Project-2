@@ -10,9 +10,11 @@ exports.auction_create_get = (req, res) => {
 }
 
 exports.auction_create_post = (req, res) => {
-  console.log(req.body);
   let auction = new Auction(req.body);
-
+  let auctionTime = Date.parse(req.body.end_date + "T" + req.body.time);
+  req.body.end_date = auctionTime;
+  console.log(auctionTime);
+  console.log(req.body);
   // Save Auction
   auction.save()
   .then(() => {
