@@ -21,8 +21,8 @@ exports.category_create_post = (req, res) => {
 }
 exports.category_index_get = (req, res) => {
   Category.find()
-  .then((categorys) => {
-    res.render("category/index", {categorys, dayjs});
+  .then((category) => {
+    res.render("category/index", {category, dayjs, "title": "List of All Categories"});
   })
   .catch((err) => {
     console.log(err);
