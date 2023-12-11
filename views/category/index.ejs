@@ -1,0 +1,37 @@
+<div>
+    <div>
+      <h3><%= category.aucction_name %></h3>
+      <div>Auction Date: <%= category.category_date %></div>
+      <div>Item Category: <%= category.item_category %></div>
+      <div>Item Name: <%= category.item_name %></div>
+      <div>Starting Price: <%= category.sarting_price %></div>
+      <div>Item Category: <%= category.item_category %></div>
+      <div>Item Name: <%= category.item_name %></div>
+      <div>Starting Price: <%= category.starting_price %></div>
+      <div>Item Image: <%= category.item_img %></div>
+    </div>
+    <br>
+  New
+  12:37
+  <h1>Auctions</h1>
+  <table class="table table-striped">
+    <tr>
+      <th>Category Name</th>
+      <th>Item Name</th>
+      <th>Delete</th>
+      <th>Edit</th>
+    </tr>
+  <% categories.forEach(function (category) {  %>
+    <tr>
+      <td><a href="/category/detail?id=<%= category._id %>"><%= category.category_name %></a></td>
+      <td><%= category.item_name %></td>
+  
+     <td><a href="/category/delete?id=<%= category._id %>">Delete</a></td>
+      <td><a href="/category/edit?id=<%= category._id %>">Edit</a></td>
+    </tr>
+  <% }) %>
+  </table>
+  
+  
+  
+  
