@@ -2,6 +2,11 @@
 //npm i express mongoose dotenv
 //mkdir models controllers routes views public config
 //npm i express-ejs-layouts ejs
+//npm install express-session
+//npm i passport
+//npm i passport-google-oauth
+//npm i multer
+
 
 //Defining dependencies
 const express = require('express');
@@ -61,6 +66,7 @@ const userRouter = require('./routes/user');
 const auctionRouter = require('./routes/auction');
 //const itemRouter = require('./routes/item');
 const bidRouter = require('./routes/bid'); //Mazen
+const categoryRouter = require('./routes/category');
 
 //Mount routes
 app.use('/', indexRouter);
@@ -68,11 +74,12 @@ app.use('/user', userRouter);
 app.use('/auction', auctionRouter);
 //app.use('/item', itemRouter);
 app.use('/bid', bidRouter); //Mazen
+app.use('/category', categoryRouter)
 
-// app.post('/signin', (req, res) => {
-//   res.redirect('./routes/index');
-// });
-// app.use('/signin', userRouter);
+app.post('/signin', (req, res) => {
+  res.redirect('./routes/index');
+});
+app.use('/signin', userRouter);
 
 
 //Use public folder
@@ -80,7 +87,6 @@ app.use(express.static(path.join(__dirname, "public")));
 
 //below code is used for user object to be available in all views - by MAZEN
 // app.use(function (req, res, next) {
-//     res.locals.scales = scales;
 //     res.locals.user = req.user;
 //     next();
 //   });
