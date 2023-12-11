@@ -1,40 +1,54 @@
 <main>
 
-    <div class="container">
-        <h1><%= title %></h1>
-    </div>
+        <div class="album py-5 bg-body-tertiary">
+            <div class="container">
+    
+                <h1><%= title %></h1>
+    
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    
+        <table class="table">
+            <thead>
+                    <th scope="col">Users Type</th>
+                    <th scope="col">Created</th>
+                    <th scope="col">Updated</th>
+                    <th scope="col">Action(s)</th>
+    
+                </tr>
+            </thead>
+    
+            <% users.forEach(function (user, index) { %>
+                <tr>
+                    <td><%= user.name %></td>
+                    <td><%= user.googleId %></td>
+                    <td><%= user.email %></td>
+                    <td><img src="<%= user.avatar %>" referrerpolicy="no-referrer" height="35px"></img></td>
+                    <!-- <td><%= user.userType %></td> -->
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Google Id</th>
-                <th scope="col">Email</th>
-                <th scope="col">Users Image</th>
-                <th scope="col">Users Type</th>
-                <th scope="col">Created</th>
-                <th scope="col">Updated</th>
-                
-            </tr>
-        </thead>
+                    <td><% 
+                        if (user.userType == '1') { %>Admin<% } 
+                        else if (user.userType == '2') { %>Auctioneer<% } 
+                        else { %>Bidder<% } 
+                    %></td>
 
-        <% users.forEach(user => { %>
-            <tr>
-                <td><%= user.name %></td>
-                <td><%= user.googleId %></td>
-                <td><%= user.email %></td>
-                <td><%= user.avatar %></td>
-                <td><%= user.userType %></td>
-                <td> Created <%= dayjs(user.createdAt).format('DD/MM/YYYY') %></td>
-                <td> Updated <%= dayjs(user.updatedAt).fromNow(true) %> ago</td>
-            </tr>        
-                
-            <td><a href="/user/edit?id=<%=user._id %>">Edit User</a></td>
+                    <td> Created <%= dayjs(user.createdAt).format('DD/MM/YYYY') %></td>
+                    <td> Updated <%= dayjs(user.updatedAt).fromNow(true) %> ago</td>
 
-            <%  
-        });%>
+                    <!-- <td><a href="/user/edit?id=<%=user._id %>">Edit User</a></td> -->
+
+                    <td>
+                    <a class="btn btn-sm btn-warning" href="/user/edit?id=<%=user._id %>">
+                        <i class="bi-pencil-fill"></i></a> 
+                        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#D<%= index+1 %>">
+                            <i class="bi-trash3-fill"></i></button>
+                    </td>
+                </tr>
+                <%  
+            });
+            %>
 
 
-    </table>
+    
+        </table>
 
 </main>
