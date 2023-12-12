@@ -86,3 +86,14 @@ exports.user_bid_get = (req, res) => {
   //     res.send("Cannot Show All Bids. Please try again later.");
   //   });
 };
+
+exports.bid_show_get = (req, res) => {
+  //console.log(req.query.id);
+  Bids.findById(req.query.id)
+  .then((bid) => {
+    res.render("bid/detail", {bid, dayjs})
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+}
