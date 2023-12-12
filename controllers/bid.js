@@ -74,3 +74,14 @@ exports.bid_edit_get = (req, res) => {
     })
   }
   
+  exports.bid_show_get = (req, res) => {
+    //console.log(req.query.id);
+    Bids.findById(req.query.id)
+    .then((bid) => {
+      res.render("bid/detail", {bid, dayjs})
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+  
