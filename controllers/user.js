@@ -10,9 +10,9 @@ dayjs.extend(relativeTime);
 //List All users - weaam
 //This should be only displayed for the admin !
 exports.user_index_get = (req, res) => {
-  console.log(req.user);
-  user
-    .findbyId(req.user)
+  
+  //console.log(req.user);
+  user.find()
     .then((users) => {
       res.render("user/index", { users, dayjs, title: "Show All Users" });
     })

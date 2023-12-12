@@ -2,33 +2,27 @@ const {Auction} = require('../models/Auction');
 const {Category} = require('../models/Category');
 const User = require('../models/User');
 
-const dayjs = require("dayjs");
-var relativeTime = require("dayjs/plugin/relativeTime");
+const dayjs = require('dayjs');
+var relativeTime = require('dayjs/plugin/relativeTime');
 dayjs.extend(relativeTime);
 
 // Create Operation
 exports.auction_create_get = (req, res) => {
-  let todayDate = dayjs(Date()).format("YYYY-MM-DD");
-  let maxDate = dayjs(Date()).add(7, "day").format("YYYY-MM-DD");
-  let minDate = dayjs(Date()).add(1, "day").format("YYYY-MM-DD");
-  let theTime = dayjs(Date()).add(1, "day").format("HH") + ":00";
-
+  let todayDate = dayjs(Date()).format('YYYY-MM-DD');
+  let maxDate = dayjs(Date()).add(7, 'day').format('YYYY-MM-DD');
+  let minDate = dayjs(Date()).add(1, 'day').format('YYYY-MM-DD');
+  let theTime = dayjs(Date()).add(1, 'day').format('HH') + ":00";
+  
   Category.find()
-    .then((categories) => {
-      res.render("auction/add", {
-        categories,
-        todayDate,
-        maxDate,
-        minDate,
-        theTime,
-        title: "Create New Auction",
-      });
-    })
-    .catch((error) => {
-      console.log(error);
-      res.send("Please try again later!!");
-    });
-};
+  .then((categories) => {
+    res.render("auction/add", {categories,todayDate,maxDate,minDate,theTime, title: "Create New Auction"});
+  })
+  .catch((error) => {
+    console.log(error);
+    res.send("Please try again later!!");
+  })
+  
+}
 
 exports.auction_create_post = (req, res) => {
   let auction = new Auction(req.body);
@@ -40,25 +34,10 @@ exports.auction_create_post = (req, res) => {
   //console.log(auctionTime);
 
   // Save Auction
-  auction
-    .save()
-    .then(() => {
-      req.body.category.forEach((cat) => {
-        //bringing the category[] array from the body HTML
-        Category.findById(cat)
-          .then((cat) => {
-            auction.categories.push(cat);
-            auction.save();
-          })
-          .catch((error) => {
-            console.log(
-              "There was an error Adding Ingredient(s) to the Recipe " + error
-            );
-            //res.send("Please try again later!");
-          });
-      });
+  auction.save()
+  .then(() => {
 
-console.log(user.id);
+//console.log(user.id);
 
   //   User.findById(req.users._id)
   //   .then(() => {
@@ -85,37 +64,36 @@ console.log(user.id);
           //res.send("Please try again later!");
       })
     })
-    .catch((err) => {
-      console.log(err);
-      res.send("Please try again later!!");
-    });
-};
+
+    res.redirect("/auction/index");
+  })
+  .catch((err) => {
+    console.log(err);
+    res.send("Please try again later!!");
+  })
+}
 
 exports.auction_index_get = (req, res) => {
-  Auction.find()
-    .sort({ end_date: "desc" })
-    .then((auctions) => {
-      res.render("auction/index", {
-        auctions,
-        dayjs,
-        title: "List All Auctions",
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
+  Auction.find().sort({ end_date: 'desc'})
+  .then((auctions) => {
+    res.render("auction/index", {auctions, dayjs, "title": "List All Auctions"});
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+
+}
 
 exports.auction_show_get = (req, res) => {
   //console.log(req.query.id);
   Auction.findById(req.query.id)
-    .then((auction) => {
-      res.render("auction/detail", { auction, dayjs });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
+  .then((auction) => {
+    res.render("auction/detail", {auction, dayjs})
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+}
 
 exports.auction_delete_get = (req, res) => {
   //console.log(req.query.id);
@@ -148,13 +126,13 @@ exports.auction_edit_get = (req, res) => {
 exports.auction_update_post = (req, res) => {
   //console.log(req.body.id);
   Auction.findByIdAndUpdate(req.body.id, req.body)
-    .then(() => {
-      res.redirect("/auction/index");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
+  .then(() => {
+    res.redirect("/auction/index");
+  })
+  .catch(err => {
+    console.log(err);
+  })
+}
 
 //List bids for specific user - WEAAM
 exports.user_auction_get = (req, res) => {
