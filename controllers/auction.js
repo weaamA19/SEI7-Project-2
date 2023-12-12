@@ -1,4 +1,5 @@
-const Auction = require('../models/Auction');
+const {Auction} = require('../models/Auction');
+const {Category} = require('../models/Category');
 
 const dayjs = require('dayjs');
 var relativeTime = require('dayjs/plugin/relativeTime');
@@ -6,21 +7,53 @@ dayjs.extend(relativeTime);
 
 // Create Operation
 exports.auction_create_get = (req, res) => {
-  res.render("auction/add", {"title": "Create New Auction"});
+  let todayDate = dayjs(Date()).format('YYYY-MM-DD');
+  let maxDate = dayjs(Date()).add(7, 'day').format('YYYY-MM-DD');
+  let minDate = dayjs(Date()).add(1, 'day').format('YYYY-MM-DD');
+  let theTime = dayjs(Date()).add(1, 'day').format('HH') + ":00";
+  
+  Category.find()
+  .then((categories) => {
+    res.render("auction/add", {categories,todayDate,maxDate,minDate,theTime, title: "Create New Auction"});
+  })
+  .catch((error) => {
+    console.log(error);
+    res.send("Please try again later!!");
+  })
+  
 }
 
 exports.auction_create_post = (req, res) => {
-  console.log(req.body);
   let auction = new Auction(req.body);
+
+  auction.item_img = newFileName;
+
+  let auctionTime = Date.parse(req.body.end_date + "T" + req.body.time);
+  req.body.end_date = auctionTime;
+  console.log(auctionTime);
+
 
   // Save Auction
   auction.save()
   .then(() => {
+
+    req.body.category.forEach( cat => { //bringing the category[] array from the body HTML
+      Category.findById(cat)
+      .then((cat) => {
+          auction.categories.push(cat);
+          auction.save();
+      })
+      .catch((error)=> {
+          console.log("There was an error Adding Ingredient(s) to the Recipe " + error);
+          //res.send("Please try again later!");
+      })
+    })
+
     res.redirect("/auction/index");
   })
   .catch((err) => {
     console.log(err);
-    res.send("Please try again later!!")
+    res.send("Please try again later!!");
   })
 }
 
@@ -36,7 +69,7 @@ exports.auction_index_get = (req, res) => {
 }
 
 exports.auction_show_get = (req, res) => {
-  console.log(req.query.id);
+  //console.log(req.query.id);
   Auction.findById(req.query.id)
   .then((auction) => {
     res.render("auction/detail", {auction, dayjs})
@@ -47,7 +80,7 @@ exports.auction_show_get = (req, res) => {
 }
 
 exports.auction_delete_get = (req, res) => {
-  console.log(req.query.id);
+  //console.log(req.query.id);
   Auction.findByIdAndDelete(req.query.id)
   .then(() => {
     res.redirect("/auction/index");
@@ -68,7 +101,7 @@ exports.auction_edit_get = (req, res) => {
 }
 
 exports.auction_update_post = (req, res) => {
-  console.log(req.body.id);
+  //console.log(req.body.id);
   Auction.findByIdAndUpdate(req.body.id, req.body)
   .then(() => {
     res.redirect("/auction/index");

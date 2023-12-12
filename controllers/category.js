@@ -1,4 +1,4 @@
-const Category = require('../models/Category');
+const {Category} = require('../models/Category');
 const dayjs = require('dayjs');
 var relativeTime = require('dayjs/plugin/relativeTime');
 dayjs.extend(relativeTime);
@@ -51,7 +51,7 @@ exports.category_delete_get = (req, res) => {
 exports.category_edit_get = (req, res) => {
   Category.findById(req.query.id)
   .then((category) => {
-    res.render("category/edit", {category});
+    res.render("category/edit", {category ,"title": "Edit your Category"});
   })
   .catch(err => {
     console.log(err);

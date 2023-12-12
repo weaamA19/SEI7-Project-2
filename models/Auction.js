@@ -4,8 +4,11 @@ const mongoose = require('mongoose');
 const auctionSchema = mongoose.Schema({
   // user_id:String,
   // item_id: String,
-  // category_id:String,
-  category: String,
+  categories: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Category'
+  }],
+  //category: String,
   name: String,
   min_price: Number, //starting price
   description: String,
@@ -21,4 +24,4 @@ const auctionSchema = mongoose.Schema({
 const Auction = mongoose.model("Auction", auctionSchema);
 
 // Export
-module.exports = Auction;
+module.exports = {Auction};

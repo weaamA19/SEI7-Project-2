@@ -222,3 +222,18 @@ color: cornflowerblue;
 h1, h2, h3, h4, h5, h6 {
 font-family: "Playfair Display", Georgia, "Times New Roman", serif/*rtl:Amiri, Georgia, "Times New Roman", serif*/;
 }
+
+.price_tag {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.cat_tag {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 5px;
+    font-size: 0.7rem;
+    color: black;
+}

@@ -1,10 +1,20 @@
+<main>
+
+  <div class="album py-5 bg-body-tertiary">
+  <div class="container">
+
 <h1>Edit Category</h1>
-<form method="POST" action="/category/edit">
+<form method="POST" action="/category/update">
   <div>
     <label>Category Name</label>
     <input name="category_name" type="text" class="form-control" value="<%= category.category_name %>">
   </div>
   <br>
+  <input type="hidden" name="id" value="<%= category._id%>">
   <button type="submit" class="btn btn-primary">Update Category</button>
 </form>
+  </div>
+</div>
+
+</main>
 

@@ -5,50 +5,95 @@
 
 <h1><%= title %></h1>
 
-<form method="POST" action="/auction/add">
+<form method="POST" action="/auction/add" enctype="multipart/form-data" autocomplete="off">
+<div class="row g-3">
 
-  <div>
-    <label>Item Category</label>
-    <input name="category" type="text" class="form-control">
+  <div class="col-lg-4 col-md-12 col-sm-12">
+
+  <div class="form-check pb-3">
+    <!-- <label for="category" class="form-label">Item Category</label>
+    <input id="category" name="category" type="text" class="form-control" required> -->
+
+    <label for="category">Select a Category</label>
+    <select id="category" name="category[]" class="form-select" required>
+        <option value="" disabled="disabled" selected>List of Categories</option>
+        <% categories.forEach(function(category){ %>
+        <option value="<%= category._id %>"><%= category.category_name %></option>
+        <% }) %>
+    </select>
+
   </div>
 
-  <div>
-    <label>Auction / Item Name</label>
-    <input name="name" type="text" class="form-control">
+  <div class="form-check pb-3">
+    <label for="name" class="form-label">Auctioned Item Title</label>
+    <input id="name" name="name" type="text" class="form-control" required>
   </div>
 
-  <div>
-    <label>Starting Price</label>
-    <input name="min_price" type="number" class="form-control">
+  <div class="form-check pb-3">
+    <label for="min_price" class="form-label">Starting Price [<span class="text-warning">Currency</span>]</label>
+    <input id="min_price" name="min_price" type="number" min="1" max="9999" step="1" class="form-control" required>
   </div>
 
-  <div>
-    <label>Description</label>
-    <textarea name="description" class="form-control"></textarea>
+  <div class="form-check pb-3">
+    <label for="end_date" class="form-label">End Date / Time</label>
+    <input id="end_date" name="end_date" type="date" class="form-control" value="<%= todayDate %>" min="<%= minDate %>" max="<%= maxDate %>" required>
+    <input type="time" id="time" name="time" value="<%= theTime %>" class="form-control" required>
   </div>
+
+</div>
+
+<div class="col-lg-4 col-md-6 col-sm-12">
+  <label for="description" class="form-label">Description</label>
+  <div class="form-floating pb-3">
+    <textarea id="description" name="description" class="form-control" height="100px" required></textarea>
+  </div>
+</div>
 
   <!-- <div>
-    <label>Start Date</label>
-    <input name="start_date" type="date" class="form-control">
+    <label for="start_date" class="form-label">Start Date</label>
+    <input id="start_date" name="start_date" type="date" class="form-control">
   </div> -->
 
-  <div>
-    <label>End Date</label>
-    <input name="end_date" type="date" class="form-control">
-  </div>
-
-  <div>
-    <label>Photo</label>
-    <input name="item_img" type="file" class="form-control">
+  
+  <div class="col-lg-4 col-md-6 col-sm-12">
+    <div class="form-check pb-3">
+      <label for="item_img" class="form-label">Photo (.jpg or .png - max. 512KB)</label>
+    <input class="form-control" onchange="validateSize(this)" type="file" name="item_img" id="item_img" accept="image/png, image/jpeg">
+    </div>
   </div>
 
   <br>
-  <input name="status" type="hidden" value="true" class="form-control">
-  <button type="submit" class="btn btn-primary">Create Auction</button>
 
+<div class="row">
+    <div class="d-grid gap-2 col-4 col-sm-8 mx-auto">
+      <input name="status" type="hidden" value="true" class="form-control" required>
+      <button type="submit" class="btn btn-primary">Create Auction</button>
+    </div>
+</div>
+  
+
+</div>
 </form>
 
 </div>
+</div>
+
+<!-- Warning Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-danger">
+        <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">File Size not accepted</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <p>Cannot upload file exceeding 512KB. Please choose another photo.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 </main>
