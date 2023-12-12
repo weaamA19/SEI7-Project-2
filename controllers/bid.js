@@ -1,4 +1,5 @@
-const Bids = require("../models/Bids.js");
+const {Bids} = require("../models/Bids.js");
+const User = require('../models/User');
 
 //Define all Bid APIs or Functions
 
@@ -27,18 +28,63 @@ exports.bid_add_get = (req, res) => {
 exports.bid_create_post = (req, res) => {
   let bid = new Bids(req.body);
 
-  console.log(req.body);
+  //console.log(req.body);
 
-  bid
-    .save()
+/*************************** Weam Style */
+
+async function saveObject(theID) {
+  const savedObject = await bid.save();
+  //console.log("Object saved successfully!");
+  //console.log("ID: " + savedObject._id);
+
+  //console.log("New Auction: " + savedObject);
+
+  User.findById(theID)
+  .then((usersss) => {
+    
+    usersss.bids.push(savedObject._id);
+    usersss.save();
+    console.log("USER OBJECT:::::::::::: " + usersss);
+  }
+ )
+  .catch((error) => {
+    console.log("Error: " + error); 
+    //res.send("Please try again later!" + error); //server crashed HTTP SENT ERROR
+  }
+  )
+
+}
+
+/*************************** Weam Style */
+
+
+
+  User.findById(req.body.id)
     .then(() => {
-      console.log("User Submitted a new Bid");
-      res.redirect("/bid/index");
-    })
+    bid.user.push(req.body.id);
+
+    saveObject(req.body.id);
+    
+    res.redirect("/bid/index");
+    // bid.save()
+    // .then(() => {
+    //   console.log("User Submitted a new Bid");
+    //   res.redirect("/bid/index");
+    // })
+    // .catch((error) => {
+    //   console.log("There was an error: " + error);
+    //   res.send("Please try again later!");
+    // });
+
+
+
+
+    }
+   )
     .catch((error) => {
-      console.log("There was an error: " + error);
-      res.send("Please try again later!");
-    });
+      res.send("Please try again later!" + error);
+    }
+    )
 };
 
 exports.bid_delete_post = (req, res) => {
