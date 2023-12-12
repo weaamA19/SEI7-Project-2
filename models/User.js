@@ -17,21 +17,21 @@ const userSchema = new Schema(
       enum: ["1", "2", "3"],
       enumNames: ["admin", "auction", "bidder"],
     },
-    // auctions: {
-    //   type: Array,
-    //   default: []
-    // },
-    // bids: {
-    //   type: Array,
-    //   default: []
-    // }
+    auctions: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Auction'
+    }],
+    bids: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Bids'
+    }],
   },
   {
     timestamps: true,
   }
 );
 
-module.exports = mongoose.model("User", userSchema);
+// module.exports = mongoose.model("User", userSchema);
 
-// const User = mongoose.model("User", userSchema);
-// module.exports = User;
+const User = mongoose.model("User", userSchema);
+module.exports = User;

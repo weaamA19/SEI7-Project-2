@@ -4,6 +4,10 @@ const mongoose = require('mongoose');
 
 //Design the Schema
 const bidsSchema = mongoose.Schema({
+    user: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+      }],
     amount: Number,
     // auction: [{
     //     type: mongoose.Schema.Types.ObjectId,
@@ -25,4 +29,4 @@ const Bids = mongoose.model("Bid", bidsSchema);
 
 
 //Exports
-module.exports = Bids;
+module.exports = {Bids};

@@ -8,10 +8,12 @@ dayjs.extend(relativeTime);
 
 // Create Operation
 exports.auction_create_get = (req, res) => {
-  let todayDate = dayjs(Date()).format('YYYY-MM-DD');
+  let todayDate = dayjs(Date()).add(1, 'day').format('YYYY-MM-DD');
   let maxDate = dayjs(Date()).add(7, 'day').format('YYYY-MM-DD');
   let minDate = dayjs(Date()).add(1, 'day').format('YYYY-MM-DD');
   let theTime = dayjs(Date()).add(1, 'day').format('HH') + ":00";
+
+  console.log(req.user._id);
   
   Category.find()
   .then((categories) => {
@@ -37,33 +39,63 @@ exports.auction_create_post = (req, res) => {
   auction.save()
   .then(() => {
 
-//console.log(user.id);
+    
 
-  //   User.findById(req.users._id)
-  //   .then(() => {
-  //       auction.user.push(req.users._id);
-  //   }
-  //  )
-  //   .catch((error) => {
-  //     res.send("Please try again later!" + error);
-  //   }
-  //   )
+    User.findById(req.body.id)
+    .then(() => {
+      console.log("ID for Auction Crerator: " + req.body.id);
+        auction.user.push(req.body.id);
+    }
+   )
+    .catch((error) => {
+      res.send("Please try again later!" + error);
+    }
+    )
 
     req.body.category.forEach( cat => { //bringing the category[] array from the body HTML
 
-  
       Category.findById(cat)
       .then((cat) => {
 
           auction.categories.push(cat);
           
-          auction.save();
+          //auction.save(); ///////////Weam Style
+          saveObject(req.body.id);
+
       })
       .catch((error)=> {
           console.log("There was an error Adding the Auction " + error);
           //res.send("Please try again later!");
       })
+
     })
+
+/*************************** Weam Style */
+
+    async function saveObject(theID) {
+      const savedObject = await auction.save();
+      //console.log("Object saved successfully!");
+      //console.log("ID: " + savedObject._id);
+
+      //console.log("New Auction: " + savedObject);
+
+      User.findById(theID)
+      .then((usersss) => {
+        
+        usersss.auctions.push(savedObject._id);
+        usersss.save();
+        console.log("USER OBJECT:::::::::::: " + usersss);
+      }
+     )
+      .catch((error) => {
+        console.log("Error: " + error); 
+        //res.send("Please try again later!" + error); //server crashed HTTP SENT ERROR
+      }
+      )
+
+  }
+
+/* after 21 trials ************************** Weam Style */
 
     res.redirect("/auction/index");
   })
