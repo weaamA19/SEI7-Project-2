@@ -29,6 +29,9 @@ require('dotenv').config();
 // app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// new code below
+require('./config/passport');
+
 app.use(session({
   secret: process.env.SECRET,
   resave: false,
@@ -51,13 +54,23 @@ app.set("view engine", "ejs");
 //Mount express ejs layouts so Nodejs looks for views folder for layout.ejs
 app.use(expressLayouts);
 
+//Use public folder
+app.use(express.static(path.join(__dirname, "public")));
+
+// below code is used for user object to be available in all views - by Weaam
+app.use(function (req, res, next) {
+  console.log("req.user", req.user)
+    res.locals.user = req.user;
+    next();
+});
+
+
 /* exception to not use layouts for home index page */
 
 //database configuration
 const db = require('./config/db');
 
-// new code below
-require('./config/passport');
+
 
 //Require & import routes
 const indexRouter = require('./routes/index');
@@ -82,14 +95,6 @@ app.post('/signin', (req, res) => {
 app.use('/signin', userRouter);
 
 
-//Use public folder
-app.use(express.static(path.join(__dirname, "public")));
-
-//below code is used for user object to be available in all views - by MAZEN
-// app.use(function (req, res, next) {
-//     res.locals.user = req.user;
-//     next();
-//   });
 
 //Console
 app.listen(port, () => {
