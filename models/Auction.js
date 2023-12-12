@@ -2,7 +2,10 @@ const mongoose = require('mongoose');
 
 // Author Schema
 const auctionSchema = mongoose.Schema({
-  // user_id:String,
+  user: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }],
   // item_id: String,
   categories: [{
     type: mongoose.Schema.Types.ObjectId,
@@ -25,3 +28,4 @@ const Auction = mongoose.model("Auction", auctionSchema);
 
 // Export
 module.exports = {Auction};
+

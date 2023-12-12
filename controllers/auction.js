@@ -1,5 +1,6 @@
 const {Auction} = require('../models/Auction');
 const {Category} = require('../models/Category');
+const User = require('../models/User');
 
 const dayjs = require('dayjs');
 var relativeTime = require('dayjs/plugin/relativeTime');
@@ -30,21 +31,36 @@ exports.auction_create_post = (req, res) => {
 
   let auctionTime = Date.parse(req.body.end_date + "T" + req.body.time);
   req.body.end_date = auctionTime;
-  console.log(auctionTime);
-
+  //console.log(auctionTime);
 
   // Save Auction
   auction.save()
   .then(() => {
 
+console.log(user.id);
+
+  //   User.findById(req.users._id)
+  //   .then(() => {
+  //       auction.user.push(req.users._id);
+  //   }
+  //  )
+  //   .catch((error) => {
+  //     res.send("Please try again later!" + error);
+  //   }
+  //   )
+
     req.body.category.forEach( cat => { //bringing the category[] array from the body HTML
+
+  
       Category.findById(cat)
       .then((cat) => {
+
           auction.categories.push(cat);
+          
           auction.save();
       })
       .catch((error)=> {
-          console.log("There was an error Adding Ingredient(s) to the Recipe " + error);
+          console.log("There was an error Adding the Auction " + error);
           //res.send("Please try again later!");
       })
     })
