@@ -1,5 +1,6 @@
-const { Auction } = require("../models/Auction");
-const { Category } = require("../models/Category");
+const {Auction} = require('../models/Auction');
+const {Category} = require('../models/Category');
+const User = require('../models/User');
 
 const dayjs = require("dayjs");
 var relativeTime = require("dayjs/plugin/relativeTime");
@@ -36,7 +37,7 @@ exports.auction_create_post = (req, res) => {
 
   let auctionTime = Date.parse(req.body.end_date + "T" + req.body.time);
   req.body.end_date = auctionTime;
-  console.log(auctionTime);
+  //console.log(auctionTime);
 
   // Save Auction
   auction
@@ -57,7 +58,32 @@ exports.auction_create_post = (req, res) => {
           });
       });
 
-      res.redirect("/auction/index");
+console.log(user.id);
+
+  //   User.findById(req.users._id)
+  //   .then(() => {
+  //       auction.user.push(req.users._id);
+  //   }
+  //  )
+  //   .catch((error) => {
+  //     res.send("Please try again later!" + error);
+  //   }
+  //   )
+
+    req.body.category.forEach( cat => { //bringing the category[] array from the body HTML
+
+  
+      Category.findById(cat)
+      .then((cat) => {
+
+          auction.categories.push(cat);
+          
+          auction.save();
+      })
+      .catch((error)=> {
+          console.log("There was an error Adding the Auction " + error);
+          //res.send("Please try again later!");
+      })
     })
     .catch((err) => {
       console.log(err);
@@ -94,23 +120,30 @@ exports.auction_show_get = (req, res) => {
 exports.auction_delete_get = (req, res) => {
   //console.log(req.query.id);
   Auction.findByIdAndDelete(req.query.id)
-    .then(() => {
-      res.redirect("/auction/index");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
+  .then(() => {
+    res.redirect("/auction/index");
+  })
+  .catch((err) => {
+    console.log(err);
+    
+  })
+}
 
 exports.auction_edit_get = (req, res) => {
-  Auction.findById(req.query.id)
-    .then((auction) => {
-      res.render("auction/edit", { auction });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
+  Auction.findById(req.query.id).populate('categories')
+  .then((auction) => {
+  //let dbDate = auction.end_date;
+  //let todayDate = dayjs(dbDate).format('YYYY-MM-DD');
+  let maxDate = dayjs(Date()).add(7, 'day').format('YYYY-MM-DD');
+  let minDate = dayjs(Date()).add(1, 'day').format('YYYY-MM-DD');
+  let theTime = dayjs(Date()).add(1, 'day').format('HH') + ":00";
+    res.render("auction/edit", {auction,dayjs,maxDate,minDate,theTime,title: "Update Auction"});
+  })
+  .catch(err => {
+    console.log(err);
+    res.send("Please try again later!!");
+  })
+}
 
 exports.auction_update_post = (req, res) => {
   //console.log(req.body.id);

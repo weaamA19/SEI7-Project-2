@@ -11,7 +11,7 @@ router.use(express.urlencoded({ extended: true }));
 const bidCntrl = require("../controllers/bid");
 
 router.get("/index", ensureLoggedIn, bidCntrl.bid_index_get);
-//router.get("/detail", bidCntrl.bid_show_get);
+router.get("/detail", bidCntrl.bid_show_get);
 
 //adding a bid (add and update)
 router.get("/add", ensureLoggedIn, bidCntrl.bid_add_get);

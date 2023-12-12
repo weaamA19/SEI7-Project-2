@@ -14,13 +14,13 @@
     <!-- <label for="category" class="form-label">Item Category</label>
     <input id="category" name="category" type="text" class="form-control" required> -->
 
-    <label for="category">Select a Category</label>
-    <select id="category" name="category[]" class="form-select" required>
-        <option value="" disabled="disabled" selected>List of Categories</option>
-        <% categories.forEach(function(category){ %>
-        <option value="<%= category._id %>"><%= category.category_name %></option>
-        <% }) %>
-    </select>
+      <label for="category">Select a Category</label>
+      <select id="category" name="category[]" class="form-select" required>
+          <option value="" disabled="disabled" selected>List of Categories</option>
+          <% categories.forEach(function(category){ %>
+          <option value="<%= category._id %>"><%= category.category_name %></option>
+          <% }) %>
+      </select>
 
   </div>
 
@@ -58,7 +58,7 @@
   <div class="col-lg-4 col-md-6 col-sm-12">
     <div class="form-check pb-3">
       <label for="item_img" class="form-label">Photo (.jpg or .png - max. 512KB)</label>
-    <input class="form-control" onchange="validateSize(this)" type="file" name="item_img" id="item_img" accept="image/png, image/jpeg">
+    <input class="form-control" onchange="validateSize(this)" type="file" name="item_img" id="item_img" accept=".png, .jpg, .jpeg, .gif">
     </div>
   </div>
 
@@ -67,6 +67,7 @@
 <div class="row">
     <div class="d-grid gap-2 col-4 col-sm-8 mx-auto">
       <input name="status" type="hidden" value="true" class="form-control" required>
+      <!-- <input type="hidden" name="id" value="<%= //users._id %>"> -->
       <button type="submit" class="btn btn-primary">Create Auction</button>
     </div>
 </div>
