@@ -1,4 +1,4 @@
-const Category = require('../models/Category');
+const {Category} = require('../models/Category');
 const dayjs = require('dayjs');
 var relativeTime = require('dayjs/plugin/relativeTime');
 dayjs.extend(relativeTime);

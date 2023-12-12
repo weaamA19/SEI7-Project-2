@@ -9,9 +9,11 @@ const router = express.Router();
 
 //Require our index controller
 const indexCntrl = require('../controllers/index');
+const mainCntrl = require('../controllers/main');
 
 //Routes 
 router.get('/', indexCntrl.index);
+router.get('/main', mainCntrl.index);
 
 // Check if the user is logged in - Weaam
 const ensureLoggedIn = require('../config/ensureLoggedIn');

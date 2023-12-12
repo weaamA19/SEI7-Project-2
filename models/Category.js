@@ -11,7 +11,7 @@ const categorySchema = mongoose.Schema({
 // auction Model
 const Category = mongoose.model("Category", categorySchema);
 // Export
-module.exports = Category;
+module.exports = {Category};
 
 
 
