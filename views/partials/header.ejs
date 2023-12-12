@@ -72,56 +72,64 @@
             <span class="fs-2">Auction App </span>
         </a>
         <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
-            <li>
-            <a href="/" class="nav-link text-white">
-                <div class="bi d-block mx-auto mb-1 menu"><i class="bi bi-house"></i></div>
-                Home
-            </a>
-            </li>
            
+            <li>
+                <a href="/main" class="nav-link text-white">
+                    <div class="bi d-block mx-auto mb-1 menu"><i class="bi bi-file-earmark-spreadsheet-fill"></i></div>
+                    Market 
+                </a>
+            </li>
 
             <% if (user) { %>
                 
+                <% if (!(user.userType == 1)) { %>
                 <li>
-                    <a href="/category/index" class="nav-link text-white">
-                        <div class="bi d-block mx-auto mb-1 menu"><i class="bi bi-file-earmark-spreadsheet-fill"></i></div>
-                        Categories 
-                    </a>
-                </li>
-
-                <li>
-                    <a href="/bid/index" class="nav-link text-white">
+                    <a href="/bid/userbids" class="nav-link text-white">
                         <div class="bi d-block mx-auto mb-1 menu"><i class="bi bi-file-earmark-plus-fill"></i></div>
-                        Bids
+                        My Bids
                     </a>
                 </li>
+                <% } %>
 
                 <% if (user.userType==2 ){%>
 
                     <li>
-                        <a href="/auction/index" class="nav-link text-white">
+                        <a href="/auction/userAuctions" class="nav-link text-white">
                             <div class="bi d-block mx-auto mb-1 menu"><i class="bi bi-file-earmark-spreadsheet-fill"></i></div>
-                            Auctions 
+                            My Auctions 
                         </a>
                     </li>
                     
-                <% } else {%>
+                <% } else if (user.userType == 1){%>
 
-                    <li>
-                        <a href="/auction/index" class="nav-link text-white">
-                            <div class="bi d-block mx-auto mb-1 menu"><i class="bi bi-file-earmark-spreadsheet-fill"></i></div>
-                            Auctions 
-                        </a>
-                    </li>
+                        
+                        <li>
+                            <a href="/auction/index" class="nav-link text-white">
+                                <div class="bi d-block mx-auto mb-1 menu"><i class="bi bi-file-earmark-spreadsheet-fill"></i></div>
+                                Auctions
+                            </a>
+                        </li>
 
-                    <% if (user.userType == 1){%>
+                        <li>
+                            <a href="/category/index" class="nav-link text-white">
+                                <div class="bi d-block mx-auto mb-1 menu"><i class="bi bi-file-earmark-spreadsheet-fill"></i></div>
+                                Categories 
+                            </a>
+                        </li>
+        
+                        <li>
+                            <a href="/bid/index" class="nav-link text-white">
+                                <div class="bi d-block mx-auto mb-1 menu"><i class="bi bi-file-earmark-plus-fill"></i></div>
+                                Bids
+                            </a>
+                        </li>
+                        
                         <li>
                             <a href="/user/index" class="nav-link text-white">
                                 <div class="bi d-block mx-auto mb-1 menu"><i class="bi bi-file-earmark-spreadsheet-fill"></i></div>
-                                Show Users 
+                                Users 
                             </a>
                         </li>
-                    <% } %>
 
                 <% } %>
                 <li>
@@ -132,13 +140,21 @@
                 </li>
 
                 <li>
-                    <a href="/profile" class="nav-link text-white">
+                    <a href="/user/profile" class="nav-link text-white">
                         <div class="bi d-block mx-auto mb-1 menu"><i class="bi bi-file-earmark-spreadsheet-fill"></i></div>
                         Profile 
                     </a>
                 </li>
 
             <% } else { %>
+
+                <li>
+                    <a href="/" class="nav-link text-white">
+                        <div class="bi d-block mx-auto mb-1 menu"><i class="bi bi-house"></i></div>
+                        Home
+                    </a>
+                </li>
+
                 <li>
                     <a href="/auth/google" class="nav-link text-white">
                         <div class="bi d-block mx-auto mb-1 menu"><i class="bi bi-file-earmark-spreadsheet-fill"></i></div>
