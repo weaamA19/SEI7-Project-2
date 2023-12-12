@@ -78,29 +78,78 @@
                 Home
             </a>
             </li>
-            <li>
-            <a href="/bid/index" class="nav-link text-white">
-                <div class="bi d-block mx-auto mb-1 menu"><i class="bi bi-file-earmark-plus-fill"></i></div>
-                Bids 
-            </a>
-            </li>
-            <li>
-            <a href="/auction/index" class="nav-link text-white">
-                <div class="bi d-block mx-auto mb-1 menu"><i class="bi bi-file-earmark-spreadsheet-fill"></i></div>
-                Auctions 
-            </a>
-            </li>
+           
 
-            <li>
-                <a href="/category/index" class="nav-link text-white">
-                    <div class="bi d-block mx-auto mb-1 menu"><i class="bi bi-file-earmark-spreadsheet-fill"></i></div>
-                    Categories 
-                </a>
-             </li>
+            <% if (user) { %>
+                
+                <li>
+                    <a href="/category/index" class="nav-link text-white">
+                        <div class="bi d-block mx-auto mb-1 menu"><i class="bi bi-file-earmark-spreadsheet-fill"></i></div>
+                        Categories 
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/bid/index" class="nav-link text-white">
+                        <div class="bi d-block mx-auto mb-1 menu"><i class="bi bi-file-earmark-plus-fill"></i></div>
+                        Bids
+                    </a>
+                </li>
+
+                <% if (user.userType==2 ){%>
+
+                    <li>
+                        <a href="/auction/index" class="nav-link text-white">
+                            <div class="bi d-block mx-auto mb-1 menu"><i class="bi bi-file-earmark-spreadsheet-fill"></i></div>
+                            Auctions 
+                        </a>
+                    </li>
+                    
+                <% } else {%>
+
+                    <li>
+                        <a href="/auction/index" class="nav-link text-white">
+                            <div class="bi d-block mx-auto mb-1 menu"><i class="bi bi-file-earmark-spreadsheet-fill"></i></div>
+                            Auctions 
+                        </a>
+                    </li>
+
+                    <% if (user.userType == 1){%>
+                        <li>
+                            <a href="/user/index" class="nav-link text-white">
+                                <div class="bi d-block mx-auto mb-1 menu"><i class="bi bi-file-earmark-spreadsheet-fill"></i></div>
+                                Show Users 
+                            </a>
+                        </li>
+                    <% } %>
+
+                <% } %>
+                <li>
+                    <a href="/logout" class="nav-link text-white">
+                        <div class="bi d-block mx-auto mb-1 menu"><i class="bi bi-file-earmark-spreadsheet-fill"></i></div>
+                        Sign Out  
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/profile" class="nav-link text-white">
+                        <div class="bi d-block mx-auto mb-1 menu"><i class="bi bi-file-earmark-spreadsheet-fill"></i></div>
+                        Profile 
+                    </a>
+                </li>
+
+            <% } else { %>
+                <li>
+                    <a href="/auth/google" class="nav-link text-white">
+                        <div class="bi d-block mx-auto mb-1 menu"><i class="bi bi-file-earmark-spreadsheet-fill"></i></div>
+                        Sign In  
+                    </a>
+                 </li>
+
+            <% } %>
 
         </ul>
         </div>
     </div>
     </div>
 </header>
-    
