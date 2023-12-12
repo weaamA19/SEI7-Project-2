@@ -87,16 +87,23 @@ exports.auction_delete_get = (req, res) => {
   })
   .catch((err) => {
     console.log(err);
+    
   })
 }
 
 exports.auction_edit_get = (req, res) => {
-  Auction.findById(req.query.id)
+  Auction.findById(req.query.id).populate('categories')
   .then((auction) => {
-    res.render("auction/edit", {auction});
+  //let dbDate = auction.end_date;
+  //let todayDate = dayjs(dbDate).format('YYYY-MM-DD');
+  let maxDate = dayjs(Date()).add(7, 'day').format('YYYY-MM-DD');
+  let minDate = dayjs(Date()).add(1, 'day').format('YYYY-MM-DD');
+  let theTime = dayjs(Date()).add(1, 'day').format('HH') + ":00";
+    res.render("auction/edit", {auction,dayjs,maxDate,minDate,theTime,title: "Update Auction"});
   })
   .catch(err => {
     console.log(err);
+    res.send("Please try again later!!");
   })
 }
 
