@@ -11,7 +11,7 @@ dayjs.extend(relativeTime);
 
 //List All bids
 exports.bid_index_get = (req, res) => {
-  Bids.find()
+  Bids.find().populate('auction')
     .then((bids) => {
       res.render("bid/index", { bids, dayjs, title: "Show All Bids" });
     })
@@ -37,7 +37,8 @@ if((req.query.id)){
       //console.log(auction);
 
       if(auction._id){
-      res.render("bid/new", { auction, dayjs, title: "Create a New Bid on " + req.query.id });
+        //auctionID = req.query.id;
+      res.render("bid/new", { auction, dayjs, title: "Create a New Bid " });
       }else{
         res.send("Auction does not exist."); 
       }
@@ -57,24 +58,42 @@ if((req.query.id)){
 exports.bid_create_post = (req, res) => {
   let bid = new Bids(req.body);
   bid.user = req.user._id;
+  bid.auction = req.body.auctionID;
 
   bid.save()
   .then((newBid) => {
 
   //find the user
   User.findById(req.user._id)
-  .then((user) => {
-    
+  .then((user) => { 
     user.bids.push(newBid);
     user.save()
     .then(() => {
-      res.redirect("/bid/index");
+
+      Auction.findById(req.body.auctionID)
+    .then((auction) => {
+      auction.bids.push(newBid);
+      auction.save()
+      .then(() => {
+        res.redirect("/bid/index");
+      })
+      .catch((error) => {
+        console.log("Error: " + error);
+        res.send("Please try again later!" + error);
+      })
+    })
+
     })
     .catch((error) => {
       console.log("Error: " + error);
       res.send("Please try again later!" + error);
-    }
-    )
+    })
+    .catch((error) => {
+      console.log("Error: " + error);
+      res.send("Please try again later!" + error);
+    })
+
+
   })
   .catch((error) => {
     console.log("Error: " + error); 
@@ -82,66 +101,6 @@ exports.bid_create_post = (req, res) => {
   })
 
   })
-
-
-  //console.log(req.body);
-
-/*************************** Weam Style */
-
-// async function saveObject(theID) {
-//   const savedObject = await bid.save();
-//   //console.log("Object saved successfully!");
-//   //console.log("ID: " + savedObject._id);
-
-//   //console.log("New Auction: " + savedObject);
-
-//   User.findById(theID)
-//   .then((usersss) => {
-    
-//     usersss.bids.push(savedObject._id);
-//     usersss.save();
-//     console.log("USER OBJECT:::::::::::: " + usersss);
-//   }
-//  )
-//   .catch((error) => {
-//     console.log("Error: " + error); 
-//     //res.send("Please try again later!" + error); //server crashed HTTP SENT ERROR
-//   }
-//   )
-
-// }
-
-/*************************** Weam Style */
-
-
-
-  // User.findById(req.body.id)
-  //   .then(() => {
-  //   bid.user.push(req.body.id);
-
-  //   saveObject(req.body.id);
-    
-  //   res.redirect("/bid/index");
-
-    // bid.save()
-    // .then(() => {
-    //   console.log("User Submitted a new Bid");
-    //   res.redirect("/bid/index");
-    // })
-    // .catch((error) => {
-    //   console.log("There was an error: " + error);
-    //   res.send("Please try again later!");
-    // });
-
-
-
-
-  //   }
-  //  )
-  //   .catch((error) => {
-  //     res.send("Please try again later!" + error);
-  //   }
-  //   )
 };
 
 exports.bid_delete_post = (req, res) => {
@@ -167,7 +126,7 @@ exports.bid_edit_get = (req, res) => {
 };
 
 exports.bid_update_post = (req, res) => {
-  console.log(req.body.id);
+  //console.log(req.body.id);
   Bids.findByIdAndUpdate(req.body.id, req.body)
     .then(() => {
       res.redirect("/bid/index");
