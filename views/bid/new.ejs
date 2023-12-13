@@ -17,7 +17,7 @@
 
             <div class="mb-3 pb-1">
                 <label for="amount" class="form-label">Place your Bid in [ <span class="text-warning"><%= //currency %></span> ] Currency</label>
-                <input type="number" class="form-control" id="amount" name="amount" min="<%= auction.highest_bid %>" step="0.5" required>
+                <input type="number" class="form-control" id="amount" name="amount" min="<%= auction.highest_bid+auction.steps %>" step="<%= auction.steps %>" required>
             </div>
 
             <!-- <div class="form-check">
@@ -37,7 +37,7 @@
             <br /> -->
 
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" required>
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" required checked>
                 <label class="form-check-label" for="flexCheckDefault">
                     <a data-bs-toggle="modal" data-bs-target="#acceptTerms">Accept Terms & Conditions</a>
                 </label>
@@ -48,7 +48,7 @@
         <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="form-floating pb-3">
                 <textarea class="form-control" style="height: 100px;" placeholder="Bidder Notes for Auctioneer" id="note" name="note"></textarea>
-                <label for="content">Bidder Note for Auctioneer</label>
+                <label for="content">Bidder Note for Auctioneer (Optional)</label>
             </div>
         </div>   
         
@@ -61,7 +61,7 @@
         <div class="row">
             <div class="d-grid gap-2 col-4 col-sm-8 mx-auto">
             <input type="hidden" name="id" id="id" value="<%= user._id %>">
-            <input type="text" name="auctionID" id="auctionID" value="<%= auction._id %>">
+            <input type="hidden" name="auctionID" id="auctionID" value="<%= auction._id %>">
             <% if(auction.status){ %><button class="btn btn-bd-primary" type="submit">Submit Bid</button>
             <% }else{ %> <span class="btn btn-secondary">Cannot Bid</span> <% } %>
             

@@ -35,6 +35,11 @@
   </div>
 
   <div class="form-check pb-3">
+    <label for="steps" class="form-label">Step Increment Allowed</label>
+    <input id="steps" name="steps" type="number" min="1" class="form-control" value="1">
+  </div>
+
+  <div class="form-check pb-3">
     <label for="end_date" class="form-label">End Date / Time</label>
     <input id="end_date" name="end_date" type="date" class="form-control" value="<%= todayDate %>" min="<%= minDate %>" max="<%= maxDate %>" required>
     <input type="time" id="time" name="time" value="<%= theTime %>" class="form-control" required>

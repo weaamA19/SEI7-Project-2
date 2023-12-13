@@ -30,6 +30,6 @@ router.post("/update", ensureLoggedIn, checkType(3), bidCntrl.bid_update_post);
 //deleting a bid (might change to cancel or delete)
 router.post("/delete", ensureLoggedIn, checkType(1), bidCntrl.bid_delete_post);
 
-router.get("/userBids", ensureLoggedIn, checkType(2), checkType(3), bidCntrl.user_bid_get);
+//router.get("/userBids", ensureLoggedIn, checkType(3), bidCntrl.user_bid_get);
 
 module.exports = router;

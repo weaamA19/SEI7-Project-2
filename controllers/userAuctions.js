@@ -31,7 +31,7 @@ exports.userAuctions_create_get = (req, res) => {
   let todayDate = dayjs.utc(Date()).add(1, 'day').format('YYYY-MM-DD');
   let maxDate = dayjs.utc(Date()).add(7, 'day').format('YYYY-MM-DD');
   let minDate = dayjs.utc(Date()).add(1, 'day').format('YYYY-MM-DD');
-  let theTime = dayjs.utc(Date()).add(1, 'day').format('HH') + ":00";
+  let theTime = dayjs(Date()).format('HH') + ":00";
 
   console.log(req.user._id);
   
@@ -178,9 +178,9 @@ exports.userAuctions_delete_get = (req, res) => {
 exports.userAuctions_edit_get = (req, res) => {
   Auction.findById(req.query.id).populate('category')
   .then((auction) => {
-    let maxDate = dayjs(Date()).add(7, 'day').format('YYYY-MM-DD');
-  let minDate = dayjs(Date()).add(1, 'day').format('YYYY-MM-DD');
-  let theTime = dayjs(Date()).add(1, 'day').format('HH') + ":00";
+    let maxDate = dayjs.utc(Date()).add(7, 'day').format('YYYY-MM-DD');
+  let minDate = dayjs.utc(Date()).add(1, 'day').format('YYYY-MM-DD');
+  let theTime = dayjs.utc(Date()).add(1, 'day').format('HH') + ":00";
     res.render("userAuctions/edit", {auction,dayjs ,maxDate,minDate,theTime,"title": "Edit your Auctions"});
   })
   .catch(err => {

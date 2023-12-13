@@ -13,7 +13,7 @@ exports.auction_create_get = (req, res) => {
   let todayDate = dayjs.utc(Date()).add(1, 'day').format('YYYY-MM-DD');
   let maxDate = dayjs.utc(Date()).add(7, 'day').format('YYYY-MM-DD');
   let minDate = dayjs.utc(Date()).add(1, 'day').format('YYYY-MM-DD');
-  let theTime = dayjs.utc(Date()).add(1, 'day').format('HH') + ":00";
+  let theTime = dayjs(Date()).format('HH') + ":00";
 
   //console.log(req.user._id);
   
@@ -35,6 +35,7 @@ exports.auction_create_post = (req, res) => {
   auction.item_img = req.file.path;
   auction.user = req.user._id;
   auction.end_date = Date.parse(req.body.end_date + "T" + req.body.time);
+  auction.highest_bid = auction.min_price; //force the highest_bid to be equal to min_price initially
   // req.body.end_date = auctionTime;
   //console.log(auctionTime);
 
