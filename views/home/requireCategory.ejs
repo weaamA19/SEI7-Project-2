@@ -14,7 +14,7 @@
     
     <div class="row" data-masonry='{"percentPosition": true }'>
     
-    <% auctions.forEach(function (auction, index) {  %>
+    <% auctions.forEach(function (auction, index) { if(auction.status){ %>
     <div class="col-sm-6 col-lg-3 mb-4">
     <div class="card">
         <img src="<%= auction.item_img %>">
@@ -43,15 +43,15 @@
                 <a href="/userAuctions/edit/?id=<%= auction._id %>" class="btn btn-sm btn-primary">Edit</a><% } } %>
             
                 <% if((user.userType == 1)) { 
-                %><a href="/auction/edit/?id=<%= auction._id %>" class="btn btn-sm btn-primary">Edit</a><% }} 
-            %>
+                %><a href="/auction/edit/?id=<%= auction._id %>" class="btn btn-sm btn-primary">Edit</a>
+                <a href="/bid/new/?id=<%= auction._id%>" class="btn btn-bd-primary">BID NOW</a><% }} %>
         </div>
         </div>
         </div>
     </div>
     </div>
     
-    <% }) %>
+    <% } }) %>
     
     <!-- <div class="col-sm-6 col-lg-4 mb-4">
     <div class="card">

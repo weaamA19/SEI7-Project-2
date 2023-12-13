@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const categorySchema = mongoose.Schema({
 
   category_name: String,
+  color: String,
+  item_img: String,
 
 }, {
   timestamps: true

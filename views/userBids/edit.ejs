@@ -1,90 +1,96 @@
-<main> 
+<main>
 
-  <div class="album py-5 bg-body-tertiary">
-  <div class="container">
-  
-      <h1><%= title %></h1>
-      <div class="mb-3 pb-1">
-          <h3>You are bidding on [<span class="text-warning"> Auction / Item Name</span> ]</h3>
-          <h5>This Auction is currently [Active] until [ <span class="text-warning">Auction End Date</span> ]</h5>
-      </div>
-      
-      <form method="POST" action="/bid/update" autocomplete="off">
-      <div class="row g-3"> <!-- row-cols-1 row-cols-sm-2 row-cols-md-3 -->  
-  
-          <div class="col-lg-4 col-md-12 col-sm-12">
-  
-              <div class="mb-3 pb-1">
-                  <label for="amount" class="form-label">Place your Bid in [ <span class="text-warning">X</span> ] Currency</label>
-                  <input type="number" class="form-control" id="amount" name="amount" value="<%= bid.amount %>">
-              </div>
-  
-              <div class="form-check">
-                  <input class="form-check-input" type="radio" name="status" id="status" value="true" checked disabled>
-                  <label class="form-check-label" for="status">
-                      Publish Bid
-                  </label>
-              </div>
-  
-              <div class="form-check">
-                  <input class="form-check-input" type="radio" name="status" id="status2" value="false" disabled>
-                  <label class="form-check-label" for="status2">
-                      Don't Publish Bid Yet
-                  </label>
-              </div>
-              <br />
-              <!-- <br />
-              <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" required>
-                  <label class="form-check-label" for="flexCheckDefault">
+<div class="album py-5 bg-body-tertiary">
+<div class="container">
+
+    <h1><%= title %></h1>
+    <div class="mb-3 pb-1">
+        <h3>You are bidding on [ <span class="text-warning"><%= bid.auction.name %></span> ] auctioned by [ <span class="text-danger"><%= whoOwns %></span>  ]</h3>
+        <% const day1 = dayjs.utc(bid.auction.end_date); now = dayjs.utc(new Date()); daysDiff = Math.ceil(day1.diff(now, 'day', true)); hoursDiff = Math.ceil(day1.diff(now, 'hour', true)); %>
+        <h6>Bidding is <% if(bid.auction.status){ %><kbd class="bg-success text-small">Active</kbd><% }else{ %>  <button class="btn btn-sm btn-danger">Inactive</button> <% } %> | Remaining Time: [ <span class="text-warning"><%= daysDiff > 1 ? daysDiff+' days' : hoursDiff+' hours' %></span> ]</h6>
+    </div>
+    
+    <form method="POST" action="/userBids/update" autocomplete="off">
+    <div class="row g-3"> <!-- row-cols-1 row-cols-sm-2 row-cols-md-3 -->  
+
+        <div class="col-lg-4 col-md-12 col-sm-12">
+
+            <div class="mb-3 pb-1">
+                <label for="amount" class="form-label">Place your Bid in [ <span class="text-warning"><%= currency %></span> ] Currency</label>
+                <input type="number" class="form-control" id="amount" name="amount" min="<%= bid.auction.highest_bid+bid.auction.steps %>" step="<%= bid.auction.steps %>" value="<%= bid.amount %>" required>
+            </div>
+
+            <!-- <div class="form-check">
+                <input class="form-check-input" type="radio" name="status" id="status" value="true" checked disabled>
+                <label class="form-check-label" for="status">
+                    Publish Bid
+                </label>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="status" id="status2" value="false" disabled>
+                <label class="form-check-label" for="status2">
+                    Don't Publish Bid Yet
+                </label>
+            </div>
+            <br />
+            <br /> -->
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked required>
+                <label class="form-check-label" for="flexCheckDefault">
                     <a data-bs-toggle="modal" data-bs-target="#acceptTerms">Accept Terms & Conditions</a>
-                  </label>
-              </div> -->
-  
-          </div>
-  
-          <div class="col-lg-4 col-md-6 col-sm-12">
-              <div class="form-floating pb-3">
-                  <textarea class="form-control" style="height: 300px;" placeholder="Bidder Notes for Auctioneer" id="note" name="note"><%= bid.note %></textarea>
-                  <label for="content">Bidder Note for Auctioneer</label>
-              </div>
-          </div>   
-          
-          <div class="col-lg-4 col-md-6 col-sm-12">
-              <% //let thePhoto = "empty-item.jpg"; if(item.photo){ thePhoto = item.photo } %>
-              <p><img src="../images/items/no-item.jpg" height="300px"></p>
-          </div>
-  
-  
-          <div class="row">
-              <div class="d-grid gap-2 col-4 col-sm-8 mx-auto">
-                <input type="hidden" name="id" value="<%= bid._id%>">
-              <button class="btn btn-bd-primary" type="submit">Update Bid</button>
-              </div>
-          </div>
-              
-      </div>
-      </form>
-  
-  </div>
-  </div>
-  
-  </main>
-  
-  <div class="modal fade" id="acceptTerms" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-  <div class="modal-content">
-      <div class="modal-header">
-      <h1 class="modal-title fs-3 text-warning" id="exampleModalLabel">Terms & Conditions</h1>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      ...
-      </div>
-      <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </form>
-      </div>
-  </div>
-  </div>
-  </div>   
+                </label>
+            </div>
+
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="form-floating pb-3">
+                <textarea class="form-control" style="height: 100px;" placeholder="Bidder Notes for Auctioneer" id="note" name="note"><%= bid.note %></textarea>
+                <label for="content">Bidder Note for Auctioneer (Optional)</label>
+            </div>
+        </div>   
+        
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <% //let thePhoto = "empty-item.jpg"; if(item.photo){ thePhoto = item.photo } %>
+            <p><img src="<%= bid.auction.item_img %>" width="80%"></p>
+        </div>
+
+
+        <div class="row">
+            <div class="d-grid gap-2 col-4 col-sm-8 mx-auto">
+            <input type="hidden" name="id" id="id" value="<%= user._id %>">
+            <input type="hidden" name="auctionID" id="auctionID" value="<%= bid.auction._id %>">
+            <input type="hidden" name="BidID" id="BidID" value="<%= bid._id %>">
+            <% if(bid.auction.status){ %><button class="btn btn-bd-primary" type="submit">Submit Bid</button>
+            <% }else{ %> <span class="btn btn-secondary">Cannot Bid</span> <% } %>
+            
+            </div>
+        </div>
+            
+    </div>
+    </form>
+
+</div>
+</div>
+
+</main>
+
+<div class="modal fade" id="acceptTerms" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+<div class="modal-content">
+    <div class="modal-header">
+    <h1 class="modal-title fs-3 text-warning" id="exampleModalLabel">Terms & Conditions</h1>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+    ...
+    </div>
+    <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    </form>
+    </div>
+</div>
+</div>
+</div>

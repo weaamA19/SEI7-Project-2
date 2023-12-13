@@ -35,7 +35,12 @@
         <td><%= dayjs.utc(bid.createdAt).format('DD/MM/YYYY') %></td>
         <td>Updated <%= dayjs.utc(bid.updatedAt).fromNow(true) %> ago</td>
         <td>
-        <a class="btn btn-sm btn-warning" href="/userBids/edit?id=<%= bid._id %>"><i class="bi-pencil-fill"></i></a> <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#D<%= index+1 %>">
+        <% if(bid.user._id.equals(user._id)){ %>
+            <a class="btn btn-sm btn-warning" href="/userBids/edit?id=<%= bid._id %>"><i class="bi-pencil-fill"></i></a>
+        <% }else{ %>
+            <a class="btn btn-sm btn-secondary disabled" role="button" aria-disabled="true"><i class="bi-pencil-fill"></i></a>
+        <% } %>
+            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#D<%= index+1 %>" disabled>
             <i class="bi-trash3-fill"></i></button>
 
 <div class="modal fade" id="D<%= index+1 %>" tabindex="-1" aria-labelledby="exampleModalLabel<%= index+1 %>" aria-hidden="true">

@@ -16,8 +16,8 @@
         <div class="col-lg-4 col-md-12 col-sm-12">
 
             <div class="mb-3 pb-1">
-                <label for="amount" class="form-label">Place your Bid in [ <span class="text-warning"><%= //currency %></span> ] Currency</label>
-                <input type="number" class="form-control" id="amount" name="amount" min="<%= auction.highest_bid+auction.steps %>" step="<%= auction.steps %>" required>
+                <label for="amount" class="form-label">Place your Bid in [ <span class="text-warning"><%= currency %></span> ] Currency</label>
+                <input type="number" class="form-control" id="amount" name="amount" min="<%= auction.highest_bid+auction.steps %>" step="<%= auction.steps %>" value="<%= auction.highest_bid+auction.steps %>" required>
             </div>
 
             <!-- <div class="form-check">
@@ -54,7 +54,7 @@
         
         <div class="col-lg-4 col-md-6 col-sm-12">
             <% //let thePhoto = "empty-item.jpg"; if(item.photo){ thePhoto = item.photo } %>
-            <p><img src="<%= auction.item_img %>" height="300px"></p>
+            <p><img src="<%= auction.item_img %>" width="100%"></p>
         </div>
 
 
@@ -84,7 +84,81 @@
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body">
-    ...
+        ## Auction Participation Terms & Conditions
+
+        <p>Welcome to our exciting auction! By participating, you agree to the following terms and conditions:</p>
+        
+        **1. Eligibility:**
+        
+        <ul>
+        <li>Must be 18 years or older.</li>
+        <li>Possess legal capacity to contract.</li>
+        <li>Not prohibited by law or auction rules.</li>
+        </ul>
+        
+        **2. Bidding:**
+        
+        <ul>
+        <li>Submit bids through designated platform before deadline.</li>
+        <li>Bids are binding and irrevocable.</li>
+        <li>Suspicious bids may be rejected.</li>
+        </ul>
+        
+        **3. Payment:**
+        
+        <ul>
+        <li>Winning bidder pays full bid amount within [specified timeframe].</li>
+        <li>Accepted payment methods: [list options].</li>
+        <li>Failure to pay may result in forfeit and penalties.</li>
+        </ul>
+        
+        **4. Auction Items:**
+        
+        <ul>
+        <li>Sold "as is," no warranties or guarantees.</li>
+        <li>Inspect items before bidding; no refunds for undisclosed flaws.</li>
+        </ul>
+        
+        **5. Risk of Loss:**
+        
+        <ul>
+        <li>Transfers to winning bidder upon sale completion.</li>
+        </ul>
+        
+        **6. Disclaimers:**
+        
+        <ul>
+        <li>No representations or warranties about auction or items.</li>
+        <li>Not liable for errors, information, or damages.</li>
+        </ul>
+        
+        **7. Governing Law:**
+        
+        <p>These terms are governed by the laws of [jurisdiction].</p>
+        
+        **8. Severability:**
+        
+        <p>If any term is invalid, remaining terms stand.</p>
+        
+        **9. Amendments:**
+        
+        <p>We reserve the right to amend these terms at any time.</p>
+        
+        **10. Contact:**
+        
+        <p>For questions, contact us at [contact information].</p>
+        
+        **Additional Notes:**
+        
+        * You can add specific rules for disputes, absentee bids, or pickup arrangements.
+        * Consider including a link to detailed auction rules.
+        * Use clear, concise, and easy-to-understand language.
+        
+        **Remember to modify this template to reflect your specific auction details.**
+        
+        This content is provided in HTML format for your convenience. Don't hesitate to adapt it further to best suit your needs.
+        
+        
     </div>
     <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

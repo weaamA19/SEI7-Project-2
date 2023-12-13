@@ -1,6 +1,8 @@
 const {Auction} = require('../models/Auction');
 const {Category} = require('../models/Category');
-const User = require('../models/User')
+const User = require('../models/User');
+
+const currency = require("../config/settings");
 
 const dayjs = require('dayjs');
 var relativeTime = require('dayjs/plugin/relativeTime');
@@ -28,12 +30,13 @@ dayjs.extend(utc);
 
 
 exports.userAuctions_create_get = (req, res) => {
+  res.locals.currency = currency;
   let todayDate = dayjs.utc(Date()).add(1, 'day').format('YYYY-MM-DD');
   let maxDate = dayjs.utc(Date()).add(7, 'day').format('YYYY-MM-DD');
   let minDate = dayjs.utc(Date()).add(1, 'day').format('YYYY-MM-DD');
   let theTime = dayjs(Date()).format('HH') + ":00";
 
-  console.log(req.user._id);
+  //console.log(req.user._id);
   
   Category.find()
   .then((categories) => {
@@ -47,14 +50,15 @@ exports.userAuctions_create_get = (req, res) => {
 }
 
 exports.userAuctions_create_post = (req, res) => {
-  console.log(req.file);
+  res.locals.currency = currency;
+  //console.log(req.file);
  
-// create new auction
+  //create new auction
   let auction = new Auction(req.body);
-
   auction.item_img = req.file.path;
   auction.user = req.user._id;
   auction.end_date = Date.parse(req.body.end_date + "T" + req.body.time);
+  auction.highest_bid = auction.min_price;
   // req.body.end_date = auctionTime;
   //console.log(auctionTime);
 
@@ -62,16 +66,16 @@ exports.userAuctions_create_post = (req, res) => {
   auction.save()
   .then((newAuction) => {
 // find user 
-console.log("Entry");
+//console.log("Entry");
     User.findById(req.user._id)
     .then((user) => {
-      console.log("user"+req.user._id);
+      //console.log("user"+req.user._id);
       // console.log("ID for Auction Crerator: " + req.body.id);
       // add new auction to user auctions
       user.auctions.push(newAuction);
       user.save()
       .then(()=>{
-            console.log("entered");
+            //console.log("entered");
             res.redirect("/userAuctions/index");
       })
       .catch((error) => {
@@ -145,10 +149,11 @@ console.log("Entry");
 
 
 exports.userAuctions_index_get = (req, res) => {
-  console.log("here...")
-  Auction.find({user: req.user._id})
+  res.locals.currency = currency;
+  //console.log("here...")
+  Auction.find({user: req.user._id}).populate('category').populate('user').sort({ end_date: 'desc'})
   .then((auctions) => {
-    console.log("userAuctions", auctions)
+    //console.log("userAuctions", auctions)
     res.render("userAuctions/index", {auctions, dayjs, "title": "List of All Categories"});
   })
   .catch((err) => {
@@ -156,7 +161,8 @@ exports.userAuctions_index_get = (req, res) => {
   })
 }
 exports.userAuctions_show_get = (req, res) => {
-  console.log(req.query.id);
+  res.locals.currency = currency;
+  //console.log(req.query.id);
   Auction.findById(req.query.id)
   .then((auction) => {
     res.render("userAuctions/detail", {auction, dayjs})
@@ -166,7 +172,7 @@ exports.userAuctions_show_get = (req, res) => {
   })
 }
 exports.userAuctions_delete_get = (req, res) => {
-  console.log(req.query.id);
+  //console.log(req.query.id);
   Auction.findByIdAndDelete(req.query.id)
   .then(() => {
     res.redirect("/userAuctions/index");
@@ -176,6 +182,7 @@ exports.userAuctions_delete_get = (req, res) => {
   })
 }
 exports.userAuctions_edit_get = (req, res) => {
+  res.locals.currency = currency;
   Auction.findById(req.query.id).populate('category')
   .then((auction) => {
     let maxDate = dayjs.utc(Date()).add(7, 'day').format('YYYY-MM-DD');
@@ -188,7 +195,8 @@ exports.userAuctions_edit_get = (req, res) => {
   })
 }
 exports.userAuctions_update_post = (req, res) => {
-  console.log(req.body.id);
+  res.locals.currency = currency;
+  //console.log(req.body.id);
   Auction.findByIdAndUpdate(req.body.id, req.body)
   .then(() => {
     res.redirect("/userAuctions/index");

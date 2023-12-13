@@ -16,7 +16,7 @@
         <div class="col-lg-4 col-md-12 col-sm-12">
 
             <div class="mb-3 pb-1">
-                <label for="amount" class="form-label">Place your Bid in [ <span class="text-warning"><%= //currency %></span> ] Currency</label>
+                <label for="amount" class="form-label">Place your Bid in [ <span class="text-warning"><%= currency %></span> ] Currency</label>
                 <input type="number" class="form-control" id="amount" name="amount" min="<%= bid.auction.highest_bid+bid.auction.steps %>" step="<%= bid.auction.steps %>" value="<%= bid.amount %>" required>
             </div>
 

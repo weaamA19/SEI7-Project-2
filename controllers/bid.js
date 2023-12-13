@@ -2,6 +2,8 @@ const {Bids} = require("../models/Bids.js");
 const {Auction} = require("../models/Auction.js");
 const User = require('../models/User');
 
+const currency = require("../config/settings");
+
 //Define all Bid APIs or Functions
 
 //require dayjs (after installing)
@@ -13,8 +15,10 @@ dayjs.extend(utc);
 
 //List All bids
 exports.bid_index_get = (req, res) => {
-  Bids.find().populate('auction')
+  res.locals.currency = currency;
+  Bids.find().populate('auction').populate('user')
     .then((bids) => {
+      //console.log("Bids", bids)
       res.render("bid/index", { bids, dayjs, title: "Show All Bids" });
     })
     .catch((error) => {
@@ -25,12 +29,13 @@ exports.bid_index_get = (req, res) => {
 
 //Create Bid Operation for Admin User
 exports.bid_add_get = (req, res) => {
+  res.locals.currency = currency;
   res.render("bid/add", { title: "Create a New Bid" });
 };
 
 //Create Bid Operation for Normal User
 exports.bidder_add_get = (req, res) => {
-
+  res.locals.currency = currency;
 //A user bids so look for the right auction
 if((req.query.id)){
 
@@ -58,6 +63,7 @@ if((req.query.id)){
 };
 
 exports.bid_create_post = (req, res) => {
+  res.locals.currency = currency;
   let bid = new Bids(req.body);
   bid.user = req.user._id;
   bid.auction = req.body.auctionID;
@@ -80,22 +86,11 @@ exports.bid_create_post = (req, res) => {
 
           if(auction.highest_bid < newBid.amount){
             auction.highest_bid = newBid.amount;
-            //auction.min_price = newBid.amount; //change this to change the min_price to highest_bid
-
-            //this is not needed
-            // auction.save()
-            // .then(() => {
-            //   console.log("Someone Bidded Higher on: " + auction._id + " - " + auction.name);
-            // })
-            // .catch((error) => {
-            //   console.log("Error: " + error);
-            //   res.send("Please try again later!" + error);
-            // })
 
           }
 
           //check return the value of the bid
-          console.log(newBid);
+          //console.log(newBid);
 
       auction.bids.push(newBid);
       auction.save()
@@ -129,6 +124,7 @@ exports.bid_create_post = (req, res) => {
 };
 
 exports.bid_delete_post = (req, res) => {
+  
   console.log("Deleting Bid with ID: " + req.query.id);
   Bids.findByIdAndDelete(req.query.id)
     .then(() => {
@@ -141,7 +137,7 @@ exports.bid_delete_post = (req, res) => {
 };
 
 exports.bid_edit_get = (req, res) => {
-
+  res.locals.currency = currency;
   Bids.findById(req.query.id).populate('auction').populate('user')
     .then((bid) => {
 
@@ -165,10 +161,29 @@ exports.bid_edit_get = (req, res) => {
 };
 
 exports.bid_update_post = (req, res) => {
-  console.log(req.body.BidID);
+  res.locals.currency = currency;
+  //console.log(req.body.BidID);
   Bids.findByIdAndUpdate(req.body.BidID, req.body)
     .then(() => {
-      res.redirect("/bid/index");
+
+      Auction.findById(req.body.auctionID)
+      .then((auction) => {
+
+      if(auction.highest_bid < newBid.amount){
+        auction.highest_bid = newBid.amount;
+      }
+
+      auction.bids.push(newBid);
+      auction.save()
+      .then(() => {
+        res.redirect("/bid/index");
+      })
+      .catch((error) => {
+        console.log("Error: " + error);
+        res.send("Please try again later!" + error);
+      })
+    })
+
     })
     .catch((err) => {
       console.log(err);
@@ -189,6 +204,7 @@ exports.bid_update_post = (req, res) => {
 //};
 
 exports.bid_show_get = (req, res) => {
+  res.locals.currency = currency;
   //console.log(req.query.id);
   Bids.findById(req.query.id)
   .then((bid) => {
