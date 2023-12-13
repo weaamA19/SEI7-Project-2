@@ -2,11 +2,26 @@
 
 <h1><%= title %></h1>
 
+<nav class="navbar bg-body-tertiary mb-3">
+    <div class="container-fluid">
+
+    <% category.forEach(function (cat, index) {  %>
+
+        <a href="/main/?f=<%= cat._id %>" class="btn btn-outline-success me-2" type="button"><%= cat.category_name %></a>
+
+    <% }) %>
+
+    <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </div>  
+</nav>
+
 <div class="row" data-masonry='{"percentPosition": true }'>
 
 <% auctions.forEach(function (auction, index) {  %>
-
-<div class="col-sm-6 col-lg-4 mb-4">
+<div class="col-sm-6 col-lg-3 mb-4">
 <div class="card">
     <img src="../images/items/<%= auction.item_img %>">
     <div class="card-body">
@@ -16,9 +31,13 @@
     <p class="card-text"><small class="text-body-secondary">Ending <%= daysDiff > 1 ? daysDiff+' days' : hoursDiff+' hours' %></small></p>
     <div class="d-flex flex-row-reverse">
     <button class="btn btn-sm btn-primary price_tag"><%= currency + ' ' + auction.min_price %></button>
-    <div class="cat_tag" style="background-color: aqua;"><%= auction.category.category_name %></div>
+    <div class="cat_tag" style="background-color: aqua;"><%= auction.category.category_name %> </div>
     <div class="d-grid gap-2 col mx-auto">
-    <% if(user){ %><a href="#?id=<%= auction._id%>" class="btn btn-bd-primary">BID NOW</a><% if ((user.userType == 1)) { %><a href="/auction/edit/?id=<%= auction._id %>" class="btn btn-sm btn-primary">Edit</a><% }} %>
+    <% if(user) { if((user.userType > 1) ){ let owner = auction.user._id; let theUser = user._id; if( !( owner.toString() == theUser.toString() ) ) {
+        %><a href="#?id=<%= auction._id%>" class="btn btn-bd-primary">BID NOW</a>
+        <% }else{ %><a href="/auction/edit/?id=<%= auction._id %>" class="btn btn-sm btn-primary">Edit</a><% } } %>
+    <% if((user.userType == 1)) { %><a href="/auction/edit/?id=<%= auction._id %>" class="btn btn-sm btn-primary">Edit</a><% }} %>
+    
     </div>
 </div>
     </div>
