@@ -16,7 +16,7 @@
               <h3 class="card-title">Item: <%= auction.name %></h3>
               <p class="card-text">Minimum Price: <%= auction.min_price %></p>
               <p class="card-text">Description: <%= auction.description %></p>
-              <p class="card-text">End Date: <%= dayjs.utc(auction.end_date).format('YYYY-MM-DD') %></p>
+              <p class="card-text">End Date: <%= dayjs(auction.end_date).format('YYYY-MM-DD') %></p>
               <p class="card-text">Item Status: <%= auction.status %></p>
             </div>
           </div>

@@ -35,8 +35,8 @@
                         else { %>Bidder<% } 
                     %></td>
 
-                    <td> Created <%= dayjs(user.createdAt).format('DD/MM/YYYY') %></td>
-                    <td> Updated <%= dayjs(user.updatedAt).fromNow(true) %> ago</td>
+                    <td> Created <%= dayjs.utc(user.createdAt).format('DD/MM/YYYY') %></td>
+                    <td> Updated <%= dayjs.utc(user.updatedAt).fromNow(true) %> ago</td>
 
                     <!-- <td><a href="/user/edit?id=<%=user._id %>">Edit User</a></td> -->
 
