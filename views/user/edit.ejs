@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit User Details</title>
-    <link rel="stylesheet" href="../stylesheets/editPageStyle.css">
-</head>
-<body>
-    <h1>Edit Users Details</h1>
+<main>
+    <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+
+            <h1><%= title %></h1>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
     <form method="POST" action="/user/update">
         <div>
             <label>Name</label>
@@ -34,18 +32,15 @@
         </div>
 
         <div>
-            <label>Users Type</label>
-            <!-- <input type="number" name="userType" value="<%= users.userType%>" min="1" max="3"> -->
+            <label>User Privileges</label>
             <select name="userType">
-                <option value="1" <% users.userType = 1%> selected>Admin</option>
-                <option value="2" <% users.userType = 2%> selected>Auctioneer</option>
-                <option value="3" <% users.userType = 3%> selected>Bidder</option>
+              <option value="1" <% if (users.userType === '1') { %> selected <% } %>>Admin</option>
+              <option value="2" <% if (users.userType === '2') { %> selected <% } %>>Auctioneer</option>
+              <option value="3" <% if (users.userType === '3') { %> selected <% } %>>Bidder</option>
             </select>
-        </div>
+          </div>
 
         <input type="hidden" name="id" value="<%= users._id %>">
         <button type="submit">Edit User Details</button>
     </form>
-</body>
-</html>
-
+</main>

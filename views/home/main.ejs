@@ -1,61 +1,22 @@
 <main class="container py-5">
-
-<h1><%= title %></h1>
-
-<nav class="navbar bg-body-tertiary mb-3">
-    <div class="container-fluid">
-
-    <% category.forEach(function (cat, index) {  %>
-
-        <a href="/main/?f=<%= cat._id %>" class="btn btn-outline-success me-2" type="button"><%= cat.category_name %></a>
-
-    <% }) %>
-
-    <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-    </div>  
-</nav>
-
-<div class="row" data-masonry='{"percentPosition": true }'>
-
-<% auctions.forEach(function (auction, index) {  %>
-<div class="col-sm-6 col-lg-3 mb-4">
-<div class="card">
-    <img src="<%= auction.item_img %>">
-    <div class="card-body">
-    <h5 class="card-title"><%= auction.name %></h5> 
-    <p class="card-text pt-3"><small><%= auction.description %></small></p>
-    <% const day1 = dayjs.utc(auction.end_date); now = dayjs.utc(new Date()); daysDiff = Math.ceil(day1.diff(now, 'day', true)); hoursDiff = Math.ceil(day1.diff(now, 'hour', true)); %>
-    <p class="card-text"><small class="text-body-secondary">Ending <%= daysDiff > 1 ? daysDiff+' days' : hoursDiff+' hours' %></small></p>
-    <div class="d-flex flex-row-reverse">
-    <button class="btn btn-sm btn-primary price_tag"><%= currency + ' ' + auction.min_price %></button>
-    <div class="cat_tag" style="background-color: aqua;"><%= auction.category.category_name %> </div>
-    <div class="d-grid gap-2 col mx-auto">
-    <% if(user) { if((user.userType > 1) ){ let owner = auction.user._id; let theUser = user._id; if( !( owner.toString() == theUser.toString() ) ) {
-        %><a href="#?id=<%= auction._id%>" class="btn btn-bd-primary">BID NOW</a>
-        <% }else{ %><a href="/auction/edit/?id=<%= auction._id %>" class="btn btn-sm btn-primary">Edit</a><% } } %>
-    <% if((user.userType == 1)) { %><a href="/auction/edit/?id=<%= auction._id %>" class="btn btn-sm btn-primary">Edit</a><% }} %>
-    
+  <h1 class="text-center"><%= title %></h1>
+  <div class="container-fluid">
+    <div class="container">
+      <div class="row">
+        <% category.forEach(function(category) { %>
+          <div class="col-md-3 mb-4">
+            <div class="card">
+              <img src="../images/items/no-item.jpg">
+              <form action="/categories/requireCategory" class="card-body p-0" method="POST">
+                <input type="hidden" name="id" id="id" value="<%= category._id %>">
+                <button type="submit" class="btn btn-link p-30">
+                  <h5 class="card-title category-link mb-0" data-category="<%= category.category_name %>"><%= category.category_name %></h5>
+                </button>
+              </form>
+            </div>
+          </div>
+        <% }) %>
+      </div>
     </div>
-</div>
-    </div>
-</div>
-</div>
-
-<% }) %>
-
-<!-- <div class="col-sm-6 col-lg-4 mb-4">
-<div class="card">
-    <svg class="bd-placeholder-img card-img-top" width="100%" height="200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"/><text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
-    <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-    </div>
-</div>
-</div> -->
-
-</div>
+  </div>
 </main>

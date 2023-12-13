@@ -13,10 +13,12 @@ const mainCntrl = require("../controllers/main");
 
 // Check if the user is logged in - Weaam
 const ensureLoggedIn = require("../config/ensureLoggedIn");
+router.use(express.urlencoded({ extended: true }));
 
 //Routes
 router.get("/", indexCntrl.index);
-router.get("/main", mainCntrl.index);
+router.get("/main", mainCntrl.display_categories);
+router.post("/categories/requireCategory", mainCntrl.index);
 
 //routes using passport for Google authentication - Weaam
 
