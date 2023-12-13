@@ -15,7 +15,7 @@ exports.auction_create_get = (req, res) => {
   let minDate = dayjs.utc(Date()).add(1, 'day').format('YYYY-MM-DD');
   let theTime = dayjs.utc(Date()).add(1, 'day').format('HH') + ":00";
 
-  console.log(req.user._id);
+  //console.log(req.user._id);
   
   Category.find()
   .then((categories) => {
@@ -29,7 +29,7 @@ exports.auction_create_get = (req, res) => {
 }
 
 exports.auction_create_post = (req, res) => {
-  console.log(req.file);
+// console.log(req.file);
 // create new auction
   let auction = new Auction(req.body);
   auction.item_img = req.file.path;
@@ -120,7 +120,7 @@ exports.auction_create_post = (req, res) => {
 }
 
 exports.auction_index_get = (req, res) => {
-  Auction.find().sort({ end_date: 'desc'})
+  Auction.find().sort({ end_date: 'desc'}).populate('category')
   .then((auctions) => {
     res.render("auction/index", {auctions, dayjs, "title": "List All Auctions"});
   })
