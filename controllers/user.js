@@ -66,6 +66,7 @@ exports.user_profile_post = (req, res) => {
   // let users = new user(req.body);
   console.log("FILE", req.file);
   if (req.file) {
+    //req.body.avatar = req.file.path; ---- to be fixed for cloudinary
     req.body.avatar = "/images/profile/" + req.file.filename;
   }
   // user.name = req.user.name;
