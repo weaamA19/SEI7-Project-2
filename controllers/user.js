@@ -28,7 +28,7 @@ exports.user_update_get = (req, res) => {
   user
     .findById(req.query.id)
     .then((users) => {
-      res.render("user/edit", { users });
+      res.render("user/edit", { users, title: "Edit Users Details" });
     })
     .catch((err) => {
       console.log(err);

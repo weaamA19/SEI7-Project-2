@@ -33,9 +33,19 @@ router.get("/index", ensureLoggedIn, userCntrl.user_index_get);
 
 router.get("/edit", ensureLoggedIn, userCntrl.user_update_get);
 
-router.post("/update", ensureLoggedIn, userCntrl.user_update_post);
+router.post(
+  "/update",
+  ensureLoggedIn,
+  upload.single("item_img"),
+  userCntrl.user_update_post
+);
 
-router.get("/profile", ensureLoggedIn, userCntrl.user_profile_get);
+router.get(
+  "/profile",
+
+  ensureLoggedIn,
+  userCntrl.user_profile_get
+);
 
 router.post(
   "/updateUser",
