@@ -19,7 +19,7 @@
     <th>Auctioned Item Name</th>
     <th>Category</th>
     <th>Owner</th>
-    <th>Minimum Price</th>
+    <th>Min. Price to Highest Bid</th> <!-- was Minimum Price -->
     <!-- <th>Start Date</th> -->
     <th>End Date</th>
     <th>Created / Updated</th>
@@ -32,7 +32,7 @@
     <td><a href="/auction/detail?id=<%= auction._id %>"><%= auction.name %></a></td>
     <td><%= auction.category.category_name %></td>
     <td><%= auction.user.name %></td>
-    <td><%= auction.min_price %></td>
+    <td><kbd class="btn btn-primary"><%= auction.min_price %></kbd> to <kbd class="btn btn-success"><%= auction.highest_bid %></kbd></td>
     <!-- <td><%= // dayjs.utc(auction.start_date).format('DD/MM/YYYY') %></td> -->
     <td><%= dayjs.utc(auction.end_date).format('DD/MM/YYYY HH:mm') %></td>
     <td><small><kbd>Created: <%= dayjs.utc(auction.createdAt).format('DD/MM/YYYY') %></kbd> <kbd>Updated <%= dayjs.utc(auction.updatedAt).fromNow(true) %> ago</kbd></small></td>

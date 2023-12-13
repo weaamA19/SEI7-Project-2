@@ -6,8 +6,10 @@ const User = require('../models/User');
 
 //require dayjs (after installing)
 const dayjs = require("dayjs");
+var utc = require('dayjs/plugin/utc')
 var relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
+dayjs.extend(utc);
 
 //List All bids
 exports.bid_index_get = (req, res) => {
@@ -59,6 +61,7 @@ exports.bid_create_post = (req, res) => {
   let bid = new Bids(req.body);
   bid.user = req.user._id;
   bid.auction = req.body.auctionID;
+  
 
   bid.save()
   .then((newBid) => {
@@ -71,7 +74,29 @@ exports.bid_create_post = (req, res) => {
     .then(() => {
 
       Auction.findById(req.body.auctionID)
-    .then((auction) => {
+      .then((auction) => {
+
+          //if bid is higher than auction.highest_bid then update
+
+          if(auction.highest_bid < newBid.amount){
+            auction.highest_bid = newBid.amount;
+            //auction.min_price = newBid.amount; //change this to change the min_price to highest_bid
+
+            //this is not needed
+            // auction.save()
+            // .then(() => {
+            //   console.log("Someone Bidded Higher on: " + auction._id + " - " + auction.name);
+            // })
+            // .catch((error) => {
+            //   console.log("Error: " + error);
+            //   res.send("Please try again later!" + error);
+            // })
+
+          }
+
+          //check return the value of the bid
+          console.log(newBid);
+
       auction.bids.push(newBid);
       auction.save()
       .then(() => {
@@ -116,9 +141,23 @@ exports.bid_delete_post = (req, res) => {
 };
 
 exports.bid_edit_get = (req, res) => {
-  Bids.findById(req.query.id)
+
+  Bids.findById(req.query.id).populate('auction').populate('user')
     .then((bid) => {
-      res.render("bid/edit", { bid, title: "Edit your bid" });
+
+      Auction.findById(bid.auction._id).populate('user')
+      .then((auction) => {
+        let whoOwns = auction.user.name;
+        
+        //console.log(whoOwns);
+        res.render("bid/edit", { bid, dayjs, whoOwns, title: "Edit your Bid" });
+
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+
+      
     })
     .catch((err) => {
       console.log(err);
@@ -126,8 +165,8 @@ exports.bid_edit_get = (req, res) => {
 };
 
 exports.bid_update_post = (req, res) => {
-  //console.log(req.body.id);
-  Bids.findByIdAndUpdate(req.body.id, req.body)
+  console.log(req.body.BidID);
+  Bids.findByIdAndUpdate(req.body.BidID, req.body)
     .then(() => {
       res.redirect("/bid/index");
     })
@@ -137,8 +176,8 @@ exports.bid_update_post = (req, res) => {
 };
 
 //List bids for specific user - WEAAM
-exports.user_bid_get = (req, res) => {
-  res.render("bid/userbids");
+//exports.user_bid_get = (req, res) => {
+  //res.render("bid/userbids");
   // Bids.find()
   //   .then((bids) => {
   //     // res.render("bid/userBids", { bids, dayjs, title: "Show Users Bids" });
@@ -147,7 +186,7 @@ exports.user_bid_get = (req, res) => {
   //     console.log("There was an error: " + error);
   //     res.send("Cannot Show All Bids. Please try again later.");
   //   });
-};
+//};
 
 exports.bid_show_get = (req, res) => {
   //console.log(req.query.id);

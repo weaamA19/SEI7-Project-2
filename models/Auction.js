@@ -15,6 +15,7 @@ const auctionSchema = mongoose.Schema({
   name: String,
   min_price: Number, //starting price
   highest_bid: Number,
+  steps: Number,
   description: String,
   //start_date: Date,
   end_date: Date,

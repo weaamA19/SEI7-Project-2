@@ -1,9 +1,13 @@
 const {Bids} = require('../models/Bids');
 const {Auction} = require('../models/Auction');
 
-const dayjs = require('dayjs');
-var relativeTime = require('dayjs/plugin/relativeTime');
+//require dayjs (after installing)
+const dayjs = require("dayjs");
+var utc = require('dayjs/plugin/utc')
+var relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
+dayjs.extend(utc);
+
 // Create Operation
 exports.userBids_create_get = (req, res) => {
 //A user bids so look for the right auction
@@ -82,7 +86,7 @@ exports.userBids_create_post = (req, res) => {
 
 exports.userBids_index_get = (req, res) => {
   //console.log("here...")
-  Bids.find({user: req.user._id}).populate('auction')
+  Bids.find({user: req.user._id}).populate('user').populate('auction')
   .then((bids) => {
     console.log("userBids", bids)
     res.render("userBids/index", {bids, dayjs, "title": "List of All My Bids"});
@@ -112,12 +116,12 @@ exports.userBids_delete_get = (req, res) => {
   })
 }
 exports.userBids_edit_get = (req, res) => {
-  Bids.findById(req.query.id)
+  Bids.findById(req.query.id).populate('auction')
   .then((bid) => {
     let maxDate = dayjs(Date()).add(7, 'day').format('YYYY-MM-DD');
   let minDate = dayjs(Date()).add(1, 'day').format('YYYY-MM-DD');
   let theTime = dayjs(Date()).add(1, 'day').format('HH') + ":00";
-    res.render("userBids/edit", {bid ,dayjs ,maxDate,minDate,theTime,"title": "Edit your UserBids"});
+    res.render("userBids/edit", {bid ,dayjs ,maxDate,minDate,theTime,"title": "Edit your Bids"});
   })
   .catch(err => {
     console.log(err);
