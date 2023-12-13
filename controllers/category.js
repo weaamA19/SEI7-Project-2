@@ -1,7 +1,10 @@
 const {Category} = require('../models/Category');
 const dayjs = require('dayjs');
+var utc = require('dayjs/plugin/utc')
 var relativeTime = require('dayjs/plugin/relativeTime');
 dayjs.extend(relativeTime);
+dayjs.extend(utc);
+
 // Create Operation
 exports.category_create_get = (req, res) => {
   res.render("category/add");

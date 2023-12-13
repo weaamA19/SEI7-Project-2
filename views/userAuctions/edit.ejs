@@ -5,7 +5,7 @@
 
 <h1><%= title %></h1>
 
-<form method="POST" action="/auction/update" autocomplete="off">
+<form method="POST"  enctype="multipart/form-data" action="/auction/update" autocomplete="off">
 <div class="row g-3">
 
   <div class="col-lg-4 col-md-12 col-sm-12">
@@ -20,7 +20,7 @@
   </div>
 
   <div class="form-check pb-3">
-    <label for="name" class="form-label">Auctioned Item Name</label>
+    <label for="name" class="form-label">Auctioned Item Title</label>
     <input id="name" name="name"  value="<%= auction.name %>"  class="form-control" disabled>
   </div>
 
@@ -31,7 +31,7 @@
 
   <div class="form-check pb-3">
     <label for="end_date" class="form-label">End Date / Time</label>
-    <input id="end_date" name="end_date" type="date" class="form-control" value="<%= dayjs.utc(auction.end_date).format('YYYY-MM-DD') %>" min="<%= minDate %>" max="<%= maxDate %>" required>
+    <input id="end_date" name="end_date" type="date" class="form-control" value="<%= dayjs(auction.end_date).format('YYYY-MM-DD') %>" min="<%= minDate %>" max="<%= maxDate %>" required>
     <input type="time" id="time" name="time" value="<%= theTime %>" class="form-control" required>
   </div>
 
@@ -40,26 +40,8 @@
 <div class="col-lg-4 col-md-6 col-sm-12">
   <label for="description" class="form-label">Description</label>
   <div class="form-floating pb-3">
-    <textarea id="description" name="description" class="form-control" height="100px" required><%= auction.description %></textarea>
+    <textarea id="description" name="description" class="form-control" height="100px" required></textarea>
   </div>
-
-
-  <!-- <input name="status" type="hidden" value="true" class="form-control" required> -->
-  <% let active = ""; let disabled = "checked"; if(auction.status){ active = "checked"; disabled = ""; } %>
-  <div class="form-check">
-      <input class="form-check-input" type="radio" name="status" id="status1" value="true" <%= active %>>
-      <label class="form-check-label" for="status1">
-          Active 
-      </label>
-  </div>
-
-  <div class="form-check">
-    <input class="form-check-input" type="radio" name="status" id="status2" value="false" <%= disabled %>>
-    <label class="form-check-label" for="status2">
-        Disabled
-    </label>
-  </div>
-
 </div>
 
   <!-- <div>
@@ -69,15 +51,14 @@
 
   
   <div class="col-lg-4 col-md-6 col-sm-12">
-    <p>Auctioned by: <%= auction.user.name %></p>
-    <img src="<%= auction.item_img %>" width="80%">
+    <img src="<%= auction.item_img %>" width="100%">
   </div>
 
   <br>
 
 <div class="row">
     <div class="d-grid gap-2 col-4 col-sm-8 mx-auto">
-      <input id="id" name="id" type="hidden" value="<%= auction._id %>" required>
+      <input name="status" type="hidden" value="true" class="form-control" required>
       <button type="submit" class="btn btn-primary">Update Auction</button>
     </div>
 </div>

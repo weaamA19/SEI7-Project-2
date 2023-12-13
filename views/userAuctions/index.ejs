@@ -3,13 +3,13 @@
   <div class="album py-5 bg-body-tertiary">
       <div class="container">
   
-          <h1><%= title %></h1>
+          <h1>My Auctions</h1>
   
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
   
       <nav class="navbar bg-body-tertiary">
           <div class="container-fluid justify-content-start">
-              <a class="btn btn-sm btn-outline-success me-2" href="/auction/add">Add New Auction</a>
+              <a class="btn btn-sm btn-outline-success me-2" href="/userAuctions/add">Add New Auction</a>
           </div>
       </nav>
 
@@ -19,7 +19,7 @@
     <th>Auctioned Item Name</th>
     <th>Category</th>
     <th>Minimum Price</th>
-    <!-- <th>Start Date</th> -->
+    <th>Start Date</th>
     <th>End Date</th>
     <th>Created / Updated</th>
     <th>Action(s)</th>
@@ -28,13 +28,13 @@
 <% auctions.forEach(function (auction, index) {  %>
   <tr>
     <td><%= index+1 %></td>
-    <td><a href="/auction/detail?id=<%= auction._id %>"><%= auction.name %></a></td>
+    <td><a href="/userAuctions/detail?id=<%= auction._id %>"><%= auction.name %></a></td>
     <td><%= auction.category %></td>
     <td><%= auction.min_price %></td>
-    <!-- <td><%= // dayjs.utc(auction.start_date).format('DD/MM/YYYY') %></td> -->
-    <td><%= dayjs.utc(auction.end_date).format('DD/MM/YYYY HH:mm') %></td>
-    <td><small><kbd>Created: <%= dayjs.utc(auction.createdAt).format('DD/MM/YYYY') %></kbd> <kbd>Updated <%= dayjs.utc(auction.updatedAt).fromNow(true) %> ago</kbd></small></td>
-    <td><a class="btn btn-sm btn-warning" href="/auction/edit?id=<%= auction._id %>"><i class="bi-pencil-fill"></i></a> <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#D<%= index+1 %>">
+    <td><%= dayjs(auction.start_date).format('DD/MM/YYYY') %></td>
+    <td><%= dayjs(auction.end_date).format('DD/MM/YYYY') %></td>
+    <td><small><kbd>Created: <%= dayjs(auction.createdAt).format('DD/MM/YYYY') %></kbd> <kbd>Updated <%= dayjs(auction.updatedAt).fromNow(true) %> ago</kbd></small></td>
+    <td><a class="btn btn-sm btn-warning" href="/userAuctions/edit?id=<%= auction._id %>"><i class="bi-pencil-fill"></i></a> <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#D<%= index+1 %>">
       <i class="bi-trash3-fill"></i></button>
 
 <div class="modal fade" id="D<%= index+1 %>" tabindex="-1" aria-labelledby="exampleModalLabel<%= index+1 %>" aria-hidden="true">
@@ -47,11 +47,11 @@
   <div class="modal-body">
       Auction: <%= auction.name %> <br>
       Minimum Price: <%= auction.min_price %> <br>
-      Start Date: <%= dayjs.utc(auction.start_date).format('DD/MM/YYYY') %><br>
-      End Date: <%= dayjs.utc(auction.end_date).format('DD/MM/YYYY') %><br>
+      Start Date: <%= dayjs(auction.start_date).format('DD/MM/YYYY') %><br>
+      End Date: <%= dayjs(auction.end_date).format('DD/MM/YYYY') %><br>
   </div>
   <div class="modal-footer">
-  <form method="POST" action="/auction/delete?id=<%= auction._id %>">
+  <form method="POST" action="/userAuctions/delete?id=<%= auction._id %>">
       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
       <button type="submit" class="btn btn-danger">Delete</button>
   </form>

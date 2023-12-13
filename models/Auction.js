@@ -1,11 +1,7 @@
 const mongoose = require('mongoose');
 
-// Author Schema
+// Auction Schema
 const auctionSchema = mongoose.Schema({
-  // user: [{
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: 'User'
-  // }],
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
@@ -18,11 +14,16 @@ const auctionSchema = mongoose.Schema({
   //category: String,
   name: String,
   min_price: Number, //starting price
+  highest_bid: Number,
   description: String,
   //start_date: Date,
   end_date: Date,
   item_img: String,
   status: Boolean, //if true then its active
+  bids: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Bids'
+  }],
 }, {
   timestamps: true
 })
