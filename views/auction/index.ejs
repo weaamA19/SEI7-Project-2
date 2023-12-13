@@ -18,6 +18,7 @@
     <th>No.</th>
     <th>Auctioned Item Name</th>
     <th>Category</th>
+    <th>Owner</th>
     <th>Minimum Price</th>
     <!-- <th>Start Date</th> -->
     <th>End Date</th>
@@ -30,6 +31,7 @@
     <td><%= index+1 %></td>
     <td><a href="/auction/detail?id=<%= auction._id %>"><%= auction.name %></a></td>
     <td><%= auction.category.category_name %></td>
+    <td><%= auction.user.name %></td>
     <td><%= auction.min_price %></td>
     <!-- <td><%= // dayjs.utc(auction.start_date).format('DD/MM/YYYY') %></td> -->
     <td><%= dayjs.utc(auction.end_date).format('DD/MM/YYYY HH:mm') %></td>
