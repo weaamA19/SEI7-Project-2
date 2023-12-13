@@ -29,7 +29,7 @@
   <tr>
     <td><%= index+1 %></td>
     <td><a href="/auction/detail?id=<%= auction._id %>"><%= auction.name %></a></td>
-    <td><%= auction.category %></td>
+    <td><%= auction.category.category_name %></td>
     <td><%= auction.min_price %></td>
     <!-- <td><%= // dayjs.utc(auction.start_date).format('DD/MM/YYYY') %></td> -->
     <td><%= dayjs.utc(auction.end_date).format('DD/MM/YYYY HH:mm') %></td>

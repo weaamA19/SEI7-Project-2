@@ -5,7 +5,7 @@
 
     <h1><%= title %></h1>
     <div class="mb-3 pb-1">
-        <h2>You are bidding on [ <span class="text-warning"><%= auction.name %></span> ] auctioned [ <span class="text-danger"><%= auction.user.name %></span>  ]</h2>
+        <h3>You are bidding on [ <span class="text-warning"><%= auction.name %></span> ] auctioned by [ <span class="text-danger"><%= auction.user.name %></span>  ]</h3>
         <% const day1 = dayjs.utc(auction.end_date); now = dayjs.utc(new Date()); daysDiff = Math.ceil(day1.diff(now, 'day', true)); hoursDiff = Math.ceil(day1.diff(now, 'hour', true)); %>
         <h6>Bidding is <% if(auction.status){ %><kbd class="bg-success text-small">Active</kbd><% }else{ %>  <button class="btn btn-sm btn-danger">Inactive</button> <% } %> | Remaining Time: [ <span class="text-warning"><%= daysDiff > 1 ? daysDiff+' days' : hoursDiff+' hours' %></span> ]</h6>
     </div>
@@ -61,6 +61,7 @@
         <div class="row">
             <div class="d-grid gap-2 col-4 col-sm-8 mx-auto">
             <input type="hidden" name="id" id="id" value="<%= user._id %>">
+            <input type="text" name="auctionID" id="auctionID" value="<%= auction._id %>">
             <% if(auction.status){ %><button class="btn btn-bd-primary" type="submit">Submit Bid</button>
             <% }else{ %> <span class="btn btn-secondary">Cannot Bid</span> <% } %>
             
