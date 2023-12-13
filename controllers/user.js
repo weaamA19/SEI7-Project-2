@@ -10,9 +10,9 @@ dayjs.extend(relativeTime);
 //List All users - weaam
 //This should be only displayed for the admin !
 exports.user_index_get = (req, res) => {
-  
   //console.log(req.user);
-  user.find()
+  user
+    .find()
     .then((users) => {
       res.render("user/index", { users, dayjs, title: "Show All Users" });
     })
@@ -63,10 +63,16 @@ exports.user_profile_get = (req, res) => {
 };
 
 exports.user_profile_post = (req, res) => {
+  // let users = new user(req.body);
+  console.log("FILE", req.file);
+  if (req.file) {
+    req.body.avatar = "/images/profile/" + req.file.filename;
+  }
+  // user.name = req.user.name;
   user
     .findByIdAndUpdate(req.user._id, req.body)
     .then((users) => {
-      res.redirect("/user/profile");
+      res.redirect("/user/profile/?m=Profile_Is_Updated");
     })
     .catch((err) => {
       console.log(err);
