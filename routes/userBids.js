@@ -9,13 +9,13 @@ const {checkType} = require("../config/checkType");
 
 
 // Routes
-router.get("/add", ensureLoggedIn, checkType(2), checkType(3), userBidsCntrl.userBids_create_get);
-router.post("/add", ensureLoggedIn, checkType(2), checkType(3), userBidsCntrl.userBids_create_post);
-router.get("/index", ensureLoggedIn, checkType(2), checkType(3), userBidsCntrl.userBids_index_get);
-router.get("/detail", ensureLoggedIn, checkType(2), checkType(3), userBidsCntrl.userBids_show_get);
+router.get("/add", ensureLoggedIn, checkType(3), userBidsCntrl.userBids_create_get);
+router.post("/add", ensureLoggedIn, checkType(3), userBidsCntrl.userBids_create_post);
+router.get("/index", ensureLoggedIn, checkType(3), userBidsCntrl.userBids_index_get);
+router.get("/detail", ensureLoggedIn, checkType(3), userBidsCntrl.userBids_show_get);
 
-router.get("/edit", ensureLoggedIn, checkType(2), checkType(3), userBidsCntrl.userBids_edit_get);
-router.post("/update", ensureLoggedIn, checkType(2), checkType(3), userBidsCntrl.userBids_update_post);
+router.get("/edit", ensureLoggedIn, checkType(3), userBidsCntrl.userBids_edit_get);
+router.post("/update", ensureLoggedIn, checkType(3), userBidsCntrl.userBids_update_post);
 
-router.post("/delete", ensureLoggedIn, checkType(2), checkType(3), userBidsCntrl.userBids_delete_get);
+router.post("/delete", ensureLoggedIn, checkType(3), userBidsCntrl.userBids_delete_get);
 module.exports = router;

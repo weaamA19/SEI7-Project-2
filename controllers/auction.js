@@ -120,7 +120,7 @@ exports.auction_create_post = (req, res) => {
 }
 
 exports.auction_index_get = (req, res) => {
-  Auction.find().sort({ end_date: 'desc'}).populate('category')
+  Auction.find().sort({ end_date: 'desc'}).populate('category').populate('user')
   .then((auctions) => {
     res.render("auction/index", {auctions, dayjs, "title": "List All Auctions"});
   })
