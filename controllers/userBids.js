@@ -1,27 +1,88 @@
 const {Bids} = require('../models/Bids');
+const {Auction} = require('../models/Auction');
+
 const dayjs = require('dayjs');
 var relativeTime = require('dayjs/plugin/relativeTime');
 dayjs.extend(relativeTime);
 // Create Operation
 exports.userBids_create_get = (req, res) => {
-  res.render("userBids/add", { title: "Create a New Bid" });
+//A user bids so look for the right auction
+if((req.query.id)){
+
+  Auction.findById(req.query.id).populate('category').populate('user')
+    .then((auction) => {
+      //console.log(auction);
+
+      if(auction._id){
+        //auctionID = req.query.id;
+      res.render("userBids/add", { auction, dayjs, title: "Create a New Bid " });
+      }else{
+        res.send("Auction does not exist."); 
+      }
+    })
+    .catch((error) => {
+        console.log("There was an error: " + error);
+        res.send("Auction does not exist. Please try another.");
+    })
+
+  }else{
+    //if there is no auction id present return user to main market
+    res.redirect("/main")
+;  }
 }
 exports.userBids_create_post = (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   let userBids = new Bids(req.body);
-  // Save UserBids
+  userBids.user = req.user._id;
+  userBids.auction = req.body.auctionID;
+
   userBids.save()
-  .then(() => {
-    res.redirect("/userBids/index");
+  .then((newBid) => {
+
+  //find the user
+  User.findById(req.user._id)
+  .then((user) => { 
+    user.bids.push(newBid);
+    user.save()
+    .then(() => {
+
+      Auction.findById(req.body.auctionID)
+    .then((auction) => {
+      auction.bids.push(newBid);
+      auction.save()
+      .then(() => {
+        res.redirect("/userBids/index");
+      })
+      .catch((error) => {
+        console.log("Error: " + error);
+        res.send("Please try again later!" + error);
+      })
+    })
+
+    })
+    .catch((error) => {
+      console.log("Error: " + error);
+      res.send("Please try again later!" + error);
+    })
+    .catch((error) => {
+      console.log("Error: " + error);
+      res.send("Please try again later!" + error);
+    })
+
+
   })
-  .catch((err) => {
-    console.log(err);
-    res.send("Please try again later!!")
+  .catch((error) => {
+    console.log("Error: " + error); 
+    //res.send("Please try again later!" + error); //server crashed HTTP SENT ERROR
+  })
+
   })
 }
+
+
 exports.userBids_index_get = (req, res) => {
-  console.log("here...")
-  Bids.find({user: req.user._id})
+  //console.log("here...")
+  Bids.find({user: req.user._id}).populate('auction')
   .then((bids) => {
     console.log("userBids", bids)
     res.render("userBids/index", {bids, dayjs, "title": "List of All My Bids"});
@@ -72,23 +133,3 @@ exports.userBids_update_post = (req, res) => {
     console.log(err);
   })
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

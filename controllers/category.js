@@ -10,7 +10,7 @@ exports.category_create_get = (req, res) => {
   res.render("category/add");
 }
 exports.category_create_post = (req, res) => {
-  console.log(req.body);
+  //console.log(req.body);
   let category = new Category(req.body);
   // Save Category
   category.save()
@@ -32,7 +32,7 @@ exports.category_index_get = (req, res) => {
   })
 }
 exports.category_show_get = (req, res) => {
-  console.log(req.query.id);
+  //console.log(req.query.id);
   Category.findById(req.query.id)
   .then((category) => {
     res.render("category/detail", {category, dayjs})
@@ -61,7 +61,7 @@ exports.category_edit_get = (req, res) => {
   })
 }
 exports.category_update_post = (req, res) => {
-  console.log(req.body.id);
+  //console.log(req.body.id);
   Category.findByIdAndUpdate(req.body.id, req.body)
   .then(() => {
     res.redirect("/category/index");

@@ -8,7 +8,7 @@
   
       <nav class="navbar bg-body-tertiary">
           <div class="container-fluid justify-content-start">
-              <a class="btn btn-sm btn-outline-success me-2" href="/userBids/add">Add New Bid</a>
+              <a class="btn btn-sm btn-outline-success me-2" href="#">Won Bids</a>
           </div>
       </nav>
       
@@ -28,7 +28,7 @@
   <% bids.forEach(function (bid, index) { %>
           <tr>
           <td><%= index+1 %>. </td>
-          <td><a href="/userBids/detail/?id=<%= bid._id %>">Auction Item</a></td>
+          <td><a href="/userBids/detail/?id=<%= bid._id %>"><%= bid.auction.name %></a></td>
           <td><%= bid.amount %></td>
           <td><%= bid.note %></td>
           <td><%= dayjs(bid.createdAt).format('DD/MM/YYYY') %></td>

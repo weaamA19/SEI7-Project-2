@@ -19,13 +19,13 @@ router.get("/detail", checkType(1), bidCntrl.bid_show_get);
 
 //adding a bid (add and update)
 router.get("/add", ensureLoggedIn, checkType(1), bidCntrl.bid_add_get);
-router.post("/create", ensureLoggedIn, checkType(1), bidCntrl.bid_create_post);
+router.post("/create", ensureLoggedIn, checkType(3), bidCntrl.bid_create_post);
 
 router.get("/new", ensureLoggedIn, checkType(3), bidCntrl.bidder_add_get);
 
 //editing a bid (edit and update)
-router.get("/edit", ensureLoggedIn, checkType(1), bidCntrl.bid_edit_get);
-router.post("/update", ensureLoggedIn, checkType(1), bidCntrl.bid_update_post);
+router.get("/edit", ensureLoggedIn, checkType(3), bidCntrl.bid_edit_get);
+router.post("/update", ensureLoggedIn, checkType(3), bidCntrl.bid_update_post);
 
 //deleting a bid (might change to cancel or delete)
 router.post("/delete", ensureLoggedIn, checkType(1), bidCntrl.bid_delete_post);
