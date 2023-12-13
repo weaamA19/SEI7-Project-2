@@ -8,7 +8,7 @@ const auctionCntrl = require("../controllers/auction");
 
 // Check if the user is logged in - Weaam
 const ensureLoggedIn = require("../config/ensureLoggedIn");
-const upload = require('../config/cloudinary')
+const upload = require('../config/cloudinary');
 
 const {checkType} = require("../config/checkType");
 

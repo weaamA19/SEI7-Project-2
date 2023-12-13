@@ -26,7 +26,7 @@ exports.user_index_get = (req, res) => {
 
 //UPDATE from the admin view the users privileges  - weaam
 exports.user_update_get = (req, res) => {
-  console.log(req.body.id);
+  //console.log(req.body.id);
   user
     .findById(req.query.id)
     .then((users) => {
@@ -38,7 +38,7 @@ exports.user_update_get = (req, res) => {
 };
 
 exports.user_update_post = (req, res) => {
-  console.log(req.body.id);
+  //console.log(req.body.id);
   user
     .findByIdAndUpdate(req.body.id, req.body)
     .then((users) => {
@@ -66,10 +66,12 @@ exports.user_profile_get = (req, res) => {
 
 exports.user_profile_post = (req, res) => {
   // let users = new user(req.body);
-  console.log("FILE", req.file);
+ // console.log("FILE", req.file);
   if (req.file) {
     //req.body.avatar = req.file.path; ---- to be fixed for cloudinary
     req.body.avatar = "/images/profile/" + req.file.filename;
+
+    req.body.avatar = req.file.path;
   }
   // user.name = req.user.name;
   user
@@ -81,3 +83,4 @@ exports.user_profile_post = (req, res) => {
       console.log(err);
     });
 };
+

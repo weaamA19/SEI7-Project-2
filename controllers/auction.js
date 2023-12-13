@@ -1,6 +1,10 @@
+const {Bids} = require('../models/Bids');
 const {Auction} = require('../models/Auction');
 const {Category} = require('../models/Category');
+
 const User = require('../models/User');
+
+const currency = require("../config/settings");
 
 const dayjs = require('dayjs');
 var relativeTime = require('dayjs/plugin/relativeTime');
@@ -10,6 +14,7 @@ dayjs.extend(utc);
 
 // Create Operation
 exports.auction_create_get = (req, res) => {
+  res.locals.currency = currency;
   let todayDate = dayjs.utc(Date()).add(1, 'day').format('YYYY-MM-DD');
   let maxDate = dayjs.utc(Date()).add(7, 'day').format('YYYY-MM-DD');
   let minDate = dayjs.utc(Date()).add(1, 'day').format('YYYY-MM-DD');
@@ -29,6 +34,7 @@ exports.auction_create_get = (req, res) => {
 }
 
 exports.auction_create_post = (req, res) => {
+  res.locals.currency = currency;
 // console.log(req.file);
 // create new auction
   let auction = new Auction(req.body);
@@ -38,6 +44,7 @@ exports.auction_create_post = (req, res) => {
   auction.highest_bid = auction.min_price; //force the highest_bid to be equal to min_price initially
   // req.body.end_date = auctionTime;
   //console.log(auctionTime);
+  
 
   // Save new Auction
   auction.save()
@@ -68,7 +75,6 @@ exports.auction_create_post = (req, res) => {
     )
 
 //     req.body.category.forEach( cat => { //bringing the category[] array from the body HTML
-
 //       Category.findById(cat)
 //       .then((cat) => {
 
@@ -121,6 +127,7 @@ exports.auction_create_post = (req, res) => {
 }
 
 exports.auction_index_get = (req, res) => {
+  res.locals.currency = currency;
   Auction.find().sort({ end_date: 'desc'}).populate('category').populate('user')
   .then((auctions) => {
     res.render("auction/index", {auctions, dayjs, "title": "List All Auctions"});
@@ -132,9 +139,11 @@ exports.auction_index_get = (req, res) => {
 }
 
 exports.auction_show_get = (req, res) => {
+  res.locals.currency = currency;
   //console.log(req.query.id);
-  Auction.findById(req.query.id)
+  Auction.findById(req.query.id).populate('category').populate('user') // .populate('bids')
   .then((auction) => {
+    //console.log(auctions);
     res.render("auction/detail", {auction, dayjs})
   })
   .catch((err) => {
@@ -155,6 +164,7 @@ exports.auction_delete_get = (req, res) => {
 }
 
 exports.auction_edit_get = (req, res) => {
+  res.locals.currency = currency;
   Auction.findById(req.query.id).populate('category').populate('user')
   .then((auction) => {
   //let dbDate = auction.end_date;
@@ -171,7 +181,7 @@ exports.auction_edit_get = (req, res) => {
 }
 
 exports.auction_update_post = (req, res) => {
-
+  res.locals.currency = currency;
   req.body.end_date = req.body.end_date + "T" + req.body.time + ":00.000+00:00";
 
   console.log(req.body.time);
@@ -189,5 +199,6 @@ exports.auction_update_post = (req, res) => {
 
 //List bids for specific user - WEAAM
 exports.user_auction_get = (req, res) => {
+  res.locals.currency = currency;
   res.render("auction/userAuctions");
 };

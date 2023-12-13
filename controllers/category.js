@@ -5,6 +5,7 @@ var relativeTime = require('dayjs/plugin/relativeTime');
 dayjs.extend(relativeTime);
 dayjs.extend(utc);
 
+
 // Create Operation
 exports.category_create_get = (req, res) => {
   res.render("category/add");
@@ -12,6 +13,9 @@ exports.category_create_get = (req, res) => {
 exports.category_create_post = (req, res) => {
   //console.log(req.body);
   let category = new Category(req.body);
+
+  req.body.item_img = req.file.path;
+
   // Save Category
   category.save()
   .then(() => {
@@ -42,7 +46,7 @@ exports.category_show_get = (req, res) => {
   })
 }
 exports.category_delete_get = (req, res) => {
-  console.log(req.query.id);
+  //console.log(req.query.id);
   Category.findByIdAndDelete(req.query.id)
   .then(() => {
     res.redirect("/category/index");
@@ -64,6 +68,9 @@ exports.category_update_post = (req, res) => {
   //console.log(req.body.id);
   Category.findByIdAndUpdate(req.body.id, req.body)
   .then(() => {
+
+    req.body.item_img = req.file.path;
+
     res.redirect("/category/index");
   })
   .catch(err => {

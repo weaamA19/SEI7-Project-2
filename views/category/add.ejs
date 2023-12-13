@@ -2,19 +2,56 @@
 
   <div class="album py-5 bg-body-tertiary">
   <div class="container">
-
-
+<div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-12">
 <h1>Add Category</h1>
-<form method="POST" action="/category/add">
+<form method="POST" action="/category/add" autocomplete="off" enctype="multipart/form-data">
   <div>
     <label>Category Name</label>
-    <input name="category_name" type="text" class="form-control">
+    <input id="category_name" name="category_name" type="text" class="form-control" required>
   </div>
   <br>
+  <div>
+    <label>Color</label>
+    <input id="color" name="color" type="color" class="form-control">
+  </div>
+  <br>
+  <div class="form-check pb-3">
+    <!-- <img src="<%= //category.item_img %>" height="100px"> -->
+    <div>
+    <label for="item_img" class="form-label">Photo (.jpg or .png - max. 512KB)</label>
+    <input class="form-control" onchange="validateSize(this)" type="file" name="item_img" id="item_img" accept=".png, .jpg, .jpeg, .gif" required>
+    </div>  
+   </div>
+   <br />
   <button type="submit" class="btn btn-primary">Create Category</button>
 </form>
+
+
+</div>
+</div>
   </div>
 </div>
+
+
+<!-- Warning Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-danger">
+        <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">File Size not accepted</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Cannot upload a file exceeding 512KB. Please choose another photo.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 </main>
 
