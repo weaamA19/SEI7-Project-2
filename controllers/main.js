@@ -13,7 +13,20 @@ module.exports = {
         res.locals.currency = currency;
         Auction.find().populate('category')
         .then((auctions) => {
-            res.render("home/main", {auctions,dayjs, title: "Main Page"}); //, layout: "home"
+
+            // const filter = "";
+            // if(req.query.params.f){
+            // filter = req.query.params.f;
+            // }
+
+            Category.find()
+            .then((category) => {
+                res.render("home/main", {auctions,category,dayjs, title: "Main Page"}); //, layout: "home"
+            })
+            .catch((err) => {
+              console.log(err);
+            })
+
         })
         .catch((err) => {
           console.log(err);
