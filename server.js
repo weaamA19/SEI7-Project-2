@@ -76,7 +76,8 @@ const auctionRouter = require("./routes/auction");
 //const itemRouter = require('./routes/item');
 const bidRouter = require("./routes/bid"); //Mazen
 const categoryRouter = require("./routes/category");
-
+const userAuctionsRouter = require("./routes/userAuctions");
+const userBidsRouter = require("./routes/userBids");
 //Mount routes
 app.use("/", indexRouter);
 app.use("/user", userRouter);
@@ -84,6 +85,8 @@ app.use("/auction", auctionRouter);
 //app.use('/item', itemRouter);
 app.use("/bid", bidRouter); //Mazen
 app.use("/category", categoryRouter);
+app.use("/userAuctions", userAuctionsRouter);
+app.use("/userBids", userBidsRouter);
 
 app.post("/signin", (req, res) => {
   res.redirect("./routes/index");
