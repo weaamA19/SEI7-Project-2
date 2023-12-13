@@ -27,7 +27,7 @@
     <div class="card-body">
     <h5 class="card-title"><%= auction.name %></h5> 
     <p class="card-text pt-3"><small><%= auction.description %></small></p>
-    <% const day1 = dayjs(auction.end_date); now = dayjs(new Date()); daysDiff = Math.ceil(day1.diff(now, 'day', true)); hoursDiff = Math.ceil(day1.diff(now, 'hour', true)); %>
+    <% const day1 = dayjs.utc(auction.end_date); now = dayjs.utc(new Date()); daysDiff = Math.ceil(day1.diff(now, 'day', true)); hoursDiff = Math.ceil(day1.diff(now, 'hour', true)); %>
     <p class="card-text"><small class="text-body-secondary">Ending <%= daysDiff > 1 ? daysDiff+' days' : hoursDiff+' hours' %></small></p>
     <div class="d-flex flex-row-reverse">
     <button class="btn btn-sm btn-primary price_tag"><%= currency + ' ' + auction.min_price %></button>

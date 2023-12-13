@@ -4,14 +4,16 @@ const User = require('../models/User');
 
 const dayjs = require('dayjs');
 var relativeTime = require('dayjs/plugin/relativeTime');
+var utc = require('dayjs/plugin/utc');
 dayjs.extend(relativeTime);
+dayjs.extend(utc);
 
 // Create Operation
 exports.auction_create_get = (req, res) => {
-  let todayDate = dayjs(Date()).add(1, 'day').format('YYYY-MM-DD');
-  let maxDate = dayjs(Date()).add(7, 'day').format('YYYY-MM-DD');
-  let minDate = dayjs(Date()).add(1, 'day').format('YYYY-MM-DD');
-  let theTime = dayjs(Date()).add(1, 'day').format('HH') + ":00";
+  let todayDate = dayjs.utc(Date()).add(1, 'day').format('YYYY-MM-DD');
+  let maxDate = dayjs.utc(Date()).add(7, 'day').format('YYYY-MM-DD');
+  let minDate = dayjs.utc(Date()).add(1, 'day').format('YYYY-MM-DD');
+  let theTime = dayjs.utc(Date()).add(1, 'day').format('HH') + ":00";
 
   console.log(req.user._id);
   
@@ -152,13 +154,13 @@ exports.auction_delete_get = (req, res) => {
 }
 
 exports.auction_edit_get = (req, res) => {
-  Auction.findById(req.query.id).populate('category')
+  Auction.findById(req.query.id).populate('category').populate('user')
   .then((auction) => {
   //let dbDate = auction.end_date;
   //let todayDate = dayjs(dbDate).format('YYYY-MM-DD');
-  let maxDate = dayjs(Date()).add(7, 'day').format('YYYY-MM-DD');
-  let minDate = dayjs(Date()).add(1, 'day').format('YYYY-MM-DD');
-  let theTime = dayjs(Date()).add(1, 'day').format('HH') + ":00";
+  let maxDate = dayjs.utc(Date()).add(7, 'day').format('YYYY-MM-DD');
+  let minDate = dayjs.utc(Date()).add(1, 'day').format('YYYY-MM-DD');
+  let theTime = dayjs.utc(auction.end_date).format('HH') + ":00";
     res.render("auction/edit", {auction,dayjs,maxDate,minDate,theTime,title: "Update Auction"});
   })
   .catch(err => {
@@ -168,12 +170,18 @@ exports.auction_edit_get = (req, res) => {
 }
 
 exports.auction_update_post = (req, res) => {
-  //console.log(req.body.id);
+
+  req.body.end_date = req.body.end_date + "T" + req.body.time + ":00.000+00:00";
+
+  console.log(req.body.time);
+  console.log(req.body.end_date);
+
   Auction.findByIdAndUpdate(req.body.id, req.body)
   .then(() => {
+    //console.log(req.body.id);
     res.redirect("/auction/index");
   })
-  .catch(err => {
+  .catch((err) => {
     console.log(err);
   })
 }

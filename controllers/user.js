@@ -4,8 +4,10 @@ const user = require("../models/User");
 
 //require dayjs (after installing)
 const dayjs = require("dayjs");
+var utc = require('dayjs/plugin/utc')
 var relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
+dayjs.extend(utc);
 
 //List All users - weaam
 //This should be only displayed for the admin !
