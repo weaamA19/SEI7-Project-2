@@ -27,9 +27,10 @@ exports.auction_create_get = (req, res) => {
 }
 
 exports.auction_create_post = (req, res) => {
+  console.log(req.file);
 // create new auction
   let auction = new Auction(req.body);
-  auction.item_img = newFileName;
+  auction.item_img = req.file.path;
   auction.user = req.user._id;
   auction.end_date = Date.parse(req.body.end_date + "T" + req.body.time);
   // req.body.end_date = auctionTime;
