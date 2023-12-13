@@ -2,15 +2,19 @@ const mongoose = require('mongoose');
 
 // Author Schema
 const auctionSchema = mongoose.Schema({
-  user: [{
+  // user: [{
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'User'
+  // }],
+  user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
-  }],
+  },
   // item_id: String,
-  categories: [{
+  category: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Category'
-  }],
+  },
   //category: String,
   name: String,
   min_price: Number, //starting price

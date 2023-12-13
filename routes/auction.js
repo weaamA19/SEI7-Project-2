@@ -29,11 +29,7 @@ const ensureLoggedIn = require("../config/ensureLoggedIn");
 
 // Routes
 router.get("/add", ensureLoggedIn, auctionCntrl.auction_create_get);
-router.post(
-  "/add",
-  upload.single("item_img"),
-  auctionCntrl.auction_create_post
-);
+router.post("/add", upload.single("item_img"),auctionCntrl.auction_create_post);
 
 router.get("/index", ensureLoggedIn, auctionCntrl.auction_index_get);
 router.get("/detail", ensureLoggedIn, auctionCntrl.auction_show_get);

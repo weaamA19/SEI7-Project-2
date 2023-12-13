@@ -27,81 +27,92 @@ exports.auction_create_get = (req, res) => {
 }
 
 exports.auction_create_post = (req, res) => {
+// create new auction
   let auction = new Auction(req.body);
-
   auction.item_img = newFileName;
-
-  let auctionTime = Date.parse(req.body.end_date + "T" + req.body.time);
-  req.body.end_date = auctionTime;
+  auction.user = req.user._id;
+  auction.end_date = Date.parse(req.body.end_date + "T" + req.body.time);
+  // req.body.end_date = auctionTime;
   //console.log(auctionTime);
 
-  // Save Auction
+  // Save new Auction
   auction.save()
-  .then(() => {
-
-    
-
-    User.findById(req.body.id)
-    .then(() => {
-      console.log("ID for Auction Crerator: " + req.body.id);
-        auction.user.push(req.body.id);
+  .then((newAuction) => {
+// find user
+    User.findById(req.user._id)
+    .then((user) => {
+      // console.log("ID for Auction Crerator: " + req.body.id);
+      // add new auction to user auctions
+      user.auctions.push(newAuction);
+      user.save()
+      .then(()=>{
+            res.redirect("/auction/index");
+      })
+      .catch((error) => {
+        res.send("Please try again later!" + error);
+      })
+      
     }
    )
     .catch((error) => {
       res.send("Please try again later!" + error);
     }
     )
+    .catch((error) => {
+      res.send("Please try again later!" + error);
+    }
+    )
 
-    req.body.category.forEach( cat => { //bringing the category[] array from the body HTML
+//     req.body.category.forEach( cat => { //bringing the category[] array from the body HTML
 
-      Category.findById(cat)
-      .then((cat) => {
+//       Category.findById(cat)
+//       .then((cat) => {
 
-          auction.categories.push(cat);
+//           auction.categories.push(cat);
           
-          //auction.save(); ///////////Weam Style
-          saveObject(req.body.id);
+//           //auction.save(); ///////////Weam Style
+//           saveObject(req.body.id);
 
-      })
-      .catch((error)=> {
-          console.log("There was an error Adding the Auction " + error);
-          //res.send("Please try again later!");
-      })
+//       })
+//       .catch((error)=> {
+//           console.log("There was an error Adding the Auction " + error);
+//           //res.send("Please try again later!");
+//       })
 
-    })
+//     })
 
-/*************************** Weam Style */
+// /*************************** Weam Style */
 
-    async function saveObject(theID) {
-      const savedObject = await auction.save();
-      //console.log("Object saved successfully!");
-      //console.log("ID: " + savedObject._id);
+//     async function saveObject(theID) {
+//       const savedObject = await auction.save();
+//       //console.log("Object saved successfully!");
+//       //console.log("ID: " + savedObject._id);
 
-      //console.log("New Auction: " + savedObject);
+//       //console.log("New Auction: " + savedObject);
 
-      User.findById(theID)
-      .then((usersss) => {
+//       User.findById(theID)
+//       .then((usersss) => {
         
-        usersss.auctions.push(savedObject._id);
-        usersss.save();
-        console.log("USER OBJECT:::::::::::: " + usersss);
-      }
-     )
-      .catch((error) => {
-        console.log("Error: " + error); 
-        //res.send("Please try again later!" + error); //server crashed HTTP SENT ERROR
-      }
-      )
+//         usersss.auctions.push(savedObject._id);
+//         usersss.save();
+//         console.log("USER OBJECT:::::::::::: " + usersss);
+//       }
+//      )
+//       .catch((error) => {
+//         console.log("Error: " + error); 
+//         //res.send("Please try again later!" + error); //server crashed HTTP SENT ERROR
+//       }
+//       )
 
-  }
+//   }
 
-/* after 21 trials ************************** Weam Style */
+// /* after 21 trials ************************** Weam Style */
 
-    res.redirect("/auction/index");
-  })
-  .catch((err) => {
-    console.log(err);
-    res.send("Please try again later!!");
+//     // res.redirect("/auction/index");
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//     res.send("Please try again later!!");
   })
 }
 
@@ -140,7 +151,7 @@ exports.auction_delete_get = (req, res) => {
 }
 
 exports.auction_edit_get = (req, res) => {
-  Auction.findById(req.query.id).populate('categories')
+  Auction.findById(req.query.id).populate('category')
   .then((auction) => {
   //let dbDate = auction.end_date;
   //let todayDate = dayjs(dbDate).format('YYYY-MM-DD');
