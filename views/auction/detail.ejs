@@ -1,20 +1,27 @@
 <main>
-
   <div class="album py-5 bg-body-tertiary">
-  <div class="container">
-
-
-        <h3>Item: <%= auction.name %></h3>
-        <div>Minimum Price: <%= auction.min_price %></div>
-        <div>Description: <%= auction.description %></div>
-        <div>End Date: <%= dayjs(auction.end_date).format('YYYY-MM-DD') %></div>
-        <div>Picture of the Item: <%= auction.item_img %></div>
-        <div>Item Staus: <%= auction.status %></div>
-        
-
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="card mb-3">
+            <img src="../images/items/<%= auction.item_img %>" class="card-img-top" alt="Item Image">
+            <div class="card-body">
+              <h5 class="card-title">Picture of the Item</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8 col-md-6 col-sm-12">
+          <div class="card mb-3">
+            <div class="card-body">
+              <h3 class="card-title">Item: <%= auction.name %></h3>
+              <p class="card-text">Minimum Price: <%= auction.min_price %></p>
+              <p class="card-text">Description: <%= auction.description %></p>
+              <p class="card-text">End Date: <%= dayjs(auction.end_date).format('YYYY-MM-DD') %></p>
+              <p class="card-text">Item Status: <%= auction.status %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  </div>
-
 </main>
-  
-  
