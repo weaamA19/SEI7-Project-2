@@ -13,6 +13,8 @@ const mainCntrl = require("../controllers/main");
 
 // Check if the user is logged in - Weaam
 const ensureLoggedIn = require("../config/ensureLoggedIn");
+const {checkType} = require("../config/checkType");
+
 router.use(express.urlencoded({ extended: true }));
 
 //Routes

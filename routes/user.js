@@ -23,35 +23,22 @@ const upload = multer({ storage: storage });
 
 // Check if the user is logged in - Weaam
 const ensureLoggedIn = require("../config/ensureLoggedIn");
+const {checkType} = require("../config/checkType");
+
 
 //so the controller can encode the data from the form
 router.use(express.urlencoded({ extended: true }));
 
 const userCntrl = require("../controllers/user");
 
-router.get("/index", ensureLoggedIn, userCntrl.user_index_get);
+router.get("/index", ensureLoggedIn, checkType(1), userCntrl.user_index_get);
 
-router.get("/edit", ensureLoggedIn, userCntrl.user_update_get);
+router.get("/edit", ensureLoggedIn, checkType(1), userCntrl.user_update_get);
 
-router.post(
-  "/update",
-  ensureLoggedIn,
-  upload.single("item_img"),
-  userCntrl.user_update_post
-);
+router.post("/update",ensureLoggedIn,upload.single("item_img"),checkType(1), userCntrl.user_update_post);
 
-router.get(
-  "/profile",
+router.get("/profile",ensureLoggedIn, userCntrl.user_profile_get);
 
-  ensureLoggedIn,
-  userCntrl.user_profile_get
-);
-
-router.post(
-  "/updateUser",
-  ensureLoggedIn,
-  upload.single("item_img"),
-  userCntrl.user_profile_post
-);
+router.post("/updateUser",ensureLoggedIn, upload.single("item_img"),userCntrl.user_profile_post);
 
 module.exports = router;
