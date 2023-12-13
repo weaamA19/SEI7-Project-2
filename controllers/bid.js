@@ -27,45 +27,73 @@ exports.bid_add_get = (req, res) => {
 
 exports.bid_create_post = (req, res) => {
   let bid = new Bids(req.body);
+  bid.user = req.user._id;
+
+  bid.save()
+  .then((newBid) => {
+
+  //find the user
+  User.findById(req.user._id)
+  .then((user) => {
+    
+    user.bids.push(newBid);
+    user.save()
+    .then(() => {
+      res.redirect("/bid/index");
+    })
+    .catch((error) => {
+      console.log("Error: " + error);
+      res.send("Please try again later!" + error);
+    }
+    )
+  })
+  .catch((error) => {
+    console.log("Error: " + error); 
+    //res.send("Please try again later!" + error); //server crashed HTTP SENT ERROR
+  })
+
+  })
+
 
   //console.log(req.body);
 
 /*************************** Weam Style */
 
-async function saveObject(theID) {
-  const savedObject = await bid.save();
-  //console.log("Object saved successfully!");
-  //console.log("ID: " + savedObject._id);
+// async function saveObject(theID) {
+//   const savedObject = await bid.save();
+//   //console.log("Object saved successfully!");
+//   //console.log("ID: " + savedObject._id);
 
-  //console.log("New Auction: " + savedObject);
+//   //console.log("New Auction: " + savedObject);
 
-  User.findById(theID)
-  .then((usersss) => {
+//   User.findById(theID)
+//   .then((usersss) => {
     
-    usersss.bids.push(savedObject._id);
-    usersss.save();
-    console.log("USER OBJECT:::::::::::: " + usersss);
-  }
- )
-  .catch((error) => {
-    console.log("Error: " + error); 
-    //res.send("Please try again later!" + error); //server crashed HTTP SENT ERROR
-  }
-  )
+//     usersss.bids.push(savedObject._id);
+//     usersss.save();
+//     console.log("USER OBJECT:::::::::::: " + usersss);
+//   }
+//  )
+//   .catch((error) => {
+//     console.log("Error: " + error); 
+//     //res.send("Please try again later!" + error); //server crashed HTTP SENT ERROR
+//   }
+//   )
 
-}
+// }
 
 /*************************** Weam Style */
 
 
 
-  User.findById(req.body.id)
-    .then(() => {
-    bid.user.push(req.body.id);
+  // User.findById(req.body.id)
+  //   .then(() => {
+  //   bid.user.push(req.body.id);
 
-    saveObject(req.body.id);
+  //   saveObject(req.body.id);
     
-    res.redirect("/bid/index");
+  //   res.redirect("/bid/index");
+
     // bid.save()
     // .then(() => {
     //   console.log("User Submitted a new Bid");
@@ -79,12 +107,12 @@ async function saveObject(theID) {
 
 
 
-    }
-   )
-    .catch((error) => {
-      res.send("Please try again later!" + error);
-    }
-    )
+  //   }
+  //  )
+  //   .catch((error) => {
+  //     res.send("Please try again later!" + error);
+  //   }
+  //   )
 };
 
 exports.bid_delete_post = (req, res) => {

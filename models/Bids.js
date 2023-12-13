@@ -4,10 +4,10 @@ const mongoose = require('mongoose');
 
 //Design the Schema
 const bidsSchema = mongoose.Schema({
-    user: [{
+    user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-      }],
+      },
     amount: Number,
     // auction: [{
     //     type: mongoose.Schema.Types.ObjectId,

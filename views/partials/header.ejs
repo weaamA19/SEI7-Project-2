@@ -141,8 +141,11 @@
 
                 <li>
                     <a href="/user/profile" class="nav-link text-white">
-                        <div class="bi d-block mx-auto mb-1 menu"><i class="bi bi-file-earmark-spreadsheet-fill"></i></div>
-                        Profile 
+                        <div class="bi d-block mx-auto mt-1 menu">
+                        <!-- <div class="bi d-block mx-auto mb-1 menu"><i class="bi bi-file-earmark-spreadsheet-fill"></i></div> -->
+                        <div class="profile_img"><img class="img_profile" src="<%= user.avatar %>" referrerpolicy="no-referrer" height="35px"></img></div></div>
+                        <%= user.name %>
+                        </div>
                     </a>
                 </li>
 

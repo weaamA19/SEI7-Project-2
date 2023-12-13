@@ -11,7 +11,7 @@ module.exports = {
     index: function (req, res) {
         // This will render the main in home folder as the main folder /
         res.locals.currency = currency;
-        Auction.find().populate('categories')
+        Auction.find().populate('category')
         .then((auctions) => {
             res.render("home/main", {auctions,dayjs, title: "Main Page"}); //, layout: "home"
         })

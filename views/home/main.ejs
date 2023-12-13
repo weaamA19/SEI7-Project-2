@@ -16,7 +16,10 @@
     <p class="card-text"><small class="text-body-secondary">Ending <%= daysDiff > 1 ? daysDiff+' days' : hoursDiff+' hours' %></small></p>
     <div class="d-flex flex-row-reverse">
     <button class="btn btn-sm btn-primary price_tag"><%= currency + ' ' + auction.min_price %></button>
-    <div class="cat_tag" style="background-color: aqua;"><%= auction.categories[0].category_name %></div>
+    <div class="cat_tag" style="background-color: aqua;"><%= auction.category.category_name %></div>
+    <div class="d-grid gap-2 col mx-auto">
+    <% if(user){ %><a href="#?id=<%= auction._id%>" class="btn btn-bd-primary">BID NOW</a><% if ((user.userType == 1)) { %><a href="/auction/edit/?id=<%= auction._id %>" class="btn btn-sm btn-primary">Edit</a><% }} %>
+    </div>
 </div>
     </div>
 </div>

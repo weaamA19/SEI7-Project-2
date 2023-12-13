@@ -15,7 +15,7 @@
     <input id="category" name="category" type="text" class="form-control" required> -->
 
       <label for="category">Select a Category</label>
-      <select id="category" name="category[]" class="form-select" required>
+      <select id="category" name="category" class="form-select" required>
           <option value="" disabled="disabled" selected>List of Categories</option>
           <% categories.forEach(function(category){ %>
           <option value="<%= category._id %>"><%= category.category_name %></option>
