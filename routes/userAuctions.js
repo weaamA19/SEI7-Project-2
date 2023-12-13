@@ -5,15 +5,17 @@ const userAuctionsCntrl = require("../controllers/userAuctions");
 
 // Check if the user is logged in - Weaam
 const ensureLoggedIn = require("../config/ensureLoggedIn");
+const {checkType} = require("../config/checkType");
+
 
 // Routes
-router.get("/add", ensureLoggedIn, userAuctionsCntrl.userAuctions_create_get);
-router.post("/add", ensureLoggedIn, userAuctionsCntrl.userAuctions_create_post);
-router.get("/index", ensureLoggedIn, userAuctionsCntrl.userAuctions_index_get);
-router.get("/detail", ensureLoggedIn, userAuctionsCntrl.userAuctions_show_get);
+router.get("/add", ensureLoggedIn, checkType(2), userAuctionsCntrl.userAuctions_create_get);
+router.post("/add", ensureLoggedIn, checkType(2),userAuctionsCntrl.userAuctions_create_post);
+router.get("/index", ensureLoggedIn, checkType(2),userAuctionsCntrl.userAuctions_index_get);
+router.get("/detail", ensureLoggedIn, checkType(2), userAuctionsCntrl.userAuctions_show_get);
 
-router.get("/edit", ensureLoggedIn, userAuctionsCntrl.userAuctions_edit_get);
-router.post("/update", ensureLoggedIn, userAuctionsCntrl.userAuctions_update_post);
+router.get("/edit", ensureLoggedIn, checkType(2), userAuctionsCntrl.userAuctions_edit_get);
+router.post("/update", ensureLoggedIn, checkType(2), userAuctionsCntrl.userAuctions_update_post);
 
-router.post("/delete", ensureLoggedIn, userAuctionsCntrl.userAuctions_delete_get);
+router.post("/delete", ensureLoggedIn, checkType(2), userAuctionsCntrl.userAuctions_delete_get);
 module.exports = router;
