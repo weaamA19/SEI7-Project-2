@@ -8,7 +8,8 @@
     
         <nav class="navbar bg-body-tertiary">
             <div class="container-fluid justify-content-start">
-                <a class="btn btn-sm btn-outline-success me-2" href="/bid/add">Add New Bid</a>
+                <a class="btn btn-sm btn-outline-success me-2" href="/bid/new">Add New Bid</a>
+                <a class="btn btn-sm btn-outline-danger me-2" href="/bid/new/?id=65798f6f58c51d6578eced62">Test a Bid</a> 
             </div>
         </nav>
         
@@ -31,8 +32,8 @@
             <td><a href="/bid/detail/?id=<%= bid._id %>">Auction Item</a></td>
             <td><%= bid.amount %></td>
             <td><%= bid.note %></td>
-            <td><%= dayjs(bid.createdAt).format('DD/MM/YYYY') %></td>
-            <td>Updated <%= dayjs(bid.updatedAt).fromNow(true) %> ago</td>
+            <td><%= dayjs.utc(bid.createdAt).format('DD/MM/YYYY') %></td>
+            <td>Updated <%= dayjs.utc(bid.updatedAt).fromNow(true) %> ago</td>
             <td>
             <a class="btn btn-sm btn-warning" href="/bid/edit?id=<%= bid._id %>"><i class="bi-pencil-fill"></i></a> <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#D<%= index+1 %>">
                 <i class="bi-trash3-fill"></i></button>

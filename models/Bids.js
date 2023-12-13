@@ -9,14 +9,10 @@ const bidsSchema = mongoose.Schema({
         ref: 'User'
       },
     amount: Number,
-    // auction: [{
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'Auction'
-    // }],
-    // bidder: [{
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'Bidder' //user who is placing the big - must be similar to the defined const in the other model
-    // }],
+    auction: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Auction'
+    },
     note: String,
     status: Boolean,
 

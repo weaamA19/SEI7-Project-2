@@ -1,4 +1,5 @@
 const {Bids} = require("../models/Bids.js");
+const {Auction} = require("../models/Auction.js");
 const User = require('../models/User');
 
 //Define all Bid APIs or Functions
@@ -20,9 +21,37 @@ exports.bid_index_get = (req, res) => {
     });
 };
 
-//Create Bid Operation for Normal User
+//Create Bid Operation for Admin User
 exports.bid_add_get = (req, res) => {
   res.render("bid/add", { title: "Create a New Bid" });
+};
+
+//Create Bid Operation for Normal User
+exports.bidder_add_get = (req, res) => {
+
+//A user bids so look for the right auction
+if((req.query.id)){
+
+  Auction.findById(req.query.id).populate('category').populate('user')
+    .then((auction) => {
+      //console.log(auction);
+
+      if(auction._id){
+      res.render("bid/new", { auction, dayjs, title: "Create a New Bid on " + req.query.id });
+      }else{
+        res.send("Auction does not exist."); 
+      }
+    })
+    .catch((error) => {
+        console.log("There was an error: " + error);
+        res.send("Auction does not exist. Please try another.");
+    })
+
+  }else{
+    //if there is no auction id present return user to main market
+    res.redirect("/main")
+;  }
+
 };
 
 exports.bid_create_post = (req, res) => {
