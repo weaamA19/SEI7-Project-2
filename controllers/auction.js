@@ -141,10 +141,10 @@ exports.auction_index_get = (req, res) => {
 exports.auction_show_get = (req, res) => {
   res.locals.currency = currency;
   //console.log(req.query.id);
-  Auction.findById(req.query.id).populate('category').populate('user') // .populate('bids')
-  .then((auction) => {
-    //console.log(auctions);
-    res.render("auction/detail", {auction, dayjs})
+  Auction.findById(req.query.id).populate('category').populate('user').populate({path:'bids', populate:{path:'user'}, option:{sort:{'amount': -1}}}) //.sort({amount: 'desc'})
+  .then((auctions) => {
+    console.log(auctions);
+    res.render("auction/detail", {auctions, dayjs})
   })
   .catch((err) => {
     console.log(err);
