@@ -11,9 +11,17 @@
 
 ## ERD
 
+![1](https://drive.google.com/file/d/1PWFpN_SNpTAo1Coi5R6Um_QR20-QfVj6/view)
+
 ## Wireframes
 
+
+![1](https://drive.google.com/file/d/1PWFpN_SNpTAo1Coi5R6Um_QR20-QfVj6/view)
+
+
 ## Link to deployed application: 
+
+Coming Soon!
 
 
 ### Our Team:
@@ -32,8 +40,8 @@
 - Create a `README.md` file that explains your app to the world. ✅
 
 ### Readme Requirements
-- Include ERD of your project idea. ⭕️
-- Include wireframes or link to wireframes. ⭕️
+- Include ERD of your project idea. ✅
+- Include wireframes or link to wireframes. ✅
 - Include link to your trello board. - https://trello.com/invite/b/rgn5wjMv/ATTI0a5d79459df39f0a85b3e9eeb082b75bF0D165CA/sei7-project-2  ✅
 - Link to your deployed application. ❌
 - List of unsolved problems:
