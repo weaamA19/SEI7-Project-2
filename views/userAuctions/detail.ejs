@@ -2,25 +2,60 @@
   <div class="album py-5 bg-body-tertiary">
     <div class="container">
       <div class="row">
+
         <div class="col-lg-4 col-md-6 col-sm-12">
           <div class="card mb-3">
-            <img src="<%= auction.item_img %>" class="card-img-top" alt="Item Image">
+            <img src="<%= auctions.item_img %>" class="card-img-top" alt="Item Image">
             <div class="card-body">
-              <h5 class="card-title">Picture of the Item</h5>
+              <h5 class="card-title">Auctioneer: <%= auctions.user.name %></h5>
             </div>
           </div>
         </div>
+
         <div class="col-lg-8 col-md-6 col-sm-12">
           <div class="card mb-3">
             <div class="card-body">
-              <h3 class="card-title">Item: <%= auction.name %></h3>
-              <p class="card-text">Minimum Price: <%= auction.min_price %></p>
-              <p class="card-text">Description: <%= auction.description %></p>
-              <p class="card-text">End Date: <%= dayjs(auction.end_date).format('YYYY-MM-DD') %></p>
-              <p class="card-text">Item Status: <%= auction.status %></p>
+              <h3 class="card-title">Item: <%= auctions.name %></h3>
+              <p class="card-text">Minimum Price: <%= auctions.min_price %></p>
+              <p class="card-text">Highest Bid: <%= auctions.highest_bid %></p>
+              <p class="card-text">Description: <%= auctions.description %></p>
+              <p class="card-text">End Date: <% let todaysDate = dayjs(new Date()); if(auctions.end_date > todaysDate) { %><span class="btn btn-sm btn-success"><% }else{ %><span class="btn btn-sm btn-danger"><% } %><%= dayjs.utc(auctions.end_date).format('YYYY-MM-DD HH:mm') %></span></p>
+              <p class="card-text">Item Status: <%= auctions.status %></p>
             </div>
           </div>
         </div>
+
+      </div>
+      <br /><br />
+        <div class="row">
+        <h4>List of Bids on this Auction</h4>
+  
+  <!-- ****************** Creating the list ************* -->
+  
+  <table class="table table-striped">
+    <tr class="table-light">
+      <th>No.</th>
+      <th>Bidder</th>
+      <th>Bid Amount</th>
+      <th>Last Updated</th>
+    </tr>
+  
+  <% auctions.bids.sort((a,b)=>b.amount - a.amount).forEach(function (bid, index) {  %>
+    <tr <% let highestBidder = ""; if(index==0){ highestBidder = "<span class=\"btn btn-sm btn-success\">HIGHEST BIDDER</span>"; %>class="table-success"<% } %>>
+      <td><%= index+1 %></td>
+      <td><%= bid.user.name %></td>
+      <td><%= bid.amount %></td>
+      <!-- <td><small><kbd class="btn btn-sm btn-primary">BHD</kbd> to <kbd class="btn btn-sm btn-success">BHD</kbd></small></td> -->
+      <td><%= dayjs.utc(bid.updatedAt).format('DD/MM/YYYY HH:mm') %> <%- highestBidder %></td>
+    
+    </tr>
+  <% }) %>
+  
+  </table>
+  
+  <!-- ****************** Creating the list ************* -->
+
+
       </div>
     </div>
   </div>

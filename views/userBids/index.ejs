@@ -29,7 +29,7 @@
 <% bids.forEach(function (bid, index) { %>
         <tr>
         <td><%= index+1 %>. </td>
-        <td><a href="/userBids/detail/?id=<%= bid._id %>"><%= //bid.auction.name %></a></td>
+        <td><a href="/userBids/detail/?id=<%= bid._id %>"><%= bid.auction.name %></a></td>
         <td><%= bid.amount %></td>
         <td><%= bid.note %></td>
         <td><%= dayjs.utc(bid.createdAt).format('DD/MM/YYYY') %></td>

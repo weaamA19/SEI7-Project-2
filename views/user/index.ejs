@@ -10,12 +10,12 @@
         <table class="table">
             <thead>
                 <th scope="col">Name</th>
-                <th scope="col">Google Id</th>
+                <!-- <th scope="col">Google Id</th> -->
                 <th scope="col">Email</th>
                 <th scope="col">Users Image</th>
                 <th scope="col">Users Type</th>
-                <th scope="col">Created</th>
-                <th scope="col">Updated</th>
+                <th scope="col">Created / Updated</th>
+                
                 <th scope="col">Action(s)</th>
 
                 </tr>
@@ -24,7 +24,7 @@
             <% users.forEach(function (user, index) { %>
                 <tr>
                     <td><%= user.name %></td>
-                    <td><%= user.googleId %></td>
+                    <!-- <td><%= //user.googleId %></td> -->
                     <td><%= user.email %></td>
                     <td><img src="<%= user.avatar %>" referrerpolicy="no-referrer" height="35px"></img></td>
                     <!-- <td><%= user.userType %></td> -->
@@ -35,8 +35,7 @@
                         else { %>Bidder<% } 
                     %></td>
 
-                    <td> Created <%= dayjs.utc(user.createdAt).format('DD/MM/YYYY') %></td>
-                    <td> Updated <%= dayjs.utc(user.updatedAt).fromNow(true) %> ago</td>
+                    <td><small><kbd>Created: <%= dayjs.utc(user.createdAt).format('DD/MM/YYYY') %></kbd> <kbd>Updated <%= dayjs.utc(user.updatedAt).fromNow(true) %> ago</kbd></small></td>
 
                     <!-- <td><a href="/user/edit?id=<%=user._id %>">Edit User</a></td> -->
 
