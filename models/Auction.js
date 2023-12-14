@@ -23,7 +23,7 @@ const auctionSchema = mongoose.Schema({
   status: Boolean, //if true then its active
   bids: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Bids'
+    ref: 'Bid'
   }],
 }, {
   timestamps: true
