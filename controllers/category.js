@@ -65,11 +65,10 @@ exports.category_edit_get = (req, res) => {
   })
 }
 exports.category_update_post = (req, res) => {
-  //console.log(req.body.id);
+  req.body.item_img = req.file.path;
   Category.findByIdAndUpdate(req.body.id, req.body)
   .then(() => {
 
-    req.body.item_img = req.file.path;
 
     res.redirect("/category/index");
   })

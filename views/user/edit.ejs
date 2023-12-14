@@ -1,46 +1,56 @@
 <main>
     <div class="album py-5 bg-body-tertiary">
-        <div class="container">
+      <div class="container">
+        <h1><%= title %></h1>
+  
 
-            <h1><%= title %></h1>
+        <form method="POST" action="/user/update">
+          <div class="row g-3">
+            <div class="col-lg-4 col-md-12 col-sm-12">
 
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="mb-3 pb-1">
+                  <label for="name">Name</label>
+                  <input type="text" id="name" name="name" value="<%= users.name %>">
+                </div>
+              </div>
+  
+              <div class="mb-3 pb-1">
+                <label for="googleId">Google Id</label>
+                <input id="googleId" name="googleId" value="<%= users.googleId %>" style="background-color: lightgray" readonly>
+              </div>
+  
+              <div class="mb-3 pb-1">
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email" value="<%= users.email %>" style="background-color: lightgray" readonly>
+              </div>
+  
+              <div class="mb-3 pb-1">
+                <label for="userType">User Privileges</label>
+                <select id="userType" name="userType">
+                  <option value="1" <% if (users.userType === '1') { %> selected <% } %>>Admin</option>
+                  <option value="2" <% if (users.userType === '2') { %> selected <% } %>>Auctioneer</option>
+                  <option value="3" <% if (users.userType === '3') { %> selected <% } %>>Bidder</option>
+                </select>
+              </div>
 
-    <form method="POST" action="/user/update">
-        <div>
-            <label>Name</label>
-            <input type="text" name="name" value="<%= users.name %>">
+              <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="mb-3 pb-1">
+                    <label for="avatar">Users Image</label>
+                <div class="form-floating pb-3">
+                    <img src="<%= users.avatar %>" referrerpolicy="no-referrer" height="300px">
+                </div>
+                </div>
+            </div> 
+
+        </div>  
+
+            <div class="row">
+                <div class="d-grid gap-2 col-4 col-sm-8 mx-auto">
+              <input type="hidden" name="id" value="<%= users._id %>">
+              <button type="submit">Edit User Details</button>
+            </div>
+            
+          </form>
         </div>
-
-        <div>
-            <label>Google Id</label>
-            <!-- <textarea name="googleId" readonly><%= users.googleId %></textarea>  -->
-            <input name="googleId" value="<%= users.googleId %>" style="background-color: lightgray" readonly>
-        </div>
-
-        <div>
-            <label>Email</label>
-            <!-- <input type="text" name="email" value="<%= users.email %>" readonly> -->
-            <input type="text" name="email" value="<%= users.email %>" style="background-color: lightgray" readonly>
-        </div>
-
-        <div>
-            <label>Users Image</label>
-            <!-- <input type="text" name="avatar" value="<%= users.avatar %>"> -->
-            <img src="<%= users.avatar %>" referrerpolicy="no-referrer" height="35px"></img>            
-
-        </div>
-
-        <div>
-            <label>User Privileges</label>
-            <select name="userType">
-              <option value="1" <% if (users.userType === '1') { %> selected <% } %>>Admin</option>
-              <option value="2" <% if (users.userType === '2') { %> selected <% } %>>Auctioneer</option>
-              <option value="3" <% if (users.userType === '3') { %> selected <% } %>>Bidder</option>
-            </select>
-          </div>
-
-        <input type="hidden" name="id" value="<%= users._id %>">
-        <button type="submit">Edit User Details</button>
-    </form>
-</main>
+      </div>
+  </main>

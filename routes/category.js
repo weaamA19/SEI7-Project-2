@@ -15,8 +15,8 @@ router.post("/add", upload.single("item_img"), ensureLoggedIn, checkType(1), cat
 router.get("/index", ensureLoggedIn, checkType(1), categoryCntrl.category_index_get);
 router.get("/detail", ensureLoggedIn, checkType(1), categoryCntrl.category_show_get);
 
-router.get("/edit", upload.single("item_img"), ensureLoggedIn, checkType(1), categoryCntrl.category_edit_get);
-router.post("/update", ensureLoggedIn, checkType(1), categoryCntrl.category_update_post);
+router.get("/edit",  ensureLoggedIn, checkType(1), categoryCntrl.category_edit_get);
+router.post("/update", ensureLoggedIn, checkType(1),upload.single("item_img"), categoryCntrl.category_update_post);
 
 router.post("/delete", ensureLoggedIn, checkType(1), categoryCntrl.category_delete_get);
 module.exports = router;
