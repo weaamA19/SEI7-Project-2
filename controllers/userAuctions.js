@@ -163,9 +163,9 @@ exports.userAuctions_index_get = (req, res) => {
 exports.userAuctions_show_get = (req, res) => {
   res.locals.currency = currency;
   //console.log(req.query.id);
-  Auction.findById(req.query.id)
-  .then((auction) => {
-    res.render("userAuctions/detail", {auction, dayjs})
+  Auction.findById(req.query.id).populate('category').populate('user').populate({path:'bids', populate:{path:'user'}, option:{sort:{'amount': -1}}}) //.sort({amount: 'desc'})
+  .then((auctions) => {
+    res.render("userAuctions/detail", {auctions, dayjs})
   })
   .catch((err) => {
     console.log(err);
@@ -205,23 +205,3 @@ exports.userAuctions_update_post = (req, res) => {
     console.log(err);
   })
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
