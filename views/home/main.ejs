@@ -2,23 +2,23 @@
   <h1 class="text-center"><%= title %></h1>
   <div class="container-fluid">
     
-      <div class="row">
-
-        <% category.forEach(function(category) { %>
-          <div class="col-md-3 mb-4">
-            <div class="card">
-              <img src="../images/items/no-item.jpg">
-              <form action="/categories/requireCategory" class="card-body p-0" method="POST">
-                <input type="hidden" name="id" id="id" value="<%= category._id %>">
-                <button type="submit" class="btn btn-link p-30">
-                  <h5 class="card-title category-link mb-0" data-category="<%= category.category_name %>"><%= category.category_name %></h5>
+    <div class="row">
+      <% category.forEach(function(category) { %>
+        <div class="col-md-3 mb-4">
+          <div class="card">
+            <img src="<%= category.item_img %>">
+            <form action="/categories/requireCategory" class="card-body p-0" method="POST">
+              <input type="hidden" name="id" id="id" value="<%= category._id %>">
+              <div style="text-align: center;">
+                <button type="submit" style="text-decoration: none !important; text-align: center;" class="btn btn-link p-30">
+                  <h5 style="text-decoration: none; color: black; text-align: center;" class="card-title category-link mb-0" data-category="<%= category.category_name %>"><%= category.category_name %></h5>
                 </button>
-              </form>
-            </div>
+              </div>
+            </form>
           </div>
-        <% }) %>
-        
-      </div>
+        </div>
+      <% }) %>
+    </div>
     
   </div>
 </main>
