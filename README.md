@@ -15,6 +15,8 @@
 ### Weaam Ajoor
 ### Rajiah Hassan
 
+# About Auction App
+
 ## ERD
 
 https://drive.google.com/file/d/1PWFpN_SNpTAo1Coi5R6Um_QR20-QfVj6/view
@@ -34,8 +36,21 @@ Coming Soon! - Google Cloud:
 ![1](https://github.com/mmaskati/SEI7-Project-2/assets/814205/d64295ff-8a98-4bc6-83db-4407cb0b121a)
 
 
+## Under the hood
 
-## Requirements
+* Express.js
+* Node.js
+* multer: middleware for handling multipart/form-data, which is primarily used for uploading files
+* multer-cloudinary: A simple storage engine which stores the files directly on cloudinary
+* dayjs: a minimalist JS library that parses, validates, manipulates, and displays dates and times
+* Bootstrap 5.3 (CSS + JS + ICONS)
+
+  # APIs Connected
+  > Google Web API for for OAuth
+  > Cloudinary
+  > Mongoose
+
+## Overall Requirements
 
 ### General Requirements
 
@@ -113,7 +128,6 @@ Coming Soon! - Google Cloud:
   - What was the most difficult part of the project? Time Management
   - What was your favorite part to work on?
   - What would you like to add next?
-
 
 
 ## Useful Resources
