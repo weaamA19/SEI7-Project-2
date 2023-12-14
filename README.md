@@ -2,6 +2,12 @@
 
 ## Project Name: Auction / Tender Website
 
+![auction-logo](https://github.com/mmaskati/SEI7-Project-2/assets/814205/12ffb653-23b5-48f6-9102-efe97691dd01)
+
+
+![auction-app-screenshot](https://github.com/mmaskati/SEI7-Project-2/assets/814205/f3e674c6-3fda-4746-a31b-7c1d05280454)
+
+
 ### Developers & Collaborators Team
 
 ### Mazen Al-Maskati 
@@ -11,17 +17,16 @@
 
 ## ERD
 
-![1](https://drive.google.com/file/d/1PWFpN_SNpTAo1Coi5R6Um_QR20-QfVj6/view)
+https://drive.google.com/file/d/1PWFpN_SNpTAo1Coi5R6Um_QR20-QfVj6/view
 
 ## Wireframes
 
-
-![1](https://drive.google.com/file/d/1PWFpN_SNpTAo1Coi5R6Um_QR20-QfVj6/view)
+https://drive.google.com/file/d/1PWFpN_SNpTAo1Coi5R6Um_QR20-QfVj6/view
 
 
 ## Link to deployed application: 
 
-Coming Soon!
+Coming Soon! - Google Cloud: 
 
 
 ### Our Team:
