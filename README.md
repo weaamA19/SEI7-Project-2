@@ -1,6 +1,4 @@
-# SEI7 Team Project 2
-
-## Project Name: Auction / Tender Website
+# Auction / Tender Responsive Website App
 
 ![auction-logo](https://github.com/mmaskati/SEI7-Project-2/assets/814205/12ffb653-23b5-48f6-9102-efe97691dd01)
 
@@ -8,32 +6,50 @@
 ![auction-app-screenshot](https://github.com/mmaskati/SEI7-Project-2/assets/814205/f3e674c6-3fda-4746-a31b-7c1d05280454)
 
 
-### Developers & Collaborators Team
+## Developers & Collaborators Team
+- Mazen Al-Maskati
+- Weaam Wafeeq Ajoor 
+- Noor Mahdi Abdali 
+- Rajiah Hassan
+  
+![1](https://github.com/mmaskati/SEI7-Project-2/assets/814205/d64295ff-8a98-4bc6-83db-4407cb0b121a)
 
-### Mazen Al-Maskati 
-### Noor Mahdi Abdali 
-### Weaam Ajoor
-### Rajiah Hassan
+## Project Management Tool
 
-# About Auction App
+Trello is a web-based project management and collaboration tool that allowed our team to organize and track their tasks and projects in a visual and flexible manner. It provides a highly intuitive and user-friendly interface that resembles a virtual board with columns and cards. The following is the link to our trello board:
 
-## ERD
+https://trello.com/invite/b/rgn5wjMv/ATTI0a5d79459df39f0a85b3e9eeb082b75bF0D165CA/sei7-project-2 
 
-https://drive.google.com/file/d/1PWFpN_SNpTAo1Coi5R6Um_QR20-QfVj6/view
+## Auction App Concept
+
+The Auction Application is a web-based platform that facilitates the process of conducting auctions. It provides three distinct user roles: Admin, Auctioneer, and Bidder, each with specific functionalities tailored to their role.
+
+### Admin
+As an Admin, users have access to a comprehensive overview of all auctions created by users. They can add, edit, view details, and delete auctions. Additionally, they have a dedicated section to manage bids, enabling them to add, edit, view details, and delete bids made by users. The Admin view also allows them to manage user privileges, granting them the ability to adjust user roles. Furthermore, they can add new item categories to enhance the diversity of available auction items.
+
+### Auctioneer
+Auctioneers are users who can create their own auctions and submit bids to other Auctioneers' auctions. They have the capability to post and manage their own bids, as well as review logs of bids made within their auctions. By selecting their auction, Auctioneers can monitor the progress of bids and stay informed about the current highest bid. Auctioneers can also modify the end date of their auctions, enabling them to control the duration of the auction and automatically disable and remove expired auctions from the marketplace.
+
+### Bidder
+Bidder is the default user role in the Auction Application. Bidders can participate in auctions by placing bids on available items. They have access to the marketplace, where they can view and bid on auctions created by Auctioneers. The system automatically checks the end date of auctions and disables them once they expire, ensuring a fair and transparent bidding process.
+
+The Auction Application provides a role-specific functionalities, ensuring that each user has the necessary tools to participate effectively in the auction process. Auctioneers can manage their auctions and monitor bids, while Bidders can easily find and bid on items of interest. The Admin view offers complete control over the entire auction system, enabling efficient management of auctions, bids, and user privileges.
+
+
+## Entity Relationship Digram (ERD)
+
+![ERD](https://i.imgur.com/iTNaGm2.png)
+
 
 ## Wireframes
+![1](https://i.imgur.com/vP2K294.png) <br>
+![2](https://i.imgur.com/NeKBBfx.png)<br>
+![3](https://i.imgur.com/3h3uAJt.png)<br>
+![4](https://i.imgur.com/Lw8zzRS.png)<br>
 
-https://drive.google.com/file/d/1PWFpN_SNpTAo1Coi5R6Um_QR20-QfVj6/view
-
-
-## Link to deployed application: 
+## Link to deployed application
 
 Coming Soon! - Google Cloud: 
-
-
-### Our Team:
-
-![1](https://github.com/mmaskati/SEI7-Project-2/assets/814205/d64295ff-8a98-4bc6-83db-4407cb0b121a)
 
 
 ## Under the hood
@@ -45,10 +61,21 @@ Coming Soon! - Google Cloud:
 * dayjs: a minimalist JS library that parses, validates, manipulates, and displays dates and times
 * Bootstrap 5.3 (CSS + JS + ICONS)
 
-  # APIs Connected
-  > Google Web API for for OAuth
-  > Cloudinary
-  > Mongoose
+## APIs Connected
+- Google Web API for for OAuth
+- Cloudinary
+- Mongoose
+  
+## Unsolved Issues
+
+- Delete all Bids when an Auction is finished and deleted (exist Auction Status Boolean for now)
+- Delete a Bid from Auction list if the Bid is deleted (exists Bid status as Boolean for now)
+
+## Future Enhancements
+  - Search Capabilities
+  - Multi Image Upload for Auction Items
+  - Auction Groups
+  - All Bidder to request Admin to become and Auctioneer & Admin to approve
 
 ## Overall Requirements
 
@@ -62,20 +89,10 @@ Coming Soon! - Google Cloud:
 ### Readme Requirements
 - Include ERD of your project idea. ✅
 - Include wireframes or link to wireframes. ✅
-- Include link to your trello board. - https://trello.com/invite/b/rgn5wjMv/ATTI0a5d79459df39f0a85b3e9eeb082b75bF0D165CA/sei7-project-2  ✅
+- Include link to your trello board. ✅
 - Link to your deployed application. ❌
-- List of unsolved problems:
-  > Unable to retrieve list of Bids per Auction ⏳
-  > Unable to End auction and/or show the Auction winner ⏳ (can be in list sorted by highest bid)
-  > Delete all Bids when an Auction is finished and deleted (exist Auction Status Boolean for now)
-  > Delete a Bid from Auction list if the Bid is deleted (exists Bid status as Boolean for now)
-- Future enhancements: 
-  > Category List in Market
-  > Search capabilities
-  > Multi Image Upload for Auction Items
-  > Auction Groups
-  > All Bidder to request Admin to become and Auctioneer & Admin to approve
-  > 
+- List of Unsolved Problems ✅
+- List of future enhancement ✅
 
 ### Technical Requirements
 
@@ -136,4 +153,3 @@ Coming Soon! - Google Cloud:
 - **[Git Team Cheatsheet](https://jameschambers.co/writing/git-team-workflow-cheatsheet/)**
 - **[nodeJS Example projects](https://github.com/sqreen/awesome-nodejs-projects)**
 - **[MongooseJS documentation](https://mongoosejs.com/docs/index.html)**
-
