@@ -14,6 +14,12 @@
   
 ![1](https://github.com/mmaskati/SEI7-Project-2/assets/814205/d64295ff-8a98-4bc6-83db-4407cb0b121a)
 
+## Project Management Tool
+
+Trello is a web-based project management and collaboration tool that allowed our team to organize and track their tasks and projects in a visual and flexible manner. It provides a highly intuitive and user-friendly interface that resembles a virtual board with columns and cards. The following is the link to our trello board:
+
+https://trello.com/invite/b/rgn5wjMv/ATTI0a5d79459df39f0a85b3e9eeb082b75bF0D165CA/sei7-project-2 
+
 ## Auction App Concept
 
 The Auction Application is a web-based platform that facilitates the process of conducting auctions. It provides three distinct user roles: Admin, Auctioneer, and Bidder, each with specific functionalities tailored to their role.
@@ -56,9 +62,20 @@ Coming Soon! - Google Cloud:
 * Bootstrap 5.3 (CSS + JS + ICONS)
 
 ## APIs Connected
-  > Google Web API for for OAuth
-  > Cloudinary
-  > Mongoose
+- Google Web API for for OAuth
+- Cloudinary
+- Mongoose
+  
+## Unsolved Issues:
+
+- Delete all Bids when an Auction is finished and deleted (exist Auction Status Boolean for now)
+- Delete a Bid from Auction list if the Bid is deleted (exists Bid status as Boolean for now)
+
+## Future Enhancements: 
+  - Search Capabilities
+  - Multi Image Upload for Auction Items
+  - Auction Groups
+  - All Bidder to request Admin to become and Auctioneer & Admin to approve
 
 ## Overall Requirements
 
@@ -72,20 +89,10 @@ Coming Soon! - Google Cloud:
 ### Readme Requirements
 - Include ERD of your project idea. ✅
 - Include wireframes or link to wireframes. ✅
-- Include link to your trello board. - https://trello.com/invite/b/rgn5wjMv/ATTI0a5d79459df39f0a85b3e9eeb082b75bF0D165CA/sei7-project-2  ✅
+- Include link to your trello board. ✅
 - Link to your deployed application. ❌
-- List of unsolved problems:
-  > Unable to retrieve list of Bids per Auction ✅
-  > Unable to End auction and/or show the Auction winner ✅ (can be in list sorted by highest bid)
-  > Delete all Bids when an Auction is finished and deleted (exist Auction Status Boolean for now)
-  > Delete a Bid from Auction list if the Bid is deleted (exists Bid status as Boolean for now)
-- Future enhancements: 
-  > Category List in Market
-  > Search capabilities
-  > Multi Image Upload for Auction Items
-  > Auction Groups
-  > All Bidder to request Admin to become and Auctioneer & Admin to approve
-  > 
+- List of Unsolved Problems ✅
+- List of future enhancement ✅
 
 ### Technical Requirements
 
