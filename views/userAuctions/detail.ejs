@@ -19,7 +19,7 @@
               <p class="card-text">Minimum Price: <%= auctions.min_price %></p>
               <p class="card-text">Highest Bid: <%= auctions.highest_bid %></p>
               <p class="card-text">Description: <%= auctions.description %></p>
-              <p class="card-text">End Date: <% let todaysDate = dayjs(new Date()); if(auctions.end_date > todaysDate) { %><span class="btn btn-sm btn-success"><% }else{ %><span class="btn btn-sm btn-danger"><% } %><%= dayjs.utc(auctions.end_date).format('YYYY-MM-DD HH:mm') %></span></p>
+              <p class="card-text">End Date: <% let todaysDate = dayjs.utc(new Date()); if(auctions.end_date > todaysDate) { %><span class="btn btn-sm btn-success"><% }else{ %><span class="btn btn-sm btn-danger"><% } %><%= dayjs.utc(auctions.end_date).format('YYYY-MM-DD HH:mm') %></span></p>
               <p class="card-text">Item Status: <%= auctions.status %></p>
             </div>
           </div>

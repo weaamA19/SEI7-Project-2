@@ -26,7 +26,8 @@
   </tr>
 
 <% auctions.forEach(function (auction, index) {  %>
-  <tr>
+  <% let noEdit=""; let todaysDate = dayjs.utc(new Date()); let auctionDate = dayjs.utc(auction.end_date); %>
+    <% if(auctionDate < todaysDate){ noEdit="disabled"; %><tr class="table-danger"><% }else{ %><tr><% } %>
     <td><%= index+1 %></td>
     <td><a href="/userAuctions/detail?id=<%= auction._id %>"><%= auction.name %></a></td>
     <td><%= auction.category.category_name %></td>
@@ -34,7 +35,7 @@
     <td><%= dayjs.utc(auction.start_date).format('DD/MM/YYYY') %></td>
     <td><%= dayjs.utc(auction.end_date).format('DD/MM/YYYY HH:mm') %></td>
     <td><small><kbd>Created: <%= dayjs.utc(auction.createdAt).format('DD/MM/YYYY') %></kbd> <kbd>Updated <%= dayjs.utc(auction.updatedAt).fromNow(true) %> ago</kbd></small></td>
-    <td><a class="btn btn-sm btn-warning" href="/userAuctions/edit?id=<%= auction._id %>"><i class="bi-pencil-fill"></i></a> <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#D<%= index+1 %>">
+    <td><a class="btn btn-sm btn-warning <%= noEdit %>" href="/userAuctions/edit?id=<%= auction._id %>"><i class="bi-pencil-fill"></i></a> <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#D<%= index+1 %>" <%= noEdit %>>
       <i class="bi-trash3-fill"></i></button>
 
 <div class="modal fade" id="D<%= index+1 %>" tabindex="-1" aria-labelledby="exampleModalLabel<%= index+1 %>" aria-hidden="true">
