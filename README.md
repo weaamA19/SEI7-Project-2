@@ -7,13 +7,12 @@
 
 
 ## Developers & Collaborators Team
-
-![1](https://github.com/mmaskati/SEI7-Project-2/assets/814205/d64295ff-8a98-4bc6-83db-4407cb0b121a)
-
 - Mazen Al-Maskati
 - Weaam Wafeeq Ajoor 
 - Noor Mahdi Abdali 
 - Rajiah Hassan
+  
+![1](https://github.com/mmaskati/SEI7-Project-2/assets/814205/d64295ff-8a98-4bc6-83db-4407cb0b121a)
 
 ## Auction App Concept
 
@@ -37,12 +36,10 @@ The Auction Application provides a role-specific functionalities, ensuring that 
 
 
 ## Wireframes
-![1]()
-![2]()
-![3]()
-![4]()
-https://drive.google.com/file/d/1PWFpN_SNpTAo1Coi5R6Um_QR20-QfVj6/view
-
+![1](https://i.imgur.com/vP2K294.png)
+![2](https://i.imgur.com/NeKBBfx.png)
+![3](https://i.imgur.com/3h3uAJt.png)
+![4](https://i.imgur.com/Lw8zzRS.png)
 
 ## Link to deployed application: 
 
