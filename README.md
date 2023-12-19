@@ -47,7 +47,7 @@ The Auction Application provides a role-specific functionalities, ensuring that 
 ![3](https://i.imgur.com/3h3uAJt.png)<br>
 ![4](https://i.imgur.com/Lw8zzRS.png)<br>
 
-## Link to deployed application: 
+## Link to deployed application
 
 Coming Soon! - Google Cloud: 
 
@@ -66,12 +66,12 @@ Coming Soon! - Google Cloud:
 - Cloudinary
 - Mongoose
   
-## Unsolved Issues:
+## Unsolved Issues
 
 - Delete all Bids when an Auction is finished and deleted (exist Auction Status Boolean for now)
 - Delete a Bid from Auction list if the Bid is deleted (exists Bid status as Boolean for now)
 
-## Future Enhancements: 
+## Future Enhancements
   - Search Capabilities
   - Multi Image Upload for Auction Items
   - Auction Groups
