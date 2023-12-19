@@ -55,7 +55,7 @@ Coming Soon! - Google Cloud:
 * dayjs: a minimalist JS library that parses, validates, manipulates, and displays dates and times
 * Bootstrap 5.3 (CSS + JS + ICONS)
 
-  # APIs Connected
+## APIs Connected
   > Google Web API for for OAuth
   > Cloudinary
   > Mongoose
@@ -75,8 +75,8 @@ Coming Soon! - Google Cloud:
 - Include link to your trello board. - https://trello.com/invite/b/rgn5wjMv/ATTI0a5d79459df39f0a85b3e9eeb082b75bF0D165CA/sei7-project-2  ✅
 - Link to your deployed application. ❌
 - List of unsolved problems:
-  > Unable to retrieve list of Bids per Auction ⏳
-  > Unable to End auction and/or show the Auction winner ⏳ (can be in list sorted by highest bid)
+  > Unable to retrieve list of Bids per Auction ✅
+  > Unable to End auction and/or show the Auction winner ✅ (can be in list sorted by highest bid)
   > Delete all Bids when an Auction is finished and deleted (exist Auction Status Boolean for now)
   > Delete a Bid from Auction list if the Bid is deleted (exists Bid status as Boolean for now)
 - Future enhancements: 
