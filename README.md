@@ -36,10 +36,10 @@ The Auction Application provides a role-specific functionalities, ensuring that 
 
 
 ## Wireframes
-![1](https://i.imgur.com/vP2K294.png)
-![2](https://i.imgur.com/NeKBBfx.png)
-![3](https://i.imgur.com/3h3uAJt.png)
-![4](https://i.imgur.com/Lw8zzRS.png)
+![1](https://i.imgur.com/vP2K294.png) <br>
+![2](https://i.imgur.com/NeKBBfx.png)<br>
+![3](https://i.imgur.com/3h3uAJt.png)<br>
+![4](https://i.imgur.com/Lw8zzRS.png)<br>
 
 ## Link to deployed application: 
 
