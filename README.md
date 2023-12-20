@@ -7,13 +7,18 @@
 
 
 ## Developers & Collaborators Team
-
-![1](https://github.com/mmaskati/SEI7-Project-2/assets/814205/d64295ff-8a98-4bc6-83db-4407cb0b121a)
-
 - Mazen Al-Maskati
 - Weaam Wafeeq Ajoor 
 - Noor Mahdi Abdali 
 - Rajiah Hassan
+  
+![1](https://github.com/mmaskati/SEI7-Project-2/assets/814205/d64295ff-8a98-4bc6-83db-4407cb0b121a)
+
+## Project Management Tool
+
+Trello is a web-based project management and collaboration tool that allowed our team to organize and track their tasks and projects in a visual and flexible manner. It provides a highly intuitive and user-friendly interface that resembles a virtual board with columns and cards. The following is the link to our trello board:
+
+https://trello.com/invite/b/rgn5wjMv/ATTI0a5d79459df39f0a85b3e9eeb082b75bF0D165CA/sei7-project-2 
 
 ## Auction App Concept
 
@@ -37,14 +42,12 @@ The Auction Application provides a role-specific functionalities, ensuring that 
 
 
 ## Wireframes
-![1]()
-![2]()
-![3]()
-![4]()
-https://drive.google.com/file/d/1PWFpN_SNpTAo1Coi5R6Um_QR20-QfVj6/view
+![1](https://i.imgur.com/vP2K294.png) <br>
+![2](https://i.imgur.com/NeKBBfx.png)<br>
+![3](https://i.imgur.com/3h3uAJt.png)<br>
+![4](https://i.imgur.com/Lw8zzRS.png)<br>
 
-
-## Link to deployed application: 
+## Link to deployed application
 
 Coming Soon! - Google Cloud: 
 
@@ -58,10 +61,21 @@ Coming Soon! - Google Cloud:
 * dayjs: a minimalist JS library that parses, validates, manipulates, and displays dates and times
 * Bootstrap 5.3 (CSS + JS + ICONS)
 
-  # APIs Connected
-  > Google Web API for for OAuth
-  > Cloudinary
-  > Mongoose
+## APIs Connected
+- Google Web API for for OAuth
+- Cloudinary
+- Mongoose
+  
+## Unsolved Issues
+
+- Delete all Bids when an Auction is finished and deleted (exist Auction Status Boolean for now)
+- Delete a Bid from Auction list if the Bid is deleted (exists Bid status as Boolean for now)
+
+## Future Enhancements
+  - Search Capabilities
+  - Multi Image Upload for Auction Items
+  - Auction Groups
+  - All Bidder to request Admin to become and Auctioneer & Admin to approve
 
 ## Overall Requirements
 
@@ -75,20 +89,10 @@ Coming Soon! - Google Cloud:
 ### Readme Requirements
 - Include ERD of your project idea. ✅
 - Include wireframes or link to wireframes. ✅
-- Include link to your trello board. - https://trello.com/invite/b/rgn5wjMv/ATTI0a5d79459df39f0a85b3e9eeb082b75bF0D165CA/sei7-project-2  ✅
+- Include link to your trello board. ✅
 - Link to your deployed application. ❌
-- List of unsolved problems:
-  > Unable to retrieve list of Bids per Auction ⏳
-  > Unable to End auction and/or show the Auction winner ⏳ (can be in list sorted by highest bid)
-  > Delete all Bids when an Auction is finished and deleted (exist Auction Status Boolean for now)
-  > Delete a Bid from Auction list if the Bid is deleted (exists Bid status as Boolean for now)
-- Future enhancements: 
-  > Category List in Market
-  > Search capabilities
-  > Multi Image Upload for Auction Items
-  > Auction Groups
-  > All Bidder to request Admin to become and Auctioneer & Admin to approve
-  > 
+- List of Unsolved Problems ✅
+- List of future enhancement ✅
 
 ### Technical Requirements
 
@@ -149,4 +153,3 @@ Coming Soon! - Google Cloud:
 - **[Git Team Cheatsheet](https://jameschambers.co/writing/git-team-workflow-cheatsheet/)**
 - **[nodeJS Example projects](https://github.com/sqreen/awesome-nodejs-projects)**
 - **[MongooseJS documentation](https://mongoosejs.com/docs/index.html)**
-
