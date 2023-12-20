@@ -21,11 +21,11 @@
 
   <div class="form-check pb-3">
     <label for="name" class="form-label">Auctioned Item Name</label>
-    <input id="name" name="name"  value="<%= auction.name %>"  class="form-control" disabled>
+    <input id="name" name="name" value="<%= auction.name %>" class="form-control" disabled>
   </div>
 
   <div class="form-check pb-3">
-    <label for="min_price" class="form-label">Starting Price [<span class="text-warning">Currency</span>]</label>
+    <label for="min_price" class="form-label">Starting Price [<span class="text-warning"><%= currency %></span>]</label>
     <input id="min_price" name="min_price" value="<%= auction.min_price %>" class="form-control" disabled>
   </div>
 
@@ -36,7 +36,7 @@
 
   <div class="form-check pb-3">
     <label for="end_date" class="form-label">End Date / Time</label>
-    <input id="end_date" name="end_date" type="date" class="form-control" value="<%= dayjs.utc(auction.end_date).format('YYYY-MM-DD') %>" min="<%= minDate %>" max="<%= maxDate %>" required>
+    <input id="end_date" name="end_date" type="date" class="form-control" value="<%= dayjs(auction.end_date).format('YYYY-MM-DD') %>" min="<%= minDate %>" max="<%= maxDate %>" required>
     <input type="time" id="time" name="time" value="<%= theTime %>" class="form-control" required>
   </div>
 
