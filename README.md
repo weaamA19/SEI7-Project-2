@@ -1,6 +1,4 @@
-# SEI7 Team Project 2
-
-## Project Name: Auction / Tender Website
+# Auction / Tender Responsive Website App
 
 ![auction-logo](https://github.com/mmaskati/SEI7-Project-2/assets/814205/12ffb653-23b5-48f6-9102-efe97691dd01)
 
@@ -8,32 +6,47 @@
 ![auction-app-screenshot](https://github.com/mmaskati/SEI7-Project-2/assets/814205/f3e674c6-3fda-4746-a31b-7c1d05280454)
 
 
-### Developers & Collaborators Team
+## Developers & Collaborators Team
 
-### Mazen Al-Maskati 
-### Noor Mahdi Abdali 
-### Weaam Ajoor
-### Rajiah Hassan
+![1](https://github.com/mmaskati/SEI7-Project-2/assets/814205/d64295ff-8a98-4bc6-83db-4407cb0b121a)
 
-# About Auction App
+- Mazen Al-Maskati
+- Weaam Wafeeq Ajoor 
+- Noor Mahdi Abdali 
+- Rajiah Hassan
 
-## ERD
+## Auction App Concept
 
-https://drive.google.com/file/d/1PWFpN_SNpTAo1Coi5R6Um_QR20-QfVj6/view
+The Auction Application is a web-based platform that facilitates the process of conducting auctions. It provides three distinct user roles: Admin, Auctioneer, and Bidder, each with specific functionalities tailored to their role.
+
+### Admin
+As an Admin, users have access to a comprehensive overview of all auctions created by users. They can add, edit, view details, and delete auctions. Additionally, they have a dedicated section to manage bids, enabling them to add, edit, view details, and delete bids made by users. The Admin view also allows them to manage user privileges, granting them the ability to adjust user roles. Furthermore, they can add new item categories to enhance the diversity of available auction items.
+
+### Auctioneer
+Auctioneers are users who can create their own auctions and submit bids to other Auctioneers' auctions. They have the capability to post and manage their own bids, as well as review logs of bids made within their auctions. By selecting their auction, Auctioneers can monitor the progress of bids and stay informed about the current highest bid. Auctioneers can also modify the end date of their auctions, enabling them to control the duration of the auction and automatically disable and remove expired auctions from the marketplace.
+
+### Bidder
+Bidder is the default user role in the Auction Application. Bidders can participate in auctions by placing bids on available items. They have access to the marketplace, where they can view and bid on auctions created by Auctioneers. The system automatically checks the end date of auctions and disables them once they expire, ensuring a fair and transparent bidding process.
+
+The Auction Application provides a role-specific functionalities, ensuring that each user has the necessary tools to participate effectively in the auction process. Auctioneers can manage their auctions and monitor bids, while Bidders can easily find and bid on items of interest. The Admin view offers complete control over the entire auction system, enabling efficient management of auctions, bids, and user privileges.
+
+
+## Entity Relationship Digram (ERD)
+
+![ERD](https://i.imgur.com/iTNaGm2.png)
+
 
 ## Wireframes
-
+![1]()
+![2]()
+![3]()
+![4]()
 https://drive.google.com/file/d/1PWFpN_SNpTAo1Coi5R6Um_QR20-QfVj6/view
 
 
 ## Link to deployed application: 
 
 Coming Soon! - Google Cloud: 
-
-
-### Our Team:
-
-![1](https://github.com/mmaskati/SEI7-Project-2/assets/814205/d64295ff-8a98-4bc6-83db-4407cb0b121a)
 
 
 ## Under the hood
