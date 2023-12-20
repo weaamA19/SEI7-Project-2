@@ -187,7 +187,7 @@ exports.userAuctions_edit_get = (req, res) => {
   .then((auction) => {
     let maxDate = dayjs.utc(Date()).add(7, 'day').format('YYYY-MM-DD');
   let minDate = dayjs.utc(Date()).add(1, 'day').format('YYYY-MM-DD');
-  let theTime = dayjs.utc(Date()).add(1, 'day').format('HH') + ":00";
+  let theTime = dayjs(auction.end_date).format('HH') + ":00"; 
     res.render("userAuctions/edit", {auction,dayjs ,maxDate,minDate,theTime,"title": "Edit your Auctions"});
   })
   .catch(err => {
